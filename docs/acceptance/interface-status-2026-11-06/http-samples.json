@@ -1,0 +1,833 @@
+[
+  {
+    "body": {
+      "data": {
+        "device_id": "1",
+        "interfaces": [
+          {
+            "admin_status": "up",
+            "oper_status": "down",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "status_collection_state": "success",
+            "status_attempted_at": null,
+            "if_index": 78,
+            "name": "ge1_1_29",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          }
+        ],
+        "status_collection_state": "",
+        "status_attempted_at": null
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "CBUGC3MHDFSCQ6MXTSUZ35EYBD",
+        "generated_at": "2026-11-06T09:49:21.7063669Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-06T09:49:21.705242Z",
+        "data_age_seconds": 0,
+        "fresh": false,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    },
+    "path": "/api/v1/devices/1/interfaces",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "summary": {
+          "device_count": 4,
+          "link_count": 5,
+          "collected_device_count": 4,
+          "historical_device_count": 0,
+          "pending_neighbor_count": 0,
+          "device_kinds": {
+            "router": 0,
+            "switch": 4,
+            "wireless_controller": 0
+          }
+        },
+        "core_ids": [
+          "1"
+        ],
+        "devices": [
+          {
+            "id": "1",
+            "name": "1",
+            "sys_name": "",
+            "area": "",
+            "vendor": "",
+            "model": "",
+            "device_kind": "switch",
+            "access_addresses": [],
+            "chassis_mac": "",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": null,
+            "link_count": 2,
+            "last_seen_at": null
+          },
+          {
+            "id": "74",
+            "name": "74",
+            "sys_name": "",
+            "area": "",
+            "vendor": "",
+            "model": "",
+            "device_kind": "switch",
+            "access_addresses": [],
+            "chassis_mac": "",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": null,
+            "link_count": 4,
+            "last_seen_at": null
+          },
+          {
+            "id": "77",
+            "name": "77",
+            "sys_name": "",
+            "area": "",
+            "vendor": "",
+            "model": "",
+            "device_kind": "switch",
+            "access_addresses": [],
+            "chassis_mac": "",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": null,
+            "link_count": 3,
+            "last_seen_at": null
+          },
+          {
+            "id": "84",
+            "name": "84",
+            "sys_name": "",
+            "area": "",
+            "vendor": "",
+            "model": "",
+            "device_kind": "switch",
+            "access_addresses": [],
+            "chassis_mac": "",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": null,
+            "link_count": 1,
+            "last_seen_at": null
+          }
+        ],
+        "links": [
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "aggregation": {
+              "aggregate_id": "lag:1001:direct:74:ifindex:639:inferred:1:peer:74:ifindex:639",
+              "status": "inferred",
+              "local_group": {
+                "aggregation_source": "peer_inferred",
+                "local_device_id": "1",
+                "remote_device_id": "74",
+                "remote_aggregation_id": "direct:74:ifindex:639",
+                "member_interfaces": [
+                  78,
+                  113
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "inferred",
+                "inferred_at": "2026-11-06T17:49:21.705242+08:00",
+                "group_id": "inferred:1:peer:74:ifindex:639",
+                "device_id": "1",
+                "aggregate_if_index": null,
+                "interface_name": null,
+                "display_name": "推断聚合（对端 Bridge-Aggregation1）",
+                "evidence_type": "peer_inferred",
+                "mode": "unknown",
+                "sources": [
+                  "peer_inferred"
+                ],
+                "inferred_from": {
+                  "device_id": "74",
+                  "group_id": "direct:74:ifindex:639",
+                  "scan_id": "1001"
+                }
+              },
+              "remote_group": {
+                "aggregation_source": "native",
+                "local_device_id": "74",
+                "member_interfaces": [
+                  27,
+                  28
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:74:ifindex:639",
+                "device_id": "74",
+                "aggregate_if_index": 639,
+                "interface_name": "Bridge-Aggregation1",
+                "display_name": "Bridge-Aggregation1",
+                "evidence_type": "direct",
+                "mode": "static",
+                "sources": [
+                  "ieee_lag"
+                ]
+              },
+              "known_member_link_count": 2
+            },
+            "id": "240",
+            "device_a_id": "1",
+            "device_a_name": "",
+            "port_a_id": "2401",
+            "port_a_name": "",
+            "device_b_id": "74",
+            "device_b_name": "",
+            "port_b_id": "2402",
+            "port_b_name": "",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": null,
+            "last_seen_at": null,
+            "last_seen_scan_id": "1001"
+          },
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "aggregation": {
+              "aggregate_id": "lag:1001:direct:74:ifindex:639:inferred:1:peer:74:ifindex:639",
+              "status": "inferred",
+              "local_group": {
+                "aggregation_source": "peer_inferred",
+                "local_device_id": "1",
+                "remote_device_id": "74",
+                "remote_aggregation_id": "direct:74:ifindex:639",
+                "member_interfaces": [
+                  78,
+                  113
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "inferred",
+                "inferred_at": "2026-11-06T17:49:21.705242+08:00",
+                "group_id": "inferred:1:peer:74:ifindex:639",
+                "device_id": "1",
+                "aggregate_if_index": null,
+                "interface_name": null,
+                "display_name": "推断聚合（对端 Bridge-Aggregation1）",
+                "evidence_type": "peer_inferred",
+                "mode": "unknown",
+                "sources": [
+                  "peer_inferred"
+                ],
+                "inferred_from": {
+                  "device_id": "74",
+                  "group_id": "direct:74:ifindex:639",
+                  "scan_id": "1001"
+                }
+              },
+              "remote_group": {
+                "aggregation_source": "native",
+                "local_device_id": "74",
+                "member_interfaces": [
+                  27,
+                  28
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:74:ifindex:639",
+                "device_id": "74",
+                "aggregate_if_index": 639,
+                "interface_name": "Bridge-Aggregation1",
+                "display_name": "Bridge-Aggregation1",
+                "evidence_type": "direct",
+                "mode": "static",
+                "sources": [
+                  "ieee_lag"
+                ]
+              },
+              "known_member_link_count": 2
+            },
+            "id": "253",
+            "device_a_id": "1",
+            "device_a_name": "",
+            "port_a_id": "2531",
+            "port_a_name": "",
+            "device_b_id": "74",
+            "device_b_name": "",
+            "port_b_id": "2532",
+            "port_b_name": "",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": null,
+            "last_seen_at": null,
+            "last_seen_scan_id": "1001"
+          },
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "aggregation": {
+              "aggregate_id": "lag:1001:direct:74:ifindex:637:direct:77:ifindex:19",
+              "status": "confirmed",
+              "local_group": {
+                "aggregation_source": "native",
+                "local_device_id": "74",
+                "member_interfaces": [
+                  23,
+                  24
+                ],
+                "evidence_link_ids": [
+                  65,
+                  66
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:74:ifindex:637",
+                "device_id": "74",
+                "aggregate_if_index": 637,
+                "interface_name": "Bridge-Aggregation2",
+                "display_name": "Bridge-Aggregation2",
+                "evidence_type": "direct",
+                "mode": "static",
+                "sources": [
+                  "ieee_lag"
+                ]
+              },
+              "remote_group": {
+                "aggregation_source": "native",
+                "local_device_id": "77",
+                "member_interfaces": [
+                  16,
+                  17
+                ],
+                "evidence_link_ids": [
+                  65,
+                  66
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:77:ifindex:19",
+                "device_id": "77",
+                "aggregate_if_index": 19,
+                "interface_name": "Eth-Trunk1",
+                "display_name": "Eth-Trunk1",
+                "evidence_type": "direct",
+                "mode": "unknown",
+                "sources": [
+                  "huawei_private"
+                ]
+              },
+              "known_member_link_count": 2
+            },
+            "id": "65",
+            "device_a_id": "74",
+            "device_a_name": "",
+            "port_a_id": "651",
+            "port_a_name": "",
+            "device_b_id": "77",
+            "device_b_name": "",
+            "port_b_id": "652",
+            "port_b_name": "",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": null,
+            "last_seen_at": null,
+            "last_seen_scan_id": "1001"
+          },
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "aggregation": {
+              "aggregate_id": "lag:1001:direct:74:ifindex:637:direct:77:ifindex:19",
+              "status": "confirmed",
+              "local_group": {
+                "aggregation_source": "native",
+                "local_device_id": "74",
+                "member_interfaces": [
+                  23,
+                  24
+                ],
+                "evidence_link_ids": [
+                  65,
+                  66
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:74:ifindex:637",
+                "device_id": "74",
+                "aggregate_if_index": 637,
+                "interface_name": "Bridge-Aggregation2",
+                "display_name": "Bridge-Aggregation2",
+                "evidence_type": "direct",
+                "mode": "static",
+                "sources": [
+                  "ieee_lag"
+                ]
+              },
+              "remote_group": {
+                "aggregation_source": "native",
+                "local_device_id": "77",
+                "member_interfaces": [
+                  16,
+                  17
+                ],
+                "evidence_link_ids": [
+                  65,
+                  66
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:77:ifindex:19",
+                "device_id": "77",
+                "aggregate_if_index": 19,
+                "interface_name": "Eth-Trunk1",
+                "display_name": "Eth-Trunk1",
+                "evidence_type": "direct",
+                "mode": "unknown",
+                "sources": [
+                  "huawei_private"
+                ]
+              },
+              "known_member_link_count": 2
+            },
+            "id": "66",
+            "device_a_id": "74",
+            "device_a_name": "",
+            "port_a_id": "661",
+            "port_a_name": "",
+            "device_b_id": "77",
+            "device_b_name": "",
+            "port_b_id": "662",
+            "port_b_name": "",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": null,
+            "last_seen_at": null,
+            "last_seen_scan_id": "1001"
+          },
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "id": "417",
+            "device_a_id": "77",
+            "device_a_name": "",
+            "port_a_id": "4171",
+            "port_a_name": "",
+            "device_b_id": "84",
+            "device_b_name": "",
+            "port_b_id": "4172",
+            "port_b_name": "",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": null,
+            "last_seen_at": null,
+            "last_seen_scan_id": "1001"
+          }
+        ],
+        "neighbor_candidates": []
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "JWGKXBVQKTMAHYK7NQURII5ABZ",
+        "generated_at": "2026-11-06T09:49:21.7559086Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-06T09:49:21.705242Z",
+        "data_age_seconds": 0,
+        "fresh": false,
+        "coverage_gap": false,
+        "state": "all"
+      }
+    },
+    "path": "/api/v1/topology",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "next_cursor": null,
+        "has_more": false,
+        "response_truncated": false,
+        "inference_policy_version": "peer-lag-v2",
+        "schema_version": 4,
+        "data_quality": {
+          "snapshot_id": "1001",
+          "snapshot_at": "2026-11-06T09:49:21.705242Z",
+          "as_of": "2026-11-06T09:49:21.7564606Z",
+          "data_age_seconds": 0,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_neighbors",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "1",
+              "state": "active"
+            }
+          ]
+        },
+        "device_id": "1",
+        "state": "active",
+        "limit": 20,
+        "matching_link_count": 2,
+        "returned_link_count": 2,
+        "returned_unique_neighbor_count": 1,
+        "truncated": false,
+        "items": [
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "aggregation": {
+              "aggregate_id": "lag:1001:direct:74:ifindex:639:inferred:1:peer:74:ifindex:639",
+              "status": "inferred",
+              "local_group": {
+                "aggregation_source": "peer_inferred",
+                "local_device_id": "1",
+                "remote_device_id": "74",
+                "remote_aggregation_id": "direct:74:ifindex:639",
+                "member_interfaces": [
+                  78,
+                  113
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "inferred",
+                "inferred_at": "2026-11-06T17:49:21.705242+08:00",
+                "group_id": "inferred:1:peer:74:ifindex:639",
+                "device_id": "1",
+                "aggregate_if_index": null,
+                "interface_name": null,
+                "display_name": "推断聚合（对端 Bridge-Aggregation1）",
+                "evidence_type": "peer_inferred",
+                "mode": "unknown",
+                "sources": [
+                  "peer_inferred"
+                ],
+                "inferred_from": {
+                  "device_id": "74",
+                  "group_id": "direct:74:ifindex:639",
+                  "scan_id": "1001"
+                }
+              },
+              "remote_group": {
+                "aggregation_source": "native",
+                "local_device_id": "74",
+                "member_interfaces": [
+                  27,
+                  28
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:74:ifindex:639",
+                "device_id": "74",
+                "aggregate_if_index": 639,
+                "interface_name": "Bridge-Aggregation1",
+                "display_name": "Bridge-Aggregation1",
+                "evidence_type": "direct",
+                "mode": "static",
+                "sources": [
+                  "ieee_lag"
+                ]
+              },
+              "known_member_link_count": 2
+            },
+            "link_id": "240",
+            "local": {
+              "device_id": "1",
+              "interface_name": "ge1_1_29",
+              "interface_description": null,
+              "if_index": 78,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "74",
+              "interface_name": "Ten-GigabitEthernet1/0/27",
+              "interface_description": null,
+              "if_index": 27,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "degraded",
+            "oper_observed_at": "2026-11-06T09:49:21.705242Z",
+            "observations": []
+          },
+          {
+            "source_admin_status": "up",
+            "source_oper_status": "up",
+            "target_admin_status": "up",
+            "target_oper_status": "down",
+            "source_collection_state": "success",
+            "target_collection_state": "success",
+            "link_oper_status": "degraded",
+            "status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "source_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "target_status_collected_at": "2026-11-06T09:49:21.705242Z",
+            "aggregation": {
+              "aggregate_id": "lag:1001:direct:74:ifindex:639:inferred:1:peer:74:ifindex:639",
+              "status": "inferred",
+              "local_group": {
+                "aggregation_source": "peer_inferred",
+                "local_device_id": "1",
+                "remote_device_id": "74",
+                "remote_aggregation_id": "direct:74:ifindex:639",
+                "member_interfaces": [
+                  78,
+                  113
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "inferred",
+                "inferred_at": "2026-11-06T17:49:21.705242+08:00",
+                "group_id": "inferred:1:peer:74:ifindex:639",
+                "device_id": "1",
+                "aggregate_if_index": null,
+                "interface_name": null,
+                "display_name": "推断聚合（对端 Bridge-Aggregation1）",
+                "evidence_type": "peer_inferred",
+                "mode": "unknown",
+                "sources": [
+                  "peer_inferred"
+                ],
+                "inferred_from": {
+                  "device_id": "74",
+                  "group_id": "direct:74:ifindex:639",
+                  "scan_id": "1001"
+                }
+              },
+              "remote_group": {
+                "aggregation_source": "native",
+                "local_device_id": "74",
+                "member_interfaces": [
+                  27,
+                  28
+                ],
+                "evidence_link_ids": [
+                  240,
+                  253
+                ],
+                "inference_status": "",
+                "inferred_at": null,
+                "group_id": "direct:74:ifindex:639",
+                "device_id": "74",
+                "aggregate_if_index": 639,
+                "interface_name": "Bridge-Aggregation1",
+                "display_name": "Bridge-Aggregation1",
+                "evidence_type": "direct",
+                "mode": "static",
+                "sources": [
+                  "ieee_lag"
+                ]
+              },
+              "known_member_link_count": 2
+            },
+            "link_id": "253",
+            "local": {
+              "device_id": "1",
+              "interface_name": "ge2_1_29",
+              "interface_description": null,
+              "if_index": 113,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "74",
+              "interface_name": "Ten-GigabitEthernet1/0/28",
+              "interface_description": null,
+              "if_index": 28,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "degraded",
+            "oper_observed_at": "2026-11-06T09:49:21.705242Z",
+            "observations": []
+          }
+        ]
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "SB2HVUWLZXTKBDXO7IGV7YUZRV",
+        "generated_at": "2026-11-06T09:49:21.7564606Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-06T09:49:21.705242Z",
+        "data_age_seconds": 0,
+        "fresh": false,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    },
+    "path": "/api/v1/devices/1/neighbors?schema_version=4",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "device": {
+          "id": "1",
+          "name": "1",
+          "sys_name": "",
+          "area": "",
+          "vendor": "",
+          "model": "",
+          "device_kind": "switch",
+          "access_addresses": [],
+          "chassis_mac": "",
+          "identity_state": "verified",
+          "collection_status": "collected",
+          "discovery_depth": null,
+          "link_count": 2,
+          "last_seen_at": null
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "B4K6WQN3OKPKM6N5WECHWWAQUZ",
+        "generated_at": "2026-11-06T09:49:21.7570674Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-06T09:49:21.705242Z",
+        "data_age_seconds": 0,
+        "fresh": false,
+        "coverage_gap": false,
+        "state": "all"
+      }
+    },
+    "path": "/api/v1/devices/1",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "device_count": 4,
+        "link_count": 5,
+        "collected_device_count": 4,
+        "historical_device_count": 0,
+        "pending_neighbor_count": 0,
+        "device_kinds": {
+          "router": 0,
+          "switch": 4,
+          "wireless_controller": 0
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "ZAB7RXXGBC64X4RZ4LQJVCQITZ",
+        "generated_at": "2026-11-06T09:49:21.7570674Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-06T09:49:21.705242Z",
+        "data_age_seconds": 0,
+        "fresh": false,
+        "coverage_gap": false,
+        "state": "all"
+      }
+    },
+    "path": "/api/v1/topology/summary",
+    "status": 200
+  }
+]

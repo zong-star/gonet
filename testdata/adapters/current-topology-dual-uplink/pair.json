@@ -1,0 +1,533 @@
+{
+  "core": {
+    "lag_groups": [],
+    "lag_evidence": [],
+    "request_pdus": 132,
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.1",
+      "chassis": {
+        "subtype": 7,
+        "raw": "MDI6MDA6MDA6MDA6MDE6MDE=",
+        "raw_hex": "30323a30303a30303a30303a30313a3031"
+      },
+      "sys_name": "lab-core",
+      "sys_description": "Linux Sundray 4.14.76-10.3.4.0-4-Marvell #2 SMP Fri Oct 10 03:09:01 UTC 2025 aarch64",
+      "sys_object_id": ".1.3.6.1.4.1.45577",
+      "uptime_before": 618571360,
+      "uptime_after": 618571379,
+      "lldp_last_change_before": 0,
+      "lldp_last_change_after": 0,
+      "cap_supported": null,
+      "cap_enabled": null,
+      "cap_supported_names": null,
+      "cap_enabled_names": null
+    },
+    "interfaces": [
+      {
+        "if_index": 81,
+        "name": "ge1_1_19",
+        "description": "Gi1/1/19",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": "AgAAAAEB",
+        "phys_address_hex": "020000000101"
+      },
+      {
+        "if_index": 140,
+        "name": "ge2_1_19",
+        "description": "Gi2/1/19",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": "AgAAAAEB",
+        "phys_address_hex": "020000000101"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 65811,
+        "id": {
+          "subtype": 5,
+          "raw": "Z2UxXzFfMTk=",
+          "raw_hex": "6765315f315f3139"
+        },
+        "description": "lab-local-65811",
+        "if_index": 81,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 131347,
+        "id": {
+          "subtype": 5,
+          "raw": "Z2UyXzFfMTk=",
+          "raw_hex": "6765325f315f3139"
+        },
+        "description": "lab-local-131347",
+        "if_index": 140,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "original_port": {
+          "subtype": 0,
+          "raw": "MDI6MDA6MDA6MDA6MDI6Mjc=",
+          "raw_hex": "30323a30303a30303a30303a30323a3237"
+        },
+        "encoding_adapter": "sundray_ts7914_chassis38_20251010",
+        "index": {
+          "time_mark": 0,
+          "local_port_num": 65811,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 7,
+          "raw": "MDI6MDA6MDA6MDA6MDI6MDE=",
+          "raw_hex": "30323a30303a30303a30303a30323a3031"
+        },
+        "port": {
+          "subtype": 3,
+          "raw": "AgAAAAIn",
+          "raw_hex": "020000000227"
+        },
+        "port_description": "lab-remote-port",
+        "sys_name": "lab-remote",
+        "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 3208P03\r\nH3C S5500V2-28F-SI\r\nCopyright (c) 2004-2017 New H3C Technologies Co., Ltd. All rights reserved.",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      {
+        "original_port": {
+          "subtype": 0,
+          "raw": "MDI6MDA6MDA6MDA6MDI6Mjg=",
+          "raw_hex": "30323a30303a30303a30303a30323a3238"
+        },
+        "encoding_adapter": "sundray_ts7914_chassis38_20251010",
+        "index": {
+          "time_mark": 0,
+          "local_port_num": 131347,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 7,
+          "raw": "MDI6MDA6MDA6MDA6MDI6MDE=",
+          "raw_hex": "30323a30303a30303a30303a30323a3031"
+        },
+        "port": {
+          "subtype": 3,
+          "raw": "AgAAAAIo",
+          "raw_hex": "020000000228"
+        },
+        "port_description": "lab-remote-port",
+        "sys_name": "lab-remote",
+        "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 3208P03\r\nH3C S5500V2-28F-SI\r\nCopyright (c) 2004-2017 New H3C Technologies Co., Ltd. All rights reserved.",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    ],
+    "components": {
+      "ieee_lag": {
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "if_stack": {
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lag_membership": {
+        "supported": false,
+        "walk_complete": false,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_lag_local": {
+        "state": "empty_unverified",
+        "requests": 1,
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_lag_remote": {
+        "state": "empty_unverified",
+        "requests": 1,
+        "elapsed_ms": 1,
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": false,
+        "decode_complete": false,
+        "issues": [
+          {
+            "code": "WALK_NONINCREASING",
+            "component": "walk",
+            "message": "OID not increasing: .1.0.8802.1.1.2.1.4.2.1.3.0.65812.3061040129.1.0 >= .1.0.8802.1.1.2.1.4.2.1.3.0.65812.3061040129.1.0",
+            "retryable": false
+          }
+        ]
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    },
+    "collection_complete": true,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-11-06T05:57:24.8027443Z",
+    "collected_at": "2026-11-06T05:57:25.0039547Z",
+    "issues": [],
+    "lag_members": [],
+    "lag_advertisements": [],
+    "lacp_ports": []
+  },
+  "peer": {
+    "lag_groups": [
+      {
+        "source_group_id": "ifindex:719",
+        "aggregate_if_index": 719,
+        "source": "ieee_lag",
+        "mode": "unknown",
+        "complete": false
+      }
+    ],
+    "lag_evidence": [],
+    "lag_advertisements": [],
+    "lacp_ports": [],
+    "request_pdus": 56,
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.2",
+      "chassis": {
+        "subtype": 4,
+        "raw": "AgAAAAIB",
+        "raw_hex": "020000000201"
+      },
+      "sys_name": "lab-peer",
+      "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 3208P03\r\nH3C S5500V2-28F-SI\r\nCopyright (c) 2004-2017 New H3C Technologies Co., Ltd. All rights reserved.",
+      "sys_object_id": ".1.3.6.1.4.1.25506.1.1458",
+      "uptime_before": 2076120784,
+      "uptime_after": 2076120947,
+      "lldp_last_change_before": 2074904737,
+      "lldp_last_change_after": 2074904737,
+      "cap_supported": "KA==",
+      "cap_enabled": "KA==",
+      "cap_supported_names": [
+        "bridge",
+        "router"
+      ],
+      "cap_enabled_names": [
+        "bridge",
+        "router"
+      ]
+    },
+    "interfaces": [
+      {
+        "if_index": 27,
+        "name": "Ten-GigabitEthernet1/0/27",
+        "description": "Ten-GigabitEthernet1/0/27",
+        "alias": "To_T7914_G1/1/19",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": "AgAAAAIn",
+        "phys_address_hex": "020000000227"
+      },
+      {
+        "if_index": 28,
+        "name": "Ten-GigabitEthernet1/0/28",
+        "description": "Ten-GigabitEthernet1/0/28",
+        "alias": "To_T7914_G2/1/19",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": "AgAAAAIo",
+        "phys_address_hex": "020000000228"
+      },
+      {
+        "if_index": 719,
+        "name": "Bridge-Aggregation1",
+        "description": "Bridge-Aggregation1",
+        "alias": "To_T7914_LinkAgg",
+        "alias_collected": true,
+        "type": 161,
+        "phys_address": "AgAAAAIn",
+        "phys_address_hex": "020000000227"
+      }
+    ],
+    "lag_members": [
+      {
+        "attached": true,
+        "sources": [
+          "ieee_lag"
+        ],
+        "aggregate_if_index": 719,
+        "member_if_index": 27,
+        "source": "ieee_lag",
+        "mode": "unknown",
+        "status": "confirmed"
+      },
+      {
+        "attached": true,
+        "sources": [
+          "ieee_lag"
+        ],
+        "aggregate_if_index": 719,
+        "member_if_index": 28,
+        "source": "ieee_lag",
+        "mode": "unknown",
+        "status": "confirmed"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 27,
+        "id": {
+          "subtype": 3,
+          "raw": "AgAAAAIn",
+          "raw_hex": "020000000227"
+        },
+        "description": "lab-local-27",
+        "if_index": null,
+        "physical": false,
+        "mapping_rule": "unresolved"
+      },
+      {
+        "number": 28,
+        "id": {
+          "subtype": 3,
+          "raw": "AgAAAAIo",
+          "raw_hex": "020000000228"
+        },
+        "description": "lab-local-28",
+        "if_index": 28,
+        "physical": true,
+        "mapping_rule": "mac-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 1714961930,
+          "local_port_num": 28,
+          "remote_index": 2
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAEB",
+          "raw_hex": "020000000101"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2kyLzEvMTk=",
+          "raw_hex": "4769322f312f3139"
+        },
+        "port_description": "lab-remote-port",
+        "sys_name": "lab-remote",
+        "sys_description": "Sundray TS79-LC-16T16S8X-EB Platform Software, Software Version SW-CHASSIS3.8 BUILD20251010-015800",
+        "mgmt_addresses": [
+          "192.0.2.1",
+          "2001:db8::1"
+        ],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      },
+      {
+        "index": {
+          "time_mark": 2067822070,
+          "local_port_num": 27,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAEB",
+          "raw_hex": "020000000101"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2kxLzEvMTk=",
+          "raw_hex": "4769312f312f3139"
+        },
+        "port_description": "lab-remote-port",
+        "sys_name": "lab-remote",
+        "sys_description": "Sundray TS79-LC-16T16S8X-EB Platform Software, Software Version SW-CHASSIS3.8 BUILD20251010-015800",
+        "mgmt_addresses": [
+          "192.0.2.1",
+          "2001:db8::1"
+        ],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      }
+    ],
+    "components": {
+      "ieee_lag": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "ieee_lag_debug": {
+        "state": "observed",
+        "requests": 2,
+        "varbind_count": 28,
+        "elapsed_ms": 100,
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "ieee_lag_groups": {
+        "state": "observed",
+        "requests": 1,
+        "varbind_count": 1,
+        "elapsed_ms": 141,
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "if_stack": {
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lacp_protocol": {
+        "state": "unavailable",
+        "requests": 1,
+        "elapsed_ms": 92,
+        "supported": false,
+        "walk_complete": false,
+        "decode_complete": false,
+        "issues": [
+          {
+            "code": "SNMP_TIMEOUT",
+            "component": "walk",
+            "message": "context deadline exceeded",
+            "retryable": true
+          }
+        ]
+      },
+      "lag_membership": {
+        "supported": true,
+        "walk_complete": false,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_lag_local": {
+        "state": "observed",
+        "requests": 2,
+        "varbind_count": 32,
+        "elapsed_ms": 195,
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_lag_remote": {
+        "state": "observed",
+        "requests": 2,
+        "varbind_count": 22,
+        "elapsed_ms": 181,
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    },
+    "collection_complete": true,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-11-06T05:57:20.0195879Z",
+    "collected_at": "2026-11-06T05:57:21.6704823Z",
+    "issues": []
+  }
+}

@@ -1,0 +1,37 @@
+/* API management shares console colors, controls and pagination. */
+.api-heading-actions{display:none;flex-wrap:wrap;gap:8px}
+body[data-view=api] .heading-actions{display:none}
+body[data-view=api] .api-heading-actions{display:flex}
+.api-list{overflow:hidden}
+.api-list .table-scroll:focus-visible{outline-offset:-2px}
+.api-table{width:100%;min-width:820px;table-layout:fixed}
+.api-table th,.api-table td{padding:10px 14px;vertical-align:top;text-align:left}
+.api-table th:nth-child(1){width:16%}
+.api-table th:nth-child(2){width:20%}
+.api-table th:nth-child(3){width:18%}
+.api-table th:nth-child(4){width:21%}
+.api-table th:nth-child(5){width:17%}
+.api-table th:last-child{width:8%}
+.api-table td:last-child{white-space:nowrap}
+.api-table td:nth-child(5){white-space:nowrap;color:var(--color-text-secondary)}
+.api-table td code{font:var(--font-size-12) var(--font-mono);overflow-wrap:anywhere}
+.api-table .api-ellipsis{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.api-table .api-addresses code{display:block;line-height:1.6}
+.api-empty{margin:0;padding:32px 16px;text-align:center;color:var(--color-text-secondary)}
+.api-error{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.api-error[hidden],#apiPager[hidden]{display:none}
+.api-dialog{width:min(520px,calc(100vw - 32px));max-height:calc(100svh - 32px);overflow:auto;padding:24px;border:1px solid var(--color-border);border-radius:var(--radius-dialog);background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-overlay)}
+.api-dialog::backdrop{background:var(--color-backdrop)}
+.api-dialog h2{font-size:var(--font-size-18);margin:0 0 16px}
+.api-dialog label{display:block;font-size:var(--font-size-13);font-weight:600;margin:14px 0 6px}
+.api-dialog label span{margin-left:4px;font-size:var(--font-size-12);font-weight:400}
+.api-required,.api-form-error{color:var(--color-danger-text)}
+.api-dialog input,.api-dialog textarea,.api-dialog select{display:block;width:100%;padding:9px 10px;border:1px solid var(--color-border-strong);border-radius:var(--radius-control);background:var(--color-surface);color:inherit;font:inherit}
+.api-dialog textarea{resize:vertical}
+.api-dialog #apiIPs,.api-dialog .api-key-value{font-family:var(--font-mono)}
+.api-dialog p{margin:8px 0;font-size:var(--font-size-13);line-height:1.6}
+.api-hint{color:var(--color-text-secondary)}
+.api-dialog-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:18px}
+#apiDelete{margin-right:auto}
+#apiDelete[hidden]{display:none}
+@media(max-width:760px){.api-dialog{padding:18px}.api-heading-actions{align-self:flex-start}}

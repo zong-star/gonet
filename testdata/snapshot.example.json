@@ -1,0 +1,255 @@
+{
+  "lag_evidence": [
+    {
+      "source": "if_stack",
+      "root": "1.3.6.1.2.1.31.1.2.1.3",
+      "collected_at": "2026-11-07T08:09:13.4773747Z",
+      "status": {
+        "state": "empty_unverified",
+        "requests": 1,
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "facts": []
+    },
+    {
+      "source": "ieee_lag",
+      "root": "1.2.840.10006.300.43.1.2.1.1.13",
+      "collected_at": "2026-11-07T08:09:13.4773747Z",
+      "status": {
+        "state": "empty_unverified",
+        "requests": 1,
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "facts": []
+    }
+  ],
+  "request_pdus": 16,
+  "schema_version": 1,
+  "device": {
+    "target": "127.0.0.1",
+    "chassis": {
+      "subtype": 4,
+      "raw": "ABEiM0RV",
+      "raw_hex": "001122334455"
+    },
+    "sys_name": "core-sw1",
+    "sys_description": "Example Networks Core Switch",
+    "sys_object_id": ".1.3.6.1.4.1.99999.1.1",
+    "uptime_before": 1234567,
+    "uptime_after": 1234567,
+    "lldp_last_change_before": 42,
+    "lldp_last_change_after": 42,
+    "cap_supported": "IA==",
+    "cap_enabled": "IA==",
+    "cap_supported_names": [
+      "bridge"
+    ],
+    "cap_enabled_names": [
+      "bridge"
+    ]
+  },
+  "interfaces": [
+    {
+      "admin_status": "",
+      "oper_status": "",
+      "last_change": null,
+      "last_change_at": null,
+      "last_change_state": "",
+      "sys_up_time": 0,
+      "status_collected_at": null,
+      "status_collection_state": "",
+      "status_attempted_at": null,
+      "if_index": 101,
+      "name": "GigabitEthernet1/0/1",
+      "description": "GigabitEthernet1/0/1",
+      "alias": "to-agg-a",
+      "alias_collected": true,
+      "type": 6,
+      "phys_address": "ABEiM0RV",
+      "phys_address_hex": "001122334455"
+    },
+    {
+      "admin_status": "",
+      "oper_status": "",
+      "last_change": null,
+      "last_change_at": null,
+      "last_change_state": "",
+      "sys_up_time": 0,
+      "status_collected_at": null,
+      "status_collection_state": "",
+      "status_attempted_at": null,
+      "if_index": 102,
+      "name": "GigabitEthernet1/0/2",
+      "description": "GigabitEthernet1/0/2",
+      "alias": "to-agg-b",
+      "alias_collected": true,
+      "type": 6,
+      "phys_address": "ABEiM0RW",
+      "phys_address_hex": "001122334456"
+    }
+  ],
+  "local_ports": [
+    {
+      "number": 1,
+      "id": {
+        "subtype": 5,
+        "raw": "R2lnYWJpdEV0aGVybmV0MS8wLzE=",
+        "raw_hex": "4769676162697445746865726e6574312f302f31"
+      },
+      "description": "uplink to agg-a",
+      "if_index": 101,
+      "physical": true,
+      "mapping_rule": "ifname-exact"
+    },
+    {
+      "number": 2,
+      "id": {
+        "subtype": 5,
+        "raw": "R2lnYWJpdEV0aGVybmV0MS8wLzI=",
+        "raw_hex": "4769676162697445746865726e6574312f302f32"
+      },
+      "description": "uplink to agg-b",
+      "if_index": 102,
+      "physical": true,
+      "mapping_rule": "ifname-exact"
+    }
+  ],
+  "neighbors": [
+    {
+      "index": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "chassis": {
+        "subtype": 4,
+        "raw": "ACIzRFVm",
+        "raw_hex": "002233445566"
+      },
+      "port": {
+        "subtype": 5,
+        "raw": "R2lnYWJpdEV0aGVybmV0MC8x",
+        "raw_hex": "4769676162697445746865726e6574302f31"
+      },
+      "port_description": "to core",
+      "sys_name": "agg-a",
+      "sys_description": "Aggregation Switch A",
+      "mgmt_addresses": [
+        "192.0.2.11"
+      ],
+      "cap_supported": "IA==",
+      "cap_enabled": "IA==",
+      "cap_enabled_names": [
+        "bridge"
+      ],
+      "issues": null
+    },
+    {
+      "index": {
+        "time_mark": 7,
+        "local_port_num": 2,
+        "remote_index": 1
+      },
+      "chassis": {
+        "subtype": 4,
+        "raw": "ACIzRFV3",
+        "raw_hex": "002233445577"
+      },
+      "port": {
+        "subtype": 5,
+        "raw": "R2lnYWJpdEV0aGVybmV0MC8x",
+        "raw_hex": "4769676162697445746865726e6574302f31"
+      },
+      "port_description": "",
+      "sys_name": "agg-b",
+      "sys_description": "",
+      "mgmt_addresses": null,
+      "cap_supported": "IA==",
+      "cap_enabled": "IA==",
+      "cap_enabled_names": [
+        "bridge"
+      ],
+      "issues": null
+    }
+  ],
+  "components": {
+    "ieee_lag": {
+      "supported": false,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "if_mib": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "if_stack": {
+      "supported": false,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "lag_membership": {
+      "supported": false,
+      "walk_complete": false,
+      "decode_complete": true,
+      "issues": null
+    },
+    "lldp_local": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "lldp_man_addr": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "lldp_receive": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "lldp_rem": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "snmp_view": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "stability": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    },
+    "system": {
+      "supported": true,
+      "walk_complete": true,
+      "decode_complete": true,
+      "issues": null
+    }
+  },
+  "collection_complete": true,
+  "snapshot_stable": true,
+  "absence_eligible": true,
+  "started_at": "2026-11-07T08:09:13.4763526Z",
+  "collected_at": "2026-11-07T08:09:13.4773747Z",
+  "issues": null
+}

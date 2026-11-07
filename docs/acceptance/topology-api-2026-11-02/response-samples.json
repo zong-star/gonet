@@ -1,0 +1,536 @@
+[
+  {
+    "path": "/api/v1/topology",
+    "status": 401,
+    "body": {
+      "error": {
+        "code": "AUTH_UNAUTHENTICATED",
+        "message": "请提供登录会话或只读凭据"
+      },
+      "meta": {
+        "request_id": "UVSTMSAHRCJHS5T37VDEPUKZMN"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology",
+    "status": 200,
+    "body": {
+      "data": {
+        "summary": {
+          "device_count": 4,
+          "link_count": 5,
+          "collected_device_count": 4,
+          "historical_device_count": 0,
+          "pending_neighbor_count": 0,
+          "device_kinds": {
+            "router": 0,
+            "switch": 4,
+            "wireless_controller": 0
+          }
+        },
+        "core_ids": [
+          "1"
+        ],
+        "devices": [
+          {
+            "id": "1",
+            "name": "实验核心",
+            "sys_name": "实验核心",
+            "area": "",
+            "vendor": "Fixture",
+            "model": "Test Switch",
+            "device_kind": "switch",
+            "access_addresses": [
+              "192.0.2.1"
+            ],
+            "chassis_mac": "020000000001",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": 0,
+            "link_count": 3,
+            "last_seen_at": "2026-11-02T04:00:00Z"
+          },
+          {
+            "id": "2",
+            "name": "实验汇聚 A",
+            "sys_name": "实验汇聚 A",
+            "area": "",
+            "vendor": "Fixture",
+            "model": "Test Switch",
+            "device_kind": "switch",
+            "access_addresses": [
+              "192.0.2.2"
+            ],
+            "chassis_mac": "020000000002",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": 1,
+            "link_count": 3,
+            "last_seen_at": "2026-11-02T04:00:00Z"
+          },
+          {
+            "id": "3",
+            "name": "实验汇聚 B",
+            "sys_name": "实验汇聚 B",
+            "area": "",
+            "vendor": "Fixture",
+            "model": "Test Switch",
+            "device_kind": "switch",
+            "access_addresses": [
+              "192.0.2.3"
+            ],
+            "chassis_mac": "020000000003",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": 2,
+            "link_count": 2,
+            "last_seen_at": "2026-11-02T04:00:00Z"
+          },
+          {
+            "id": "4",
+            "name": "实验接入",
+            "sys_name": "实验接入",
+            "area": "",
+            "vendor": "Fixture",
+            "model": "Test Switch",
+            "device_kind": "switch",
+            "access_addresses": [
+              "192.0.2.4"
+            ],
+            "chassis_mac": "020000000004",
+            "identity_state": "verified",
+            "collection_status": "collected",
+            "discovery_depth": 2,
+            "link_count": 2,
+            "last_seen_at": "2026-11-02T04:00:00Z"
+          }
+        ],
+        "links": [
+          {
+            "id": "1",
+            "device_a_id": "1",
+            "device_a_name": "实验核心",
+            "port_a_id": "100",
+            "port_a_name": "GE1/0/1",
+            "device_b_id": "2",
+            "device_b_name": "实验汇聚 A",
+            "port_b_id": "101",
+            "port_b_name": "GE1/0/1",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_scan_id": "30"
+          },
+          {
+            "id": "2",
+            "device_a_id": "1",
+            "device_a_name": "实验核心",
+            "port_a_id": "102",
+            "port_a_name": "GE1/0/2",
+            "device_b_id": "2",
+            "device_b_name": "实验汇聚 A",
+            "port_b_id": "103",
+            "port_b_name": "GE1/0/2",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_scan_id": "30"
+          },
+          {
+            "id": "3",
+            "device_a_id": "1",
+            "device_a_name": "实验核心",
+            "port_a_id": "104",
+            "port_a_name": "GE1/0/3",
+            "device_b_id": "3",
+            "device_b_name": "实验汇聚 B",
+            "port_b_id": "105",
+            "port_b_name": "GE1/0/3",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_scan_id": "30"
+          },
+          {
+            "id": "4",
+            "device_a_id": "2",
+            "device_a_name": "实验汇聚 A",
+            "port_a_id": "106",
+            "port_a_name": "GE1/0/4",
+            "device_b_id": "4",
+            "device_b_name": "实验接入",
+            "port_b_id": "107",
+            "port_b_name": "GE1/0/4",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_scan_id": "30"
+          },
+          {
+            "id": "5",
+            "device_a_id": "3",
+            "device_a_name": "实验汇聚 B",
+            "port_a_id": "108",
+            "port_a_name": "GE1/0/5",
+            "device_b_id": "4",
+            "device_b_name": "实验接入",
+            "port_b_id": "109",
+            "port_b_name": "GE1/0/5",
+            "confidence": "bidirectional",
+            "discovery_state": "active",
+            "fresh": true,
+            "coverage_gap": false,
+            "missed_complete_scans": 0,
+            "first_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_at": "2026-11-02T04:00:00Z",
+            "last_seen_scan_id": "30"
+          }
+        ],
+        "neighbor_candidates": []
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "DAEMLDZF3JTKGEHKVRAQMSZHGQ",
+        "generated_at": "2026-11-02T07:24:42.2544566Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-02T04:00:00Z",
+        "data_age_seconds": 12282,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology/summary",
+    "status": 401,
+    "body": {
+      "error": {
+        "code": "AUTH_UNAUTHENTICATED",
+        "message": "请提供登录会话或只读凭据"
+      },
+      "meta": {
+        "request_id": "E5HTAXHR5M63T33UXRCJX34SJY"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology/summary",
+    "status": 200,
+    "body": {
+      "data": {
+        "device_count": 4,
+        "link_count": 5,
+        "collected_device_count": 4,
+        "historical_device_count": 0,
+        "pending_neighbor_count": 0,
+        "device_kinds": {
+          "router": 0,
+          "switch": 4,
+          "wireless_controller": 0
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "KHGQT646F3G33JQDAK547ZI5UP",
+        "generated_at": "2026-11-02T07:24:42.2999065Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-02T04:00:00Z",
+        "data_age_seconds": 12282,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/devices/1",
+    "status": 401,
+    "body": {
+      "error": {
+        "code": "AUTH_UNAUTHENTICATED",
+        "message": "请提供登录会话或只读凭据"
+      },
+      "meta": {
+        "request_id": "ALFFR7Y6RW3UOWBFX3WBTQB6BD"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/devices/1",
+    "status": 200,
+    "body": {
+      "data": {
+        "device": {
+          "id": "1",
+          "name": "实验核心",
+          "sys_name": "实验核心",
+          "area": "",
+          "vendor": "Fixture",
+          "model": "Test Switch",
+          "device_kind": "switch",
+          "access_addresses": [
+            "192.0.2.1"
+          ],
+          "chassis_mac": "020000000001",
+          "identity_state": "verified",
+          "collection_status": "collected",
+          "discovery_depth": 0,
+          "link_count": 3,
+          "last_seen_at": "2026-11-02T04:00:00Z"
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "2SSMX27KQ7XAI4MTXGH4TKEKB7",
+        "generated_at": "2026-11-02T07:24:42.3484865Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-02T04:00:00Z",
+        "data_age_seconds": 12282,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/devices/1/neighbors",
+    "status": 401,
+    "body": {
+      "error": {
+        "code": "AUTH_UNAUTHENTICATED",
+        "message": "请提供登录会话或只读凭据"
+      },
+      "meta": {
+        "request_id": "IFCJ7RM26F4OQVBGDUIUWTSXYJ"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/devices/1/neighbors",
+    "status": 200,
+    "body": {
+      "data": {
+        "device_id": "1",
+        "neighbor_count": 2,
+        "link_count": 3,
+        "items": [
+          {
+            "neighbor": {
+              "id": "2",
+              "name": "实验汇聚 A",
+              "sys_name": "实验汇聚 A",
+              "area": "",
+              "vendor": "Fixture",
+              "model": "Test Switch",
+              "device_kind": "switch",
+              "access_addresses": [
+                "192.0.2.2"
+              ],
+              "chassis_mac": "020000000002",
+              "identity_state": "verified",
+              "collection_status": "collected",
+              "discovery_depth": 1,
+              "link_count": 3,
+              "last_seen_at": "2026-11-02T04:00:00Z"
+            },
+            "link": {
+              "id": "1",
+              "device_a_id": "1",
+              "device_a_name": "实验核心",
+              "port_a_id": "100",
+              "port_a_name": "GE1/0/1",
+              "device_b_id": "2",
+              "device_b_name": "实验汇聚 A",
+              "port_b_id": "101",
+              "port_b_name": "GE1/0/1",
+              "confidence": "bidirectional",
+              "discovery_state": "active",
+              "fresh": true,
+              "coverage_gap": false,
+              "missed_complete_scans": 0,
+              "first_seen_at": "2026-11-02T04:00:00Z",
+              "last_seen_at": "2026-11-02T04:00:00Z",
+              "last_seen_scan_id": "30"
+            }
+          },
+          {
+            "neighbor": {
+              "id": "2",
+              "name": "实验汇聚 A",
+              "sys_name": "实验汇聚 A",
+              "area": "",
+              "vendor": "Fixture",
+              "model": "Test Switch",
+              "device_kind": "switch",
+              "access_addresses": [
+                "192.0.2.2"
+              ],
+              "chassis_mac": "020000000002",
+              "identity_state": "verified",
+              "collection_status": "collected",
+              "discovery_depth": 1,
+              "link_count": 3,
+              "last_seen_at": "2026-11-02T04:00:00Z"
+            },
+            "link": {
+              "id": "2",
+              "device_a_id": "1",
+              "device_a_name": "实验核心",
+              "port_a_id": "102",
+              "port_a_name": "GE1/0/2",
+              "device_b_id": "2",
+              "device_b_name": "实验汇聚 A",
+              "port_b_id": "103",
+              "port_b_name": "GE1/0/2",
+              "confidence": "bidirectional",
+              "discovery_state": "active",
+              "fresh": true,
+              "coverage_gap": false,
+              "missed_complete_scans": 0,
+              "first_seen_at": "2026-11-02T04:00:00Z",
+              "last_seen_at": "2026-11-02T04:00:00Z",
+              "last_seen_scan_id": "30"
+            }
+          },
+          {
+            "neighbor": {
+              "id": "3",
+              "name": "实验汇聚 B",
+              "sys_name": "实验汇聚 B",
+              "area": "",
+              "vendor": "Fixture",
+              "model": "Test Switch",
+              "device_kind": "switch",
+              "access_addresses": [
+                "192.0.2.3"
+              ],
+              "chassis_mac": "020000000003",
+              "identity_state": "verified",
+              "collection_status": "collected",
+              "discovery_depth": 2,
+              "link_count": 2,
+              "last_seen_at": "2026-11-02T04:00:00Z"
+            },
+            "link": {
+              "id": "3",
+              "device_a_id": "1",
+              "device_a_name": "实验核心",
+              "port_a_id": "104",
+              "port_a_name": "GE1/0/3",
+              "device_b_id": "3",
+              "device_b_name": "实验汇聚 B",
+              "port_b_id": "105",
+              "port_b_name": "GE1/0/3",
+              "confidence": "bidirectional",
+              "discovery_state": "active",
+              "fresh": true,
+              "coverage_gap": false,
+              "missed_complete_scans": 0,
+              "first_seen_at": "2026-11-02T04:00:00Z",
+              "last_seen_at": "2026-11-02T04:00:00Z",
+              "last_seen_scan_id": "30"
+            }
+          }
+        ]
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "FYGTNC4W6GVCLGS6Q4F7L3TM66",
+        "generated_at": "2026-11-02T07:24:42.3940156Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-02T04:00:00Z",
+        "data_age_seconds": 12282,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology",
+    "status": 400,
+    "body": {
+      "error": {
+        "code": "INVALID_ARGUMENT",
+        "message": "查询参数或设备 ID 无效"
+      },
+      "meta": {
+        "request_id": "RHGFBDYG46ER3J3T23JDDAEGFR"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology",
+    "status": 400,
+    "body": {
+      "error": {
+        "code": "INVALID_ARGUMENT",
+        "message": "查询参数或设备 ID 无效"
+      },
+      "meta": {
+        "request_id": "Q34SQJUXDRYALAYOC3P3PMRQUC"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology",
+    "status": 400,
+    "body": {
+      "error": {
+        "code": "INVALID_ARGUMENT",
+        "message": "查询参数或设备 ID 无效"
+      },
+      "meta": {
+        "request_id": "5R22PRNNVMBDZAF3GEWER2GQLE"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology",
+    "status": 400,
+    "body": {
+      "error": {
+        "code": "INVALID_ARGUMENT",
+        "message": "查询参数或设备 ID 无效"
+      },
+      "meta": {
+        "request_id": "KRHX65P3YLARSUWFSLFXPRSJKG"
+      }
+    }
+  },
+  {
+    "path": "/api/v1/topology/summary",
+    "status": 429,
+    "body": {
+      "error": {
+        "code": "RATE_LIMITED",
+        "message": "请求过于频繁，请稍后重试"
+      },
+      "meta": {
+        "request_id": "KV7MDLXBI7HG7QELTTIAXJPOJA"
+      }
+    }
+  }
+]

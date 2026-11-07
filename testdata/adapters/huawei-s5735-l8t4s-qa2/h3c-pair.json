@@ -1,0 +1,270 @@
+{
+  "provenance": {
+    "cli_lldp_comparison": "NOT RUN",
+    "date": "2026-10-31",
+    "h3c_model": "S5130S-28P-EI / Comware 7.1.070 Release 6368",
+    "huawei_model": "S5735-L8T4S-QA2 / VRP 5.170 V200R023C00SPC500",
+    "kind": "sanitized_real_snapshot_subsets",
+    "original_collection_complete": true,
+    "scope": "One paired uplink; names, IPs and MACs substituted consistently. Port typed IDs, LLDP local numbers, ifIndex and subtype preserved. Subsets do not grant collection/absence completeness.",
+    "snmp_view": "Custom read view including standard LLDP; default view is immutable on this firmware."
+  },
+  "h3c": {
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.20",
+      "chassis": {
+        "subtype": 4,
+        "raw": "AgAAAAAg",
+        "raw_hex": "020000000020"
+      },
+      "sys_name": "lab-h3c",
+      "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 6368\r\nH3C S5130S-28P-EI\r\nCopyright (c) 2004-2024 New H3C Technologies Co., Ltd. All rights reserved.",
+      "sys_object_id": ".1.3.6.1.4.1.25506.1.1587",
+      "uptime_before": 735875635,
+      "uptime_after": 735875897,
+      "lldp_last_change_before": 734651487,
+      "lldp_last_change_after": 734651487,
+      "cap_supported": "KA==",
+      "cap_enabled": "KA==",
+      "cap_supported_names": [
+        "bridge",
+        "router"
+      ],
+      "cap_enabled_names": [
+        "bridge",
+        "router"
+      ]
+    },
+    "interfaces": [
+      {
+        "if_index": 6,
+        "name": "GigabitEthernet1/0/6",
+        "description": "GigabitEthernet1/0/6",
+        "alias": "lab-uplink",
+        "type": 6,
+        "phys_address": "AgAAAAAm",
+        "phys_address_hex": "020000000026"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 6,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MS8wLzY=",
+          "raw_hex": "4769676162697445746865726e6574312f302f36"
+        },
+        "description": "lab-uplink",
+        "if_index": 6,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 527942774,
+          "local_port_num": 6,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAAw",
+          "raw_hex": "020000000030"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzE=",
+          "raw_hex": "4769676162697445746865726e6574302f302f31"
+        },
+        "port_description": "lab-uplink",
+        "sys_name": "lab-huawei",
+        "sys_description": "Huawei Switch S5735-L8T4S-QA2\r\nHuawei Versatile Routing Platform Software\r\nVRP (R) software, Version 5.170 (S5735 V200R023C00SPC500)\r\nCopyright (C) 2000-2023 HUAWEI TECH Co., Ltd.",
+        "mgmt_addresses": [
+          "192.0.2.30"
+        ],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      }
+    ],
+    "components": {
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    },
+    "collection_complete": false,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-10-31T07:32:53.9366475Z",
+    "collected_at": "2026-10-31T07:32:56.5668961Z",
+    "issues": null
+  },
+  "huawei": {
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.30",
+      "chassis": {
+        "subtype": 4,
+        "raw": "AgAAAAAw",
+        "raw_hex": "020000000030"
+      },
+      "sys_name": "lab-huawei",
+      "sys_description": "S5735-L8T4S-QA2 \r\nHuawei Versatile Routing Platform Software \r\n VRP (R) software,Version 5.170 (S5735 V200R023C00SPC500) \r\n Copyright (C) 2007 Huawei Technologies Co., Ltd.",
+      "sys_object_id": ".1.3.6.1.4.1.2011.2.23.967",
+      "uptime_before": 233828170,
+      "uptime_after": 233828207,
+      "lldp_last_change_before": 233826399,
+      "lldp_last_change_after": 233826399,
+      "cap_supported": "KA==",
+      "cap_enabled": "KA==",
+      "cap_supported_names": [
+        "bridge",
+        "router"
+      ],
+      "cap_enabled_names": [
+        "bridge",
+        "router"
+      ]
+    },
+    "interfaces": [
+      {
+        "if_index": 6,
+        "name": "GigabitEthernet0/0/1",
+        "description": "GigabitEthernet0/0/1",
+        "alias": "lab-uplink",
+        "type": 6,
+        "phys_address": "AgAAAAAw",
+        "phys_address_hex": "020000000030"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 1,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzE=",
+          "raw_hex": "4769676162697445746865726e6574302f302f31"
+        },
+        "description": "lab-uplink",
+        "if_index": 6,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 0,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAAg",
+          "raw_hex": "020000000020"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MS8wLzY=",
+          "raw_hex": "4769676162697445746865726e6574312f302f36"
+        },
+        "port_description": "lab-uplink",
+        "sys_name": "lab-h3c",
+        "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 6368\r\nH3C S5130S-28P-EI\r\nCopyright (c) 2004-2024 New H3C Technologies Co., Ltd. All rights reserved.",
+        "mgmt_addresses": [
+          "192.0.2.20"
+        ],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      }
+    ],
+    "components": {
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    },
+    "collection_complete": false,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-10-31T07:32:02.6529676Z",
+    "collected_at": "2026-10-31T07:32:03.1164009Z",
+    "issues": null
+  }
+}

@@ -1,0 +1,24 @@
+.detail-panel.has-uplink { width: min(880px, 94vw); }
+.uplink-view { margin-top: 28px; }
+.uplink-view section { margin: 22px 0; }
+.uplink-view h3 { margin: 18px 0 12px; font-size: 16px; }
+.uplink-quality { color: var(--color-text-secondary); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.uplink-error { color: var(--color-danger, #b42318); }
+.uplink-graph, .uplink-table-wrap { max-width: 100%; overflow: auto; margin: 16px 0; }
+.uplink-graph svg { display: block; margin: 0 auto; }
+.uplink-line { stroke: var(--color-text-secondary, #667085); stroke-width: 3; }
+.uplink-node { fill: var(--color-surface, #fff); stroke: var(--color-primary, #2563eb); stroke-width: 2; }
+.uplink-port { fill: var(--color-text-primary, #101828); font-size: 11px; }
+.uplink-node-name { fill: var(--color-text-primary, #101828); font-size: 11px; }
+.uplink-role, .uplink-status { fill: var(--color-text-secondary, #667085); font-size: 10px; }
+.uplink-graph [role=button] { cursor: pointer; }
+.uplink-graph [role=button]:focus { outline: 2px solid var(--color-primary, #2563eb); outline-offset: 3px; }
+.uplink-table-wrap table { min-width: 650px; width: 100%; border-collapse: collapse; font-size: 12px; }
+.uplink-table-wrap th, .uplink-table-wrap td { padding: 10px 8px; text-align: left; border-bottom: 1px solid var(--color-border, #e4e7ec); max-width: 180px; overflow-wrap: anywhere; vertical-align: top; }
+.uplink-edge-detail { margin: 12px 0; border: 1px solid var(--color-border, #e4e7ec); border-radius: 8px; padding: 12px; }
+.uplink-edge-detail summary { cursor: pointer; line-height: 1.6; }
+.uplink-edge-detail p { overflow-wrap: anywhere; font-size: 12px; line-height: 1.8; }
+@media (max-width: 760px) {
+  .detail-panel.has-uplink { padding: 42px 16px 24px; }
+  .uplink-graph svg { max-width: 100%; height: auto; }
+}

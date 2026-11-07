@@ -1,0 +1,10 @@
+[Unit]
+Description=Repeat GoNet scan 15 minutes after the previous scan finishes
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=15min
+Unit=gonet-scan.service
+
+[Install]
+WantedBy=timers.target

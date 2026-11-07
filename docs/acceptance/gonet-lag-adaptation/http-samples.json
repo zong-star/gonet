@@ -1,0 +1,828 @@
+[
+  {
+    "body": {
+      "data": {
+        "schema_version": 3,
+        "data_quality": {
+          "snapshot_id": "1001",
+          "snapshot_at": null,
+          "as_of": "2026-11-05T10:51:22.2590185Z",
+          "data_age_seconds": null,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": null,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_to_core_query",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "84"
+            }
+          ],
+          "diagnostic_codes": [
+            "snapshot_time_unavailable"
+          ]
+        },
+        "source_device_id": "84",
+        "target": "core",
+        "max_hops": 16,
+        "path_status": "found",
+        "path": {
+          "target_core_device_id": "1",
+          "hop_count": 3,
+          "nodes": [
+            {
+              "device_id": "84",
+              "display_name": "84",
+              "role": "source"
+            },
+            {
+              "device_id": "77",
+              "display_name": "77",
+              "role": "transit"
+            },
+            {
+              "device_id": "74",
+              "display_name": "74",
+              "role": "transit"
+            },
+            {
+              "device_id": "1",
+              "display_name": "1",
+              "role": "core"
+            }
+          ],
+          "edges": [
+            {
+              "aggregation_status": "unknown",
+              "edge_id": "physical:417",
+              "link_id": "417",
+              "hop": 1,
+              "kind": "physical",
+              "from": {
+                "device_id": "84",
+                "interface_name": "GigabitEthernet1/0/9",
+                "interface_description": null,
+                "if_index": 9,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "77",
+                "interface_name": "GigabitEthernet0/0/9",
+                "interface_description": null,
+                "if_index": 14,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": {
+                "status": "unknown",
+                "mode": "unknown",
+                "reason_codes": [
+                  "SOURCE_UNAVAILABLE"
+                ],
+                "member_data_status": "unknown",
+                "member_links": null,
+                "aggregate_id": null,
+                "local_group": null,
+                "remote_group": null,
+                "unpaired_members": [],
+                "known_member_link_count": 0,
+                "returned_member_link_count": 0
+              }
+            },
+            {
+              "aggregation_status": "confirmed",
+              "edge_id": "aggregate:1001:74:637:77:19",
+              "link_id": null,
+              "hop": 2,
+              "kind": "aggregate",
+              "from": {
+                "device_id": "77",
+                "interface_name": "Eth-Trunk1",
+                "interface_description": null,
+                "if_index": 19,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "74",
+                "interface_name": "Bridge-Aggregation2",
+                "interface_description": null,
+                "if_index": 637,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": {
+                "status": "confirmed",
+                "mode": "unknown",
+                "member_data_status": "partial",
+                "member_links": [
+                  {
+                    "membership_status": "confirmed",
+                    "link_id": "65",
+                    "from": {
+                      "device_id": "77",
+                      "interface_name": "GigabitEthernet0/0/11",
+                      "interface_description": null,
+                      "if_index": 16,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "74",
+                      "interface_name": "GigabitEthernet1/0/23",
+                      "interface_description": null,
+                      "if_index": 23,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  },
+                  {
+                    "membership_status": "confirmed",
+                    "link_id": "66",
+                    "from": {
+                      "device_id": "77",
+                      "interface_name": "GigabitEthernet0/0/12",
+                      "interface_description": null,
+                      "if_index": 17,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "74",
+                      "interface_name": "GigabitEthernet1/0/24",
+                      "interface_description": null,
+                      "if_index": 24,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  }
+                ],
+                "aggregate_id": "aggregate:1001:74:637:77:19",
+                "local_group": {
+                  "device_id": "77",
+                  "interface_name": "Eth-Trunk1",
+                  "interface_description": null,
+                  "if_index": 19,
+                  "interface_name_source": "if_name",
+                  "if_index_status": "known"
+                },
+                "remote_group": {
+                  "device_id": "74",
+                  "interface_name": "Bridge-Aggregation2",
+                  "interface_description": null,
+                  "if_index": 637,
+                  "interface_name_source": "if_name",
+                  "if_index_status": "known"
+                },
+                "unpaired_members": [],
+                "known_member_link_count": 2,
+                "returned_member_link_count": 2
+              }
+            },
+            {
+              "aggregation_status": "partial",
+              "edge_id": "physical:240",
+              "link_id": "240",
+              "hop": 3,
+              "kind": "physical",
+              "from": {
+                "device_id": "74",
+                "interface_name": "Ten-GigabitEthernet1/0/27",
+                "interface_description": null,
+                "if_index": 27,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "1",
+                "interface_name": "ge1_1_29",
+                "interface_description": null,
+                "if_index": 78,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": {
+                "status": "partial",
+                "mode": "unknown",
+                "reason_codes": [
+                  "MEMBERSHIP_INCOMPLETE"
+                ],
+                "member_data_status": "partial",
+                "member_links": [
+                  {
+                    "membership_status": "local_only",
+                    "link_id": "240",
+                    "from": {
+                      "device_id": "74",
+                      "interface_name": "Ten-GigabitEthernet1/0/27",
+                      "interface_description": null,
+                      "if_index": 27,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "1",
+                      "interface_name": "ge1_1_29",
+                      "interface_description": null,
+                      "if_index": 78,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  },
+                  {
+                    "membership_status": "local_only",
+                    "link_id": "253",
+                    "from": {
+                      "device_id": "74",
+                      "interface_name": "Ten-GigabitEthernet1/0/28",
+                      "interface_description": null,
+                      "if_index": 28,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "1",
+                      "interface_name": "ge2_1_29",
+                      "interface_description": null,
+                      "if_index": 113,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  }
+                ],
+                "aggregate_id": null,
+                "local_group": {
+                  "device_id": "74",
+                  "interface_name": "Bridge-Aggregation1",
+                  "interface_description": null,
+                  "if_index": 639,
+                  "interface_name_source": "if_name",
+                  "if_index_status": "known"
+                },
+                "remote_group": null,
+                "unpaired_members": [],
+                "known_member_link_count": 2,
+                "returned_member_link_count": 2
+              }
+            }
+          ]
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "KJHQB2SGNF3RREVBM5QOQCWXJO",
+        "generated_at": "2026-11-05T10:51:22.2590185Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": null,
+        "data_age_seconds": null,
+        "fresh": false,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    },
+    "path": "/api/v1/devices/84/uplink-path?schema_version=3",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "1001",
+          "snapshot_at": null,
+          "as_of": "2026-11-05T10:51:22.3064554Z",
+          "data_age_seconds": null,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": null,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_to_core_query",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "84"
+            }
+          ],
+          "diagnostic_codes": [
+            "snapshot_time_unavailable"
+          ]
+        },
+        "source_device_id": "84",
+        "target": "core",
+        "max_hops": 16,
+        "path_status": "found",
+        "path": {
+          "target_core_device_id": "1",
+          "hop_count": 3,
+          "nodes": [
+            {
+              "device_id": "84",
+              "display_name": "84",
+              "role": "source"
+            },
+            {
+              "device_id": "77",
+              "display_name": "77",
+              "role": "transit"
+            },
+            {
+              "device_id": "74",
+              "display_name": "74",
+              "role": "transit"
+            },
+            {
+              "device_id": "1",
+              "display_name": "1",
+              "role": "core"
+            }
+          ],
+          "edges": [
+            {
+              "aggregation_status": "unknown",
+              "edge_id": "physical:417",
+              "link_id": "417",
+              "hop": 1,
+              "kind": "physical",
+              "from": {
+                "device_id": "84",
+                "interface_name": "GigabitEthernet1/0/9",
+                "interface_description": null,
+                "if_index": 9,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "77",
+                "interface_name": "GigabitEthernet0/0/9",
+                "interface_description": null,
+                "if_index": 14,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": null
+            },
+            {
+              "aggregation_status": "confirmed",
+              "edge_id": "aggregate:74:637:77:19",
+              "link_id": null,
+              "hop": 2,
+              "kind": "aggregate",
+              "from": {
+                "device_id": "77",
+                "interface_name": "Eth-Trunk1",
+                "interface_description": null,
+                "if_index": 19,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "74",
+                "interface_name": "Bridge-Aggregation2",
+                "interface_description": null,
+                "if_index": 637,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": {
+                "aggregate_id": "aggregate:74:637:77:19",
+                "member_data_status": "partial",
+                "member_links": [
+                  {
+                    "link_id": "65",
+                    "from": {
+                      "device_id": "77",
+                      "interface_name": "GigabitEthernet0/0/11",
+                      "interface_description": null,
+                      "if_index": 16,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "74",
+                      "interface_name": "GigabitEthernet1/0/23",
+                      "interface_description": null,
+                      "if_index": 23,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  },
+                  {
+                    "link_id": "66",
+                    "from": {
+                      "device_id": "77",
+                      "interface_name": "GigabitEthernet0/0/12",
+                      "interface_description": null,
+                      "if_index": 17,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "74",
+                      "interface_name": "GigabitEthernet1/0/24",
+                      "interface_description": null,
+                      "if_index": 24,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "aggregation_status": "partial",
+              "aggregation_diagnostics": {
+                "local_group": {
+                  "device_id": "74",
+                  "interface_name": "Bridge-Aggregation1",
+                  "interface_description": null,
+                  "if_index": 639,
+                  "interface_name_source": "if_name",
+                  "if_index_status": "known"
+                },
+                "remote_group": null,
+                "member_data_status": "partial",
+                "member_links": [
+                  {
+                    "membership_status": "local_only",
+                    "link_id": "240",
+                    "from": {
+                      "device_id": "74",
+                      "interface_name": "Ten-GigabitEthernet1/0/27",
+                      "interface_description": null,
+                      "if_index": 27,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "1",
+                      "interface_name": "ge1_1_29",
+                      "interface_description": null,
+                      "if_index": 78,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  },
+                  {
+                    "membership_status": "local_only",
+                    "link_id": "253",
+                    "from": {
+                      "device_id": "74",
+                      "interface_name": "Ten-GigabitEthernet1/0/28",
+                      "interface_description": null,
+                      "if_index": 28,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "1",
+                      "interface_name": "ge2_1_29",
+                      "interface_description": null,
+                      "if_index": 113,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  }
+                ],
+                "unpaired_members": [],
+                "reason_codes": [
+                  "MEMBERSHIP_INCOMPLETE"
+                ]
+              },
+              "edge_id": "physical:240",
+              "link_id": "240",
+              "hop": 3,
+              "kind": "physical",
+              "from": {
+                "device_id": "74",
+                "interface_name": "Ten-GigabitEthernet1/0/27",
+                "interface_description": null,
+                "if_index": 27,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "1",
+                "interface_name": "ge1_1_29",
+                "interface_description": null,
+                "if_index": 78,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": null
+            }
+          ]
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "REXMFLJ34DGETI6PX7XH5B3DGX",
+        "generated_at": "2026-11-05T10:51:22.3064554Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": null,
+        "data_age_seconds": null,
+        "fresh": false,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    },
+    "path": "/api/v1/devices/84/uplink-path?schema_version=2",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "next_cursor": null,
+        "has_more": false,
+        "response_truncated": false,
+        "schema_version": 3,
+        "data_quality": {
+          "snapshot_id": "1001",
+          "snapshot_at": null,
+          "as_of": "2026-11-05T10:51:22.3064554Z",
+          "data_age_seconds": null,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": null,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_neighbors",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "77",
+              "state": "active"
+            }
+          ],
+          "diagnostic_codes": [
+            "snapshot_time_unavailable"
+          ]
+        },
+        "device_id": "77",
+        "state": "active",
+        "limit": 20,
+        "matching_link_count": 3,
+        "returned_link_count": 3,
+        "returned_unique_neighbor_count": 2,
+        "truncated": false,
+        "items": [
+          {
+            "link_id": "65",
+            "local": {
+              "device_id": "77",
+              "interface_name": "GigabitEthernet0/0/11",
+              "interface_description": null,
+              "if_index": 16,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "74",
+              "interface_name": "GigabitEthernet1/0/23",
+              "interface_description": null,
+              "if_index": 23,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": []
+          },
+          {
+            "link_id": "66",
+            "local": {
+              "device_id": "77",
+              "interface_name": "GigabitEthernet0/0/12",
+              "interface_description": null,
+              "if_index": 17,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "74",
+              "interface_name": "GigabitEthernet1/0/24",
+              "interface_description": null,
+              "if_index": 24,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": []
+          },
+          {
+            "link_id": "417",
+            "local": {
+              "device_id": "77",
+              "interface_name": "GigabitEthernet0/0/9",
+              "interface_description": null,
+              "if_index": 14,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "84",
+              "interface_name": "GigabitEthernet1/0/9",
+              "interface_description": null,
+              "if_index": 9,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": []
+          }
+        ]
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "QHPOP6LQMWJEYTHMURCOS2MXMJ",
+        "generated_at": "2026-11-05T10:51:22.3064554Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": null,
+        "data_age_seconds": null,
+        "fresh": false,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    },
+    "path": "/api/v1/devices/77/neighbors?schema_version=3",
+    "status": 200
+  },
+  {
+    "body": {
+      "data": {
+        "next_cursor": null,
+        "has_more": false,
+        "response_truncated": false,
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "1001",
+          "snapshot_at": null,
+          "as_of": "2026-11-05T10:51:22.3069676Z",
+          "data_age_seconds": null,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": null,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_neighbors",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "74",
+              "state": "active"
+            }
+          ],
+          "diagnostic_codes": [
+            "snapshot_time_unavailable"
+          ]
+        },
+        "device_id": "74",
+        "state": "active",
+        "limit": 20,
+        "matching_link_count": 2,
+        "returned_link_count": 2,
+        "returned_unique_neighbor_count": 1,
+        "truncated": false,
+        "items": [
+          {
+            "link_id": "65",
+            "local": {
+              "device_id": "74",
+              "interface_name": "GigabitEthernet1/0/23",
+              "interface_description": null,
+              "if_index": 23,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "77",
+              "interface_name": "GigabitEthernet0/0/11",
+              "interface_description": null,
+              "if_index": 16,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": []
+          },
+          {
+            "link_id": "66",
+            "local": {
+              "device_id": "74",
+              "interface_name": "GigabitEthernet1/0/24",
+              "interface_description": null,
+              "if_index": 24,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "77",
+              "interface_name": "GigabitEthernet0/0/12",
+              "interface_description": null,
+              "if_index": 17,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": []
+          }
+        ]
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "NMNSWS7H6FKQZRUJS356KVFSZ4",
+        "generated_at": "2026-11-05T10:51:22.3069676Z",
+        "latest_scan_id": "1001",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": null,
+        "data_age_seconds": null,
+        "fresh": false,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    },
+    "path": "/api/v1/devices/74/neighbors?schema_version=2\u0026neighbor_device_id=77",
+    "status": 200
+  }
+]

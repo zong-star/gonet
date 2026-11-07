@@ -1,0 +1,787 @@
+{
+  "parent": {
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.1",
+      "chassis": {
+        "subtype": 4,
+        "raw": "AgAAAAAB",
+        "raw_hex": "020000000001"
+      },
+      "sys_name": "additional-sample-1",
+      "sys_description": "S5720-28TP-PWR-LI-AC \r\nHuawei Versatile Routing Platform Software \r\n VRP (R) software,Version 5.170 (S5720 V200R011C10SPC600) \r\n Copyright (C) 2007 Huawei Technologies Co., Ltd.",
+      "sys_object_id": ".1.3.6.1.4.1.2011.2.23.462",
+      "uptime_before": 2024686298,
+      "uptime_after": 2024686543,
+      "lldp_last_change_before": 2024686235,
+      "lldp_last_change_after": 2024686235,
+      "cap_supported": "KA==",
+      "cap_enabled": "KA==",
+      "cap_supported_names": [
+        "bridge",
+        "router"
+      ],
+      "cap_enabled_names": [
+        "bridge",
+        "router"
+      ]
+    },
+    "interfaces": [
+      {
+        "if_index": 1,
+        "name": "InLoopBack0",
+        "description": "InLoopBack0",
+        "alias": "",
+        "type": 24,
+        "phys_address": "AgAAAAAC",
+        "phys_address_hex": "020000000002"
+      },
+      {
+        "if_index": 2,
+        "name": "NULL0",
+        "description": "NULL0",
+        "alias": "",
+        "type": 1,
+        "phys_address": "AgAAAAAC",
+        "phys_address_hex": "020000000002"
+      },
+      {
+        "if_index": 3,
+        "name": "Console9/0/0",
+        "description": "Console9/0/0",
+        "alias": "",
+        "type": 1,
+        "phys_address": "AgAAAAAC",
+        "phys_address_hex": "020000000002"
+      },
+      {
+        "if_index": 4,
+        "name": "Vlanif1",
+        "description": "Vlanif1",
+        "alias": "",
+        "type": 53,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 5,
+        "name": "GigabitEthernet0/0/1",
+        "description": "GigabitEthernet0/0/1",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 6,
+        "name": "GigabitEthernet0/0/2",
+        "description": "GigabitEthernet0/0/2",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 7,
+        "name": "GigabitEthernet0/0/3",
+        "description": "GigabitEthernet0/0/3",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 8,
+        "name": "GigabitEthernet0/0/4",
+        "description": "GigabitEthernet0/0/4",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 9,
+        "name": "GigabitEthernet0/0/5",
+        "description": "GigabitEthernet0/0/5",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 10,
+        "name": "GigabitEthernet0/0/6",
+        "description": "GigabitEthernet0/0/6",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 11,
+        "name": "GigabitEthernet0/0/7",
+        "description": "GigabitEthernet0/0/7",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 12,
+        "name": "GigabitEthernet0/0/8",
+        "description": "GigabitEthernet0/0/8",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 13,
+        "name": "GigabitEthernet0/0/9",
+        "description": "GigabitEthernet0/0/9",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 14,
+        "name": "GigabitEthernet0/0/10",
+        "description": "GigabitEthernet0/0/10",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 15,
+        "name": "GigabitEthernet0/0/11",
+        "description": "GigabitEthernet0/0/11",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 16,
+        "name": "GigabitEthernet0/0/12",
+        "description": "GigabitEthernet0/0/12",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 17,
+        "name": "GigabitEthernet0/0/13",
+        "description": "GigabitEthernet0/0/13",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 18,
+        "name": "GigabitEthernet0/0/14",
+        "description": "GigabitEthernet0/0/14",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 19,
+        "name": "GigabitEthernet0/0/15",
+        "description": "GigabitEthernet0/0/15",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 20,
+        "name": "GigabitEthernet0/0/16",
+        "description": "GigabitEthernet0/0/16",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 21,
+        "name": "GigabitEthernet0/0/17",
+        "description": "GigabitEthernet0/0/17",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 22,
+        "name": "GigabitEthernet0/0/18",
+        "description": "GigabitEthernet0/0/18",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 23,
+        "name": "GigabitEthernet0/0/19",
+        "description": "GigabitEthernet0/0/19",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 24,
+        "name": "GigabitEthernet0/0/20",
+        "description": "GigabitEthernet0/0/20",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 25,
+        "name": "GigabitEthernet0/0/21",
+        "description": "GigabitEthernet0/0/21",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 26,
+        "name": "GigabitEthernet0/0/22",
+        "description": "GigabitEthernet0/0/22",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 27,
+        "name": "GigabitEthernet0/0/23",
+        "description": "GigabitEthernet0/0/23",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 28,
+        "name": "GigabitEthernet0/0/24",
+        "description": "GigabitEthernet0/0/24",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 29,
+        "name": "GigabitEthernet0/0/25",
+        "description": "GigabitEthernet0/0/25",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 30,
+        "name": "GigabitEthernet0/0/26",
+        "description": "GigabitEthernet0/0/26",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 31,
+        "name": "GigabitEthernet0/0/27",
+        "description": "GigabitEthernet0/0/27",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 32,
+        "name": "GigabitEthernet0/0/28",
+        "description": "GigabitEthernet0/0/28",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      },
+      {
+        "if_index": 33,
+        "name": "Vlanif301",
+        "description": "Vlanif301",
+        "alias": "",
+        "type": 53,
+        "phys_address": "AgAAAAAB",
+        "phys_address_hex": "020000000001"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 27,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzI3",
+          "raw_hex": "4769676162697445746865726e6574302f302f3237"
+        },
+        "description": "sample physical port",
+        "if_index": 31,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 0,
+          "local_port_num": 27,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAAD",
+          "raw_hex": "020000000003"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MS8wLzI2",
+          "raw_hex": "4769676162697445746865726e6574312f302f3236"
+        },
+        "port_description": "paired uplink",
+        "sys_name": "paired-peer",
+        "sys_description": "H3C Comware Platform Software, Software Version 5.20 Release 5203P05\r\nH3C S3100V2-26TP-SI\r\nCopyright (c) 2004-2013 Hangzhou H3C Tech. Co., Ltd. All rights reserved.",
+        "mgmt_addresses": [],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      }
+    ],
+    "components": {
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    },
+    "collection_complete": false,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-11-01T00:00:00Z",
+    "collected_at": "2026-11-01T00:00:01Z",
+    "issues": []
+  },
+  "peer": {
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.2",
+      "chassis": {
+        "subtype": 4,
+        "raw": "AgAAAAAD",
+        "raw_hex": "020000000003"
+      },
+      "sys_name": "additional-sample-2",
+      "sys_description": "H3C Comware Platform Software, Software Version 5.20 Release 5203P05\r\nH3C S3100V2-26TP-SI\r\nCopyright (c) 2004-2013 Hangzhou H3C Tech. Co., Ltd. All rights reserved.",
+      "sys_object_id": ".1.3.6.1.4.1.25506.1.655",
+      "uptime_before": 683294885,
+      "uptime_after": 683295008,
+      "lldp_last_change_before": 1953651994,
+      "lldp_last_change_after": 1953651994,
+      "cap_supported": "KA==",
+      "cap_enabled": "KA==",
+      "cap_supported_names": [
+        "bridge",
+        "router"
+      ],
+      "cap_enabled_names": [
+        "bridge",
+        "router"
+      ]
+    },
+    "interfaces": [
+      {
+        "if_index": 1,
+        "name": "Ethernet1/0/1",
+        "description": "Ethernet1/0/1",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAE",
+        "phys_address_hex": "020000000004"
+      },
+      {
+        "if_index": 2,
+        "name": "Ethernet1/0/2",
+        "description": "Ethernet1/0/2",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAF",
+        "phys_address_hex": "020000000005"
+      },
+      {
+        "if_index": 3,
+        "name": "Ethernet1/0/3",
+        "description": "Ethernet1/0/3",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAG",
+        "phys_address_hex": "020000000006"
+      },
+      {
+        "if_index": 4,
+        "name": "Ethernet1/0/4",
+        "description": "Ethernet1/0/4",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAH",
+        "phys_address_hex": "020000000007"
+      },
+      {
+        "if_index": 5,
+        "name": "Ethernet1/0/5",
+        "description": "Ethernet1/0/5",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAI",
+        "phys_address_hex": "020000000008"
+      },
+      {
+        "if_index": 6,
+        "name": "Ethernet1/0/6",
+        "description": "Ethernet1/0/6",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAJ",
+        "phys_address_hex": "020000000009"
+      },
+      {
+        "if_index": 7,
+        "name": "Ethernet1/0/7",
+        "description": "Ethernet1/0/7",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAK",
+        "phys_address_hex": "02000000000a"
+      },
+      {
+        "if_index": 8,
+        "name": "Ethernet1/0/8",
+        "description": "Ethernet1/0/8",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAL",
+        "phys_address_hex": "02000000000b"
+      },
+      {
+        "if_index": 9,
+        "name": "Ethernet1/0/9",
+        "description": "Ethernet1/0/9",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAM",
+        "phys_address_hex": "02000000000c"
+      },
+      {
+        "if_index": 10,
+        "name": "Ethernet1/0/10",
+        "description": "Ethernet1/0/10",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAN",
+        "phys_address_hex": "02000000000d"
+      },
+      {
+        "if_index": 11,
+        "name": "Ethernet1/0/11",
+        "description": "Ethernet1/0/11",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAO",
+        "phys_address_hex": "02000000000e"
+      },
+      {
+        "if_index": 12,
+        "name": "Ethernet1/0/12",
+        "description": "Ethernet1/0/12",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAP",
+        "phys_address_hex": "02000000000f"
+      },
+      {
+        "if_index": 13,
+        "name": "Ethernet1/0/13",
+        "description": "Ethernet1/0/13",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAQ",
+        "phys_address_hex": "020000000010"
+      },
+      {
+        "if_index": 14,
+        "name": "Ethernet1/0/14",
+        "description": "Ethernet1/0/14",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAR",
+        "phys_address_hex": "020000000011"
+      },
+      {
+        "if_index": 15,
+        "name": "Ethernet1/0/15",
+        "description": "Ethernet1/0/15",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAS",
+        "phys_address_hex": "020000000012"
+      },
+      {
+        "if_index": 16,
+        "name": "Ethernet1/0/16",
+        "description": "Ethernet1/0/16",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAT",
+        "phys_address_hex": "020000000013"
+      },
+      {
+        "if_index": 17,
+        "name": "Ethernet1/0/17",
+        "description": "Ethernet1/0/17",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAU",
+        "phys_address_hex": "020000000014"
+      },
+      {
+        "if_index": 18,
+        "name": "Ethernet1/0/18",
+        "description": "Ethernet1/0/18",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAV",
+        "phys_address_hex": "020000000015"
+      },
+      {
+        "if_index": 19,
+        "name": "Ethernet1/0/19",
+        "description": "Ethernet1/0/19",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAW",
+        "phys_address_hex": "020000000016"
+      },
+      {
+        "if_index": 20,
+        "name": "Ethernet1/0/20",
+        "description": "Ethernet1/0/20",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAX",
+        "phys_address_hex": "020000000017"
+      },
+      {
+        "if_index": 21,
+        "name": "Ethernet1/0/21",
+        "description": "Ethernet1/0/21",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAY",
+        "phys_address_hex": "020000000018"
+      },
+      {
+        "if_index": 22,
+        "name": "Ethernet1/0/22",
+        "description": "Ethernet1/0/22",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAZ",
+        "phys_address_hex": "020000000019"
+      },
+      {
+        "if_index": 23,
+        "name": "Ethernet1/0/23",
+        "description": "Ethernet1/0/23",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAa",
+        "phys_address_hex": "02000000001a"
+      },
+      {
+        "if_index": 24,
+        "name": "Ethernet1/0/24",
+        "description": "Ethernet1/0/24",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAb",
+        "phys_address_hex": "02000000001b"
+      },
+      {
+        "if_index": 25,
+        "name": "GigabitEthernet1/0/25",
+        "description": "GigabitEthernet1/0/25",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAc",
+        "phys_address_hex": "02000000001c"
+      },
+      {
+        "if_index": 26,
+        "name": "GigabitEthernet1/0/26",
+        "description": "GigabitEthernet1/0/26",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAd",
+        "phys_address_hex": "02000000001d"
+      },
+      {
+        "if_index": 27,
+        "name": "NULL0",
+        "description": "NULL0",
+        "alias": "",
+        "type": 1,
+        "phys_address": "AgAAAAAC",
+        "phys_address_hex": "020000000002"
+      },
+      {
+        "if_index": 29,
+        "name": "Vlan-interface301",
+        "description": "Vlan-interface301",
+        "alias": "",
+        "type": 136,
+        "phys_address": "AgAAAAAD",
+        "phys_address_hex": "020000000003"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 26,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MS8wLzI2",
+          "raw_hex": "4769676162697445746865726e6574312f302f3236"
+        },
+        "description": "sample physical port",
+        "if_index": 26,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 624861929,
+          "local_port_num": 26,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAAB",
+          "raw_hex": "020000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzI3",
+          "raw_hex": "4769676162697445746865726e6574302f302f3237"
+        },
+        "port_description": "paired uplink",
+        "sys_name": "paired-peer",
+        "sys_description": "S5720-28TP-PWR-LI-AC\r\nHuawei Versatile Routing Platform Software\r\nVRP (R) software, Version 5.170 (S5720 V200R011C10SPC600)\r\nCopyright (C) 2000-2018 HUAWEI TECH Co., Ltd.",
+        "mgmt_addresses": [],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      }
+    ],
+    "components": {
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    },
+    "collection_complete": false,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-11-01T00:00:00Z",
+    "collected_at": "2026-11-01T00:00:01Z",
+    "issues": []
+  }
+}

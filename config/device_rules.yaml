@@ -1,0 +1,162 @@
+# Device classification rules. Each rule has a unique id, matching conditions
+# and an action (switch or excluded). Rules are applied in ascending priority;
+# equal-priority contradictions are config errors. No match => unknown.
+#
+# Applied by the classification engine. OID matching compares numeric segments.
+# Every rule must be backed by a fixture; see docs/vendor-support.md.
+version: 1
+rules:
+  # Direct authorized sample, sanitized fixture:
+  # testdata/adapters/h3c-s5130s-28p-ei/snapshot-subset.json
+  - id: h3c-s5130s-28p-ei-r6368
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1587
+    description_regex: '^H3C Comware Platform Software, Software Version 7[.]1[.]070, Release 6368\r?\nH3C S5130S-28P-EI(?:\r?\n|$)'
+    action: switch
+    priority: 10
+  # Direct authorized sample after enabling LLDP access in the SNMP view:
+  # testdata/adapters/huawei-s5735-l8t4s-qa2/h3c-pair.json
+  - id: huawei-s5735-l8t4s-qa2-v200r023c00spc500
+    sys_object_id_prefix: 1.3.6.1.4.1.2011.2.23.967
+    description_regex: '^S5735-L8T4S-QA2[ \t]*\r?\nHuawei Versatile Routing Platform Software[ \t]*\r?\n[ \t]*VRP \(R\) software,[ \t]*Version 5[.]170 \(S5735 V200R023C00SPC500\)(?:[ \t]*\r?\n|$)'
+    action: switch
+    priority: 10
+
+# BEGIN ASSET VERIFIED MODELS
+# Exact product/firmware observations: testdata/adapters/inventory-models/catalog.json
+  - id: h3c-live-1523-6817
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1523
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6817\\r?\\nH3C S5560X-30F-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1460-6817
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1460
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6817\\r?\\nH3C S5560X-30C-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1587-6368
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1587
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6368\\r?\\nH3C S5130S-28P-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1639-6368
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1639
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6368\\r?\\nH3C S5130S-10P-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1720-6113
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1720
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6113\\r?\\nH3C S3100V3-18TP-SI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1678-6126p20
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1678
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6126P20\\r?\\nH3C S5120V2-28P-SI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  # SNMP system facts and operator CLI LLDP confirmation:
+  # testdata/adapters/h3c-s5120v2-28p-si-r6318p01/device.json
+  - id: h3c-live-1678-6318p01
+    vendor: H3C
+    model: S5120V2-28P-SI
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1678
+    description_regex: '^H3C Comware Platform Software, Software Version 7[.]1[.]070, Release 6318P01\r?\nH3C S5120V2-28P-SI(?:\r?\n|$)'
+    action: switch
+    priority: 20
+  - id: h3c-live-1724-6113
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1724
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6113\\r?\\nH3C MS4200-28TP-PWR(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1681-6126p13
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1681
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6126P13\\r?\\nH3C S5120V2-28P-PWR-LI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1458-3208p03
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1458
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 3208P03\\r?\\nH3C S5500V2-28F-SI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1721-6126p20
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1721
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6126P20\\r?\\nH3C S3100V3-28TP-SI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-655-5213p08
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.655
+    description_regex: "^H3C Comware Platform Software, Software Version 5\\.20 Release 5213P08\\r?\\nH3C S3100V2-26TP-SI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-462-1515
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.462
+    description_regex: "^H3C Switch S5120-28P-SI Software Version 5\\.20, Release 1515(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-462-1517p02
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.462
+    description_regex: "^H3C Switch S5120-28P-SI Software Version 5\\.20, Release 1517P02(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1646-6113
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1646
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6113\\r?\\nH3C S3100V3-28TP-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1460-6628p47
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1460
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6628P47\\r?\\nH3C S5560X-30C-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+  - id: h3c-live-1639-6379
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.1639
+    description_regex: "^H3C Comware Platform Software, Software Version 7\\.1\\.070, Release 6379\\r?\\nH3C S5130S-10P-EI(?:\\r?\\n|$)"
+    action: switch
+    priority: 20
+
+# Legacy samples: testdata/adapters/legacy-access/models.json.
+# Version alone is never sufficient: require vendor OID, exact model and release.
+  - id: h3c-s3100v2-26tp-si-r5203p05
+    vendor: H3C
+    model: S3100V2-26TP-SI
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.655
+    description_regex: '^H3C Comware Platform Software,[ \t]*Software Version[ \t]+5[.]20[ \t]+Release 5203P05[ \t]*\r?\nH3C S3100V2-26TP-SI[ \t]*(?:\r?\n|$)'
+    action: switch
+    priority: 20
+  - id: h3c-s3100v2-26tp-si-r5103p01
+    vendor: H3C
+    model: S3100V2-26TP-SI
+    sys_object_id_prefix: 1.3.6.1.4.1.25506.1.655
+    description_regex: '^H3C Comware Platform Software,[ \t]*Software Version[ \t]+5[.]20[ \t]+Release 5103P01[ \t]*\r?\nH3C S3100V2-26TP-SI[ \t]*(?:\r?\n|$)'
+    action: switch
+    priority: 20
+  - id: huawei-s2700-9tp-ei-ac-v100r006c05
+    vendor: Huawei
+    model: S2700-9TP-EI-AC
+    sys_object_id_prefix: 1.3.6.1.4.1.2011.2.23.114
+    description_regex: '^S2700-9TP-EI-AC[ \t]*\r?\nHuawei Versatile Routing Platform Software[ \t]*\r?\n[ \t]*VRP \(R\) software,[ \t]*Version[ \t]+5[.]70[ \t]+\(S2700 V100R006C05\)[ \t]*(?:\r?\n|$)'
+    action: switch
+    priority: 20
+  # System/IF-MIB sampled after the operator enabled SNMP; LLDP view still closed.
+  - id: huawei-s2318tp-ei-v100r006c03
+    vendor: Huawei
+    model: S2318TP-EI
+    sys_object_id_prefix: 1.3.6.1.4.1.2011.2.23.90
+    description_regex: '^S2318TP-EI[ \t]*\r?\nHuawei Versatile Routing Platform Software[ \t]*\r?\n[ \t]*VRP \(R\) software,[ \t]*Version[ \t]+5[.]70[ \t]+\(S2300 V100R006C03\)[ \t]*(?:\r?\n|$)'
+    action: switch
+    priority: 20
+
+# Direct samples: testdata/adapters/additional-devices/models.json
+  - id: huawei-s5720-28tp-pwr-li-ac-v200r011c10spc600
+    vendor: Huawei
+    model: S5720-28TP-PWR-LI-AC
+    sys_object_id_prefix: 1.3.6.1.4.1.2011.2.23.462
+    description_regex: '^S5720-28TP-PWR-LI-AC[ \t]*\r?\nHuawei Versatile Routing Platform Software[ \t]*\r?\n[ \t]*VRP \(R\) software,[ \t]*Version[ \t]+5[.]170[ \t]+\(S5720 V200R011C10SPC600\)[ \t]*(?:\r?\n|$)'
+    action: switch
+    priority: 20
+  - id: huawei-ac6507s-v200r010c00spc700
+    vendor: Huawei
+    model: AC6507S
+    sys_object_id_prefix: 1.3.6.1.4.1.2011.2.240.19
+    description_regex: '^Huawei AC6507S Huawei Versatile Routing Platform Software[ \t]+VRP \(R\) software,[ \t]*Version[ \t]+5[.]170[ \t]+\(AC6507S V200R010C00SPC700\)(?:[ \t]|$)'
+    action: wireless_controller
+    priority: 20

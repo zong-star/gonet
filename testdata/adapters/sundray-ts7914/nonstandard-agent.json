@@ -1,0 +1,96 @@
+{
+  "provenance": {
+    "kind": "sanitized_real_snmp_subset",
+    "date": "2026-10-31",
+    "model": "TS7914 two-member stack, confirmed by operator",
+    "firmware": "SW-CHASSIS3.8 BUILD20251010-015800 observed through the paired H3C LLDP advertisement; kernel build is retained in direct sysDescr",
+    "redaction": "Host omitted; MAC text substituted consistently with equal length; opaque management row id replaced; actual ASN.1 types, bad subtype 0, family 1/length 0 and repeated OID retained",
+    "cli_comparison": "NOT RUN"
+  },
+  "facts": [
+    {
+      "oid": ".1.3.6.1.2.1.1.2.0",
+      "asn1": "ObjectIdentifier",
+      "go_type": "string",
+      "value": ".1.3.6.1.4.1.45577"
+    },
+    {
+      "oid": ".1.3.6.1.2.1.1.1.0",
+      "asn1": "OctetString",
+      "go_type": "[]uint8",
+      "value": "TGludXggU3VuZHJheSA0LjE0Ljc2LTEwLjMuNC4wLTQtTWFydmVsbCAjMiBTTVAgRnJpIE9jdCAxMCAwMzowOTowMSBVVEMgMjAyNSBhYXJjaDY0",
+      "raw_hex": "4c696e75782053756e6472617920342e31342e37362d31302e332e342e302d342d4d617276656c6c20233220534d5020467269204f63742031302030333a30393a30312055544320323032352061617263683634"
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.3.1.0",
+      "asn1": "Integer",
+      "go_type": "int",
+      "value": 7
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.3.2.0",
+      "asn1": "OctetString",
+      "go_type": "[]uint8",
+      "value": "MDI6MDA6MDA6MDA6MDA6MDE=",
+      "raw_hex": "30323a30303a30303a30303a30303a3031"
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.3.5.0",
+      "asn1": "NoSuchObject",
+      "go_type": "<nil>",
+      "value": null
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.3.6.0",
+      "asn1": "NoSuchObject",
+      "go_type": "<nil>",
+      "value": null
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.4.1.1.6.0.65795.1",
+      "asn1": "Integer",
+      "go_type": "int",
+      "value": 5
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.4.1.1.6.0.65800.1",
+      "asn1": "Integer",
+      "go_type": "int",
+      "value": 0
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.4.1.1.7.0.65800.1",
+      "asn1": "OctetString",
+      "go_type": "[]uint8",
+      "value": "MDI6MDA6MDA6MDA6MDA6MDM=",
+      "raw_hex": "30323a30303a30303a30303a30303a3033"
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.4.1.1.4.0.65800.1",
+      "asn1": "Integer",
+      "go_type": "int",
+      "value": 7
+    },
+    {
+      "oid": ".1.0.8802.1.1.2.1.4.1.1.5.0.65800.1",
+      "asn1": "OctetString",
+      "go_type": "[]uint8",
+      "value": "MDI6MDA6MDA6MDA6MDA6MDI=",
+      "raw_hex": "30323a30303a30303a30303a30303a3032"
+    }
+  ],
+  "management_getnext": [
+    {
+      "asn1": "Integer",
+      "oid": ".1.0.8802.1.1.2.1.4.2.1.3.0.65793.305419777.1.0",
+      "requested_after": "1.0.8802.1.1.2.1.4.2.1.3",
+      "value": 0
+    },
+    {
+      "asn1": "Integer",
+      "oid": ".1.0.8802.1.1.2.1.4.2.1.3.0.65793.305419777.1.0",
+      "requested_after": ".1.0.8802.1.1.2.1.4.2.1.3.0.65793.305419777.1.0",
+      "value": 0
+    }
+  ]
+}

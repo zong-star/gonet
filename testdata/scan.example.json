@@ -1,0 +1,2316 @@
+{
+  "preprobe": {
+    "records": null,
+    "summary": {
+      "refresh_interval_ns": 0,
+      "enabled": false,
+      "range_hosts": 0,
+      "probe_queued": 0,
+      "probe_completed": 0,
+      "probe_failed": 0,
+      "identified": 0,
+      "deferred": 0,
+      "pool_addresses": 0,
+      "pool_identities": 0,
+      "pdus": 0,
+      "elapsed_ns": 0,
+      "cursor": {
+        "scope_digest": "",
+        "next_offset": 0,
+        "covered_hosts": 0,
+        "completed_cycles": 0,
+        "known_offset": 0
+      }
+    }
+  },
+  "verifications": [
+    {
+      "source_device": 1,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.2"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 2,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.2",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 1,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.2"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 2,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.2",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 1,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 3,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAD",
+          "raw_hex": "000000000003"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.3"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 3,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.3",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 2,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 1,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.1",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 2,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 1,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.1",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 2,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 3,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAE",
+          "raw_hex": "000000000004"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.4"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 4,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.4",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 3,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDM=",
+          "raw_hex": "5033"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 1,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.1",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 3,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAE",
+          "raw_hex": "000000000004"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.4"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 4,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.4",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 4,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDM=",
+          "raw_hex": "5033"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.2"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 2,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.2",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 4,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAD",
+          "raw_hex": "000000000003"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.3"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "matched_device": 3,
+      "verification": {
+        "verification_status": "verified",
+        "selected_snmp_ip": "192.0.2.3",
+        "last_verification_at": "2023-11-14T22:13:20Z"
+      }
+    },
+    {
+      "source_device": 4,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 3,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAACh",
+          "raw_hex": "0000000000a1"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.201"
+        ],
+        "cap_supported": "EA==",
+        "cap_enabled": "EA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "verification": {
+        "verification_status": "excluded",
+        "failure_code": "EXCLUDED_DEVICE",
+        "failure_reason": "capability:ap/telephone/station"
+      }
+    },
+    {
+      "source_device": 4,
+      "neighbor": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 4,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAACi",
+          "raw_hex": "0000000000a2"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.202"
+        ],
+        "cap_supported": "BA==",
+        "cap_enabled": "BA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "discovered_at": "2023-11-14T22:13:20Z",
+      "verification": {
+        "verification_status": "excluded",
+        "failure_code": "EXCLUDED_DEVICE",
+        "failure_reason": "capability:ap/telephone/station"
+      }
+    }
+  ],
+  "pending_nodes": [],
+  "pending_links": [],
+  "schema_version": 1,
+  "status": "completed",
+  "devices": [
+    {
+      "ref": 1,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000001",
+      "identity_keys": [
+        "lldp:4:000000000001"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAB",
+        "raw_hex": "000000000001"
+      },
+      "sys_name": "core-sw1",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "test-switch",
+        "reason": "rule:test-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.1",
+          "state": "verified",
+          "source": "seed"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 2,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000002",
+      "identity_keys": [
+        "lldp:4:000000000002"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAC",
+        "raw_hex": "000000000002"
+      },
+      "sys_name": "agg-a",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "test-switch",
+        "reason": "rule:test-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.2",
+          "state": "verified",
+          "source": "lldp"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 3,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000003",
+      "identity_keys": [
+        "lldp:4:000000000003"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAD",
+        "raw_hex": "000000000003"
+      },
+      "sys_name": "agg-b",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "test-switch",
+        "reason": "rule:test-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.3",
+          "state": "verified",
+          "source": "lldp"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 4,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000004",
+      "identity_keys": [
+        "lldp:4:000000000004"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAE",
+        "raw_hex": "000000000004"
+      },
+      "sys_name": "access-sw1",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "test-switch",
+        "reason": "rule:test-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.4",
+          "state": "verified",
+          "source": "lldp"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "ports": [
+    {
+      "ref": 1,
+      "device": 1,
+      "key": "lldp:5:5031",
+      "subtype": 5,
+      "raw_id": "UDE=",
+      "aliases": [
+        "lldp:5:5031"
+      ],
+      "display_name": "",
+      "if_index": 101,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 2,
+      "device": 1,
+      "key": "lldp:5:5032",
+      "subtype": 5,
+      "raw_id": "UDI=",
+      "aliases": [
+        "lldp:5:5032"
+      ],
+      "display_name": "",
+      "if_index": 102,
+      "lldp_port_num": 2,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 3,
+      "device": 1,
+      "key": "lldp:5:5033",
+      "subtype": 5,
+      "raw_id": "UDM=",
+      "aliases": [
+        "lldp:5:5033"
+      ],
+      "display_name": "",
+      "if_index": 103,
+      "lldp_port_num": 3,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 4,
+      "device": 2,
+      "key": "lldp:5:5031",
+      "subtype": 5,
+      "raw_id": "UDE=",
+      "aliases": [
+        "lldp:5:5031"
+      ],
+      "display_name": "",
+      "if_index": 201,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 5,
+      "device": 2,
+      "key": "lldp:5:5032",
+      "subtype": 5,
+      "raw_id": "UDI=",
+      "aliases": [
+        "lldp:5:5032"
+      ],
+      "display_name": "",
+      "if_index": 202,
+      "lldp_port_num": 2,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 6,
+      "device": 3,
+      "key": "lldp:5:5031",
+      "subtype": 5,
+      "raw_id": "UDE=",
+      "aliases": [
+        "lldp:5:5031"
+      ],
+      "display_name": "",
+      "if_index": 301,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 7,
+      "device": 2,
+      "key": "lldp:5:5033",
+      "subtype": 5,
+      "raw_id": "UDM=",
+      "aliases": [
+        "lldp:5:5033"
+      ],
+      "display_name": "",
+      "if_index": 203,
+      "lldp_port_num": 3,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 8,
+      "device": 4,
+      "key": "lldp:5:5031",
+      "subtype": 5,
+      "raw_id": "UDE=",
+      "aliases": [
+        "lldp:5:5031"
+      ],
+      "display_name": "",
+      "if_index": 401,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 9,
+      "device": 3,
+      "key": "lldp:5:5032",
+      "subtype": 5,
+      "raw_id": "UDI=",
+      "aliases": [
+        "lldp:5:5032"
+      ],
+      "display_name": "",
+      "if_index": 302,
+      "lldp_port_num": 2,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 10,
+      "device": 4,
+      "key": "lldp:5:5032",
+      "subtype": 5,
+      "raw_id": "UDI=",
+      "aliases": [
+        "lldp:5:5032"
+      ],
+      "display_name": "",
+      "if_index": 402,
+      "lldp_port_num": 2,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 11,
+      "device": 4,
+      "key": "lldp:5:5033",
+      "subtype": 5,
+      "raw_id": "UDM=",
+      "aliases": [
+        "lldp:5:5033"
+      ],
+      "display_name": "",
+      "if_index": 403,
+      "lldp_port_num": 3,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 12,
+      "device": 4,
+      "key": "lldp:5:5034",
+      "subtype": 5,
+      "raw_id": "UDQ=",
+      "aliases": [
+        "lldp:5:5034"
+      ],
+      "display_name": "",
+      "if_index": 404,
+      "lldp_port_num": 4,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "outcomes": [
+    {
+      "device": 1,
+      "target": {
+        "address": "192.0.2.1",
+        "depth": 0
+      },
+      "snapshot": {
+        "request_pdus": 0,
+        "schema_version": 1,
+        "device": {
+          "target": "192.0.2.1",
+          "chassis": {
+            "subtype": 4,
+            "raw": "AAAAAAAB",
+            "raw_hex": "000000000001"
+          },
+          "sys_name": "core-sw1",
+          "sys_description": "",
+          "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+          "uptime_before": 0,
+          "uptime_after": 0,
+          "lldp_last_change_before": 0,
+          "lldp_last_change_after": 0,
+          "cap_supported": "IA==",
+          "cap_enabled": "IA==",
+          "cap_supported_names": null,
+          "cap_enabled_names": null
+        },
+        "interfaces": [
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 101,
+            "name": "P1",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 102,
+            "name": "P2",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 103,
+            "name": "P3",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          }
+        ],
+        "local_ports": [
+          {
+            "number": 1,
+            "id": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 2,
+            "id": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 3,
+            "id": {
+              "subtype": 5,
+              "raw": "UDM=",
+              "raw_hex": "5033"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          }
+        ],
+        "neighbors": [
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 1,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAC",
+              "raw_hex": "000000000002"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.2"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 2,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAC",
+              "raw_hex": "000000000002"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.2"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 3,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAD",
+              "raw_hex": "000000000003"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.3"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          }
+        ],
+        "components": null,
+        "collection_complete": true,
+        "snapshot_stable": true,
+        "absence_eligible": false,
+        "started_at": "0001-01-01T00:00:00Z",
+        "collected_at": "2023-11-14T22:13:20Z",
+        "issues": null
+      },
+      "issues": null
+    },
+    {
+      "device": 2,
+      "target": {
+        "address": "192.0.2.2",
+        "depth": 1
+      },
+      "snapshot": {
+        "request_pdus": 0,
+        "schema_version": 1,
+        "device": {
+          "target": "192.0.2.2",
+          "chassis": {
+            "subtype": 4,
+            "raw": "AAAAAAAC",
+            "raw_hex": "000000000002"
+          },
+          "sys_name": "agg-a",
+          "sys_description": "",
+          "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+          "uptime_before": 0,
+          "uptime_after": 0,
+          "lldp_last_change_before": 0,
+          "lldp_last_change_after": 0,
+          "cap_supported": "IA==",
+          "cap_enabled": "IA==",
+          "cap_supported_names": null,
+          "cap_enabled_names": null
+        },
+        "interfaces": [
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 201,
+            "name": "P1",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 202,
+            "name": "P2",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 203,
+            "name": "P3",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          }
+        ],
+        "local_ports": [
+          {
+            "number": 1,
+            "id": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 2,
+            "id": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 3,
+            "id": {
+              "subtype": 5,
+              "raw": "UDM=",
+              "raw_hex": "5033"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          }
+        ],
+        "neighbors": [
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 1,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAB",
+              "raw_hex": "000000000001"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.1"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 2,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAB",
+              "raw_hex": "000000000001"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.1"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 3,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAE",
+              "raw_hex": "000000000004"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.4"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          }
+        ],
+        "components": null,
+        "collection_complete": true,
+        "snapshot_stable": true,
+        "absence_eligible": false,
+        "started_at": "0001-01-01T00:00:00Z",
+        "collected_at": "2023-11-14T22:13:20Z",
+        "issues": null
+      },
+      "issues": null
+    },
+    {
+      "device": 3,
+      "target": {
+        "address": "192.0.2.3",
+        "depth": 1
+      },
+      "snapshot": {
+        "request_pdus": 0,
+        "schema_version": 1,
+        "device": {
+          "target": "192.0.2.3",
+          "chassis": {
+            "subtype": 4,
+            "raw": "AAAAAAAD",
+            "raw_hex": "000000000003"
+          },
+          "sys_name": "agg-b",
+          "sys_description": "",
+          "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+          "uptime_before": 0,
+          "uptime_after": 0,
+          "lldp_last_change_before": 0,
+          "lldp_last_change_after": 0,
+          "cap_supported": "IA==",
+          "cap_enabled": "IA==",
+          "cap_supported_names": null,
+          "cap_enabled_names": null
+        },
+        "interfaces": [
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 301,
+            "name": "P1",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 302,
+            "name": "P2",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          }
+        ],
+        "local_ports": [
+          {
+            "number": 1,
+            "id": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 2,
+            "id": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          }
+        ],
+        "neighbors": [
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 1,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAB",
+              "raw_hex": "000000000001"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDM=",
+              "raw_hex": "5033"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.1"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 2,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAE",
+              "raw_hex": "000000000004"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.4"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          }
+        ],
+        "components": null,
+        "collection_complete": true,
+        "snapshot_stable": true,
+        "absence_eligible": false,
+        "started_at": "0001-01-01T00:00:00Z",
+        "collected_at": "2023-11-14T22:13:20Z",
+        "issues": null
+      },
+      "issues": null
+    },
+    {
+      "device": 4,
+      "target": {
+        "address": "192.0.2.4",
+        "depth": 2
+      },
+      "snapshot": {
+        "request_pdus": 0,
+        "schema_version": 1,
+        "device": {
+          "target": "192.0.2.4",
+          "chassis": {
+            "subtype": 4,
+            "raw": "AAAAAAAE",
+            "raw_hex": "000000000004"
+          },
+          "sys_name": "access-sw1",
+          "sys_description": "",
+          "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+          "uptime_before": 0,
+          "uptime_after": 0,
+          "lldp_last_change_before": 0,
+          "lldp_last_change_after": 0,
+          "cap_supported": "IA==",
+          "cap_enabled": "IA==",
+          "cap_supported_names": null,
+          "cap_enabled_names": null
+        },
+        "interfaces": [
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 401,
+            "name": "P1",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 402,
+            "name": "P2",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 403,
+            "name": "P3",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          },
+          {
+            "admin_status": "",
+            "oper_status": "",
+            "last_change": null,
+            "last_change_at": null,
+            "last_change_state": "",
+            "sys_up_time": 0,
+            "status_collected_at": null,
+            "status_collection_state": "",
+            "status_attempted_at": null,
+            "if_index": 404,
+            "name": "P4",
+            "description": "",
+            "alias": "",
+            "type": 6,
+            "phys_address": null,
+            "phys_address_hex": ""
+          }
+        ],
+        "local_ports": [
+          {
+            "number": 1,
+            "id": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 2,
+            "id": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 3,
+            "id": {
+              "subtype": 5,
+              "raw": "UDM=",
+              "raw_hex": "5033"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          },
+          {
+            "number": 4,
+            "id": {
+              "subtype": 5,
+              "raw": "UDQ=",
+              "raw_hex": "5034"
+            },
+            "description": "",
+            "if_index": null,
+            "physical": false,
+            "mapping_rule": ""
+          }
+        ],
+        "neighbors": [
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 1,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAC",
+              "raw_hex": "000000000002"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDM=",
+              "raw_hex": "5033"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.2"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 2,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAAAD",
+              "raw_hex": "000000000003"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDI=",
+              "raw_hex": "5032"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.3"
+            ],
+            "cap_supported": "IA==",
+            "cap_enabled": "IA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 3,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAACh",
+              "raw_hex": "0000000000a1"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.201"
+            ],
+            "cap_supported": "EA==",
+            "cap_enabled": "EA==",
+            "cap_enabled_names": null,
+            "issues": null
+          },
+          {
+            "index": {
+              "time_mark": 7,
+              "local_port_num": 4,
+              "remote_index": 1
+            },
+            "chassis": {
+              "subtype": 4,
+              "raw": "AAAAAACi",
+              "raw_hex": "0000000000a2"
+            },
+            "port": {
+              "subtype": 5,
+              "raw": "UDE=",
+              "raw_hex": "5031"
+            },
+            "port_description": "",
+            "sys_name": "",
+            "sys_description": "",
+            "mgmt_addresses": [
+              "192.0.2.202"
+            ],
+            "cap_supported": "BA==",
+            "cap_enabled": "BA==",
+            "cap_enabled_names": null,
+            "issues": null
+          }
+        ],
+        "components": null,
+        "collection_complete": true,
+        "snapshot_stable": true,
+        "absence_eligible": false,
+        "started_at": "0001-01-01T00:00:00Z",
+        "collected_at": "2023-11-14T22:13:20Z",
+        "issues": null
+      },
+      "issues": null
+    }
+  ],
+  "observations": [
+    {
+      "observer": 1,
+      "remote": 2,
+      "local_port": 1,
+      "remote_port": 4,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.2"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 1,
+      "remote": 2,
+      "local_port": 2,
+      "remote_port": 5,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 2,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.2"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 1,
+      "remote": 3,
+      "local_port": 3,
+      "remote_port": 6,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 3,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 3,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAD",
+          "raw_hex": "000000000003"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.3"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 2,
+      "remote": 1,
+      "local_port": 4,
+      "remote_port": 1,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 2,
+      "remote": 1,
+      "local_port": 5,
+      "remote_port": 2,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 2,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 2,
+      "remote": 4,
+      "local_port": 7,
+      "remote_port": 8,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 3,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 3,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAE",
+          "raw_hex": "000000000004"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.4"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 3,
+      "remote": 1,
+      "local_port": 6,
+      "remote_port": 3,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDM=",
+          "raw_hex": "5033"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 3,
+      "remote": 4,
+      "local_port": 9,
+      "remote_port": 10,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 2,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAE",
+          "raw_hex": "000000000004"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.4"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 4,
+      "remote": 2,
+      "local_port": 8,
+      "remote_port": 7,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDM=",
+          "raw_hex": "5033"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.2"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 4,
+      "remote": 3,
+      "local_port": 10,
+      "remote_port": 9,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 2,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAD",
+          "raw_hex": "000000000003"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDI=",
+          "raw_hex": "5032"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.3"
+        ],
+        "cap_supported": "IA==",
+        "cap_enabled": "IA==",
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    }
+  ],
+  "unresolved": null,
+  "candidates": [
+    {
+      "observer": 4,
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAACh",
+        "raw_hex": "0000000000a1"
+      },
+      "port": {
+        "subtype": 5,
+        "raw": "UDE=",
+        "raw_hex": "5031"
+      },
+      "sys_name": "",
+      "classification": {
+        "result": "excluded",
+        "rule_id": "capability",
+        "reason": "capability:ap/telephone/station"
+      },
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 3,
+        "remote_index": 1
+      },
+      "disposition": "excluded",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 3,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAACh",
+          "raw_hex": "0000000000a1"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.201"
+        ],
+        "cap_supported": "EA==",
+        "cap_enabled": "EA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "at": "2023-11-14T22:13:20Z"
+    },
+    {
+      "observer": 4,
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAACi",
+        "raw_hex": "0000000000a2"
+      },
+      "port": {
+        "subtype": 5,
+        "raw": "UDE=",
+        "raw_hex": "5031"
+      },
+      "sys_name": "",
+      "classification": {
+        "result": "excluded",
+        "rule_id": "capability",
+        "reason": "capability:ap/telephone/station"
+      },
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 4,
+        "remote_index": 1
+      },
+      "disposition": "excluded",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 4,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAACi",
+          "raw_hex": "0000000000a2"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "UDE=",
+          "raw_hex": "5031"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": [
+          "192.0.2.202"
+        ],
+        "cap_supported": "BA==",
+        "cap_enabled": "BA==",
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "at": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "links": [
+    {
+      "key": {
+        "device_a": 1,
+        "port_a": 1,
+        "device_b": 2,
+        "port_b": 4
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    },
+    {
+      "key": {
+        "device_a": 1,
+        "port_a": 2,
+        "device_b": 2,
+        "port_b": 5
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    },
+    {
+      "key": {
+        "device_a": 1,
+        "port_a": 3,
+        "device_b": 3,
+        "port_b": 6
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    },
+    {
+      "key": {
+        "device_a": 2,
+        "port_a": 7,
+        "device_b": 4,
+        "port_b": 8
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    },
+    {
+      "key": {
+        "device_a": 3,
+        "port_a": 9,
+        "device_b": 4,
+        "port_b": 10
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "counts": {
+    "collect_queued": 4,
+    "collect_completed": 4,
+    "collect_failed": 0,
+    "collect_pdus": 0,
+    "collect_elapsed_ms": 0,
+    "admitted_candidates": 4,
+    "devices_discovered": 4,
+    "devices_collected": 4,
+    "devices_failed": 0,
+    "devices_unscanned": 0,
+    "excluded_neighbors": 2,
+    "unknown_neighbors": 0,
+    "unresolved_observations": 0,
+    "links_observed": 5,
+    "truncated_branches": 0,
+    "eligible_devices": 0
+  },
+  "issues": [
+    {
+      "code": "IDENTITY_UNRESOLVED",
+      "component": "identity",
+      "message": "advertised strong identity is not yet directly collected",
+      "retryable": false
+    },
+    {
+      "code": "PORT_UNRESOLVED",
+      "component": "topology",
+      "message": "remote interfaceName port is provisional until the peer is scanned",
+      "retryable": false
+    },
+    {
+      "code": "PORT_UNRESOLVED",
+      "component": "topology",
+      "message": "remote interfaceName port is provisional until the peer is scanned",
+      "retryable": false
+    },
+    {
+      "code": "IDENTITY_UNRESOLVED",
+      "component": "identity",
+      "message": "advertised strong identity is not yet directly collected",
+      "retryable": false
+    },
+    {
+      "code": "PORT_UNRESOLVED",
+      "component": "topology",
+      "message": "remote interfaceName port is provisional until the peer is scanned",
+      "retryable": false
+    },
+    {
+      "code": "IDENTITY_UNRESOLVED",
+      "component": "identity",
+      "message": "advertised strong identity is not yet directly collected",
+      "retryable": false
+    },
+    {
+      "code": "PORT_UNRESOLVED",
+      "component": "topology",
+      "message": "remote interfaceName port is provisional until the peer is scanned",
+      "retryable": false
+    },
+    {
+      "code": "PORT_UNRESOLVED",
+      "component": "topology",
+      "message": "remote interfaceName port is provisional until the peer is scanned",
+      "retryable": false
+    }
+  ],
+  "termination_reason": "frontier_empty"
+}

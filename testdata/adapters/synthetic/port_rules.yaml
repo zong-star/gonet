@@ -1,0 +1,9 @@
+# Synthetic contract fixture. This is not a real vendor/model support claim.
+version: 1
+rules:
+  - id: synthetic-a-ports
+    device_rule_id: synthetic-a
+    fixture: testdata/adapters/synthetic/cases.json
+    aliases:
+      Short1/1: Ethernet1/1
+    non_physical_name_regex: '^Pseudo[0-9]+$'

@@ -1,0 +1,6 @@
+[
+  {"rule_id":"synthetic-a","port":"Short1/1","interface":"Ethernet1/1","if_type":6,"physical":true},
+  {"rule_id":"synthetic-a","port":"Pseudo0","interface":"Pseudo0","if_type":6,"physical":false},
+  {"rule_id":"other-model","port":"Short1/1","interface":"Ethernet1/1","if_type":6,"physical":false},
+  {"rule_id":"synthetic-a","port":"Port-Channel1","interface":"Port-Channel1","if_type":161,"physical":false}
+]

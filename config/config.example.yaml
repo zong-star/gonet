@@ -1,0 +1,124 @@
+# gonet configuration example. Replace the seeds, management CIDRs and
+# environment variable values before any real use. The example IPs must NOT be
+# contacted without explicit authorization.
+version: 1
+
+history:
+  # Completed/partial/failed/aborted rounds; running round is never removed.
+  # Latest usable topology occupies one slot even after prolonged failures.
+  keep_scans: 500
+
+database:
+  # Host, port, database, username and password come from this environment
+  # variable. Local Windows service setup: docs/postgresql-service.md.
+  dsn_env: GONET_DATABASE_URL
+  statement_timeout: 30s
+
+discovery:
+  preprobe:
+    enabled: true
+    workers: 8
+    timeout: 1s
+    retries: 0
+    host_timeout: 3s
+    # Legacy rotating-batch settings; scan/serve now visit the complete range.
+    # The complete update still obeys discovery.run_timeout and cancellation.
+    max_hosts_per_run: 256
+    known_hosts_per_run: 64
+    phase_timeout: 60s
+    refresh_interval: 15m
+  seeds: [10.201.109.1]
+  management_cidrs: [10.201.109.0/24]
+  # Deny first, even when a broader management CIDR includes these addresses.
+  excluded_cidrs: []
+  max_depth: 8
+  max_devices: 200
+  max_targets: 600
+  workers: 8
+  run_timeout: 15m
+  max_addresses_per_device: 3
+  # Enable only on an explicitly reachable IPv4 link-local network. The
+  # target must still be inside management_cidrs and outside excluded_cidrs.
+  allow_ipv4_link_local: false
+
+snmp:
+  # Optional access hints only; topology identity/matching uses chassis/port.
+  # TS/RS tables are read with bounded walks; malformed instances are diagnosed.
+  collect_management_addresses: true
+  # Enable only for the operator-verified TS7914 firmware/kernel fingerprint.
+  # adapters: [sundray_ts7914_chassis38_20251010]
+  adapters: []
+  # Optional, exact-firmware LAG adapters; lldp_dot3_lag retains advertisements.
+  # huawei_s5735_qa2_v200r023_lag, h3c_s5560_6628p47_lag, lldp_dot3_lag
+  # Additional work stays inside device_timeout and max_pdus_per_device.
+  lag_timeout: 3s
+  lag_max_pdus: 32
+  port: 161
+  default_profile: lab_v2c
+  timeout: 3s
+  retries: 1
+  device_timeout: 45s
+  max_repetitions: 20
+  max_pdus_per_device: 500
+  max_neighbors_per_device: 4096
+  consistency_retries: 1
+  startup_grace: 180s
+  # Set to true only after operations has confirmed the SNMP read-only view and
+  # LLDP receive visibility cover the required subtrees. Default false.
+  view_verified: false
+  profiles:
+    lab_v2c:
+      version: 2c
+      community_env: GONET_SNMP_COMMUNITY
+    prod_v3:
+      version: "3"
+      security_level: authPriv
+      username_env: GONET_SNMPV3_USER
+      auth_protocol: SHA256
+      auth_password_env: GONET_SNMPV3_AUTH
+      priv_protocol: AES
+      priv_password_env: GONET_SNMPV3_PRIV
+      context_name: ""
+  # Longest-prefix match over management CIDRs; uncomment to route a CIDR to a
+  # specific profile. Equal-length conflicts are config errors.
+  profile_rules: []
+  # profile_rules:
+  #   - cidr: 10.201.109.0/24
+  #     profile: lab_v2c
+
+identity:
+  allow_network_address_chassis: false
+  overrides: []
+  address_overrides: []
+  # Access inventory: NOT an additional seed and NOT an identity based on IP.
+  # address_overrides:
+  #   - identity_key: lldp:4:020000000020
+  #     addresses: [192.0.2.20] # must be within management_cidrs
+  #     reason: operator-verified chassis-to-SNMP-access mapping
+
+classification:
+  rules_file: config/device_rules.yaml
+  # Exact operator-confirmed manual:<id> or lldp:4:<MAC hex> identity only.
+  # Each override requires identity_key, result (switch/router/wireless_controller/excluded) and reason.
+  # This does not classify every device sharing a vendor OID or description.
+  overrides: []
+
+ports:
+  rules_file: config/port_rules.yaml
+  overrides: []
+
+logging:
+  level: info
+  format: json
+
+# Independent IF-MIB operational cache; does not trigger LLDP scans.
+interface_status:
+  disabled: false
+  interval: 4m
+  stale_after: 12m
+  workers: 4
+  inference_stale_after: 72h
+
+# Full topology refresh through the same console scan job. Zero disables it.
+topology_scan:
+  interval: 0s

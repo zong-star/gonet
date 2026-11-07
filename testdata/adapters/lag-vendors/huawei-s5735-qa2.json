@@ -1,0 +1,830 @@
+{
+  "provenance": "2026-11-05 read-only capture; addresses, labels and system MACs sanitized; interface indices and firmware preserved",
+  "snapshot": {
+    "device": {
+      "sys_description": "S5735-L8T4S-QA2 \r\nHuawei Versatile Routing Platform Software \r\n VRP (R) software,Version 5.170 (S5735 V200R023C00SPC500) \r\n Copyright (C) 2007 Huawei Technologies Co., Ltd.",
+      "sys_object_id": ".1.3.6.1.4.1.2011.2.23.967",
+      "uptime_before": 899551470,
+      "uptime_after": 899551516,
+      "lldp_last_change_before": 899551081,
+      "lldp_last_change_after": 899551081,
+      "target": "192.0.2.77",
+      "sys_name": "huawei-s5735-qa2"
+    },
+    "interfaces": [
+      {
+        "if_index": 1,
+        "name": "InLoopBack0",
+        "description": "InLoopBack0",
+        "alias": "",
+        "alias_collected": true,
+        "type": 24,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 2,
+        "name": "NULL0",
+        "description": "NULL0",
+        "alias": "",
+        "alias_collected": true,
+        "type": 1,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 3,
+        "name": "Console9/0/0",
+        "description": "Console9/0/0",
+        "alias": "",
+        "alias_collected": true,
+        "type": 1,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 5,
+        "name": "Vlanif1",
+        "description": "Vlanif1",
+        "alias": "",
+        "alias_collected": true,
+        "type": 53,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 6,
+        "name": "GigabitEthernet0/0/1",
+        "description": "GigabitEthernet0/0/1",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 7,
+        "name": "GigabitEthernet0/0/2",
+        "description": "GigabitEthernet0/0/2",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 8,
+        "name": "GigabitEthernet0/0/3",
+        "description": "GigabitEthernet0/0/3",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 9,
+        "name": "GigabitEthernet0/0/4",
+        "description": "GigabitEthernet0/0/4",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 10,
+        "name": "GigabitEthernet0/0/5",
+        "description": "GigabitEthernet0/0/5",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 11,
+        "name": "GigabitEthernet0/0/6",
+        "description": "GigabitEthernet0/0/6",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 12,
+        "name": "GigabitEthernet0/0/7",
+        "description": "GigabitEthernet0/0/7",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 13,
+        "name": "GigabitEthernet0/0/8",
+        "description": "GigabitEthernet0/0/8",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 14,
+        "name": "GigabitEthernet0/0/9",
+        "description": "GigabitEthernet0/0/9",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 15,
+        "name": "GigabitEthernet0/0/10",
+        "description": "GigabitEthernet0/0/10",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 16,
+        "name": "GigabitEthernet0/0/11",
+        "description": "GigabitEthernet0/0/11",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 17,
+        "name": "GigabitEthernet0/0/12",
+        "description": "GigabitEthernet0/0/12",
+        "alias": "",
+        "alias_collected": true,
+        "type": 6,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 18,
+        "name": "Vlanif109",
+        "description": "Vlanif109",
+        "alias": "",
+        "alias_collected": true,
+        "type": 53,
+        "phys_address": null,
+        "phys_address_hex": ""
+      },
+      {
+        "if_index": 19,
+        "name": "Eth-Trunk1",
+        "description": "Eth-Trunk1",
+        "alias": "",
+        "alias_collected": true,
+        "type": 53,
+        "phys_address": null,
+        "phys_address_hex": ""
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 1,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzE=",
+          "raw_hex": "4769676162697445746865726e6574302f302f31"
+        },
+        "description": "",
+        "if_index": 6,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 2,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzI=",
+          "raw_hex": "4769676162697445746865726e6574302f302f32"
+        },
+        "description": "",
+        "if_index": 7,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 3,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzM=",
+          "raw_hex": "4769676162697445746865726e6574302f302f33"
+        },
+        "description": "",
+        "if_index": 8,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 4,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzQ=",
+          "raw_hex": "4769676162697445746865726e6574302f302f34"
+        },
+        "description": "",
+        "if_index": 9,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 5,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzU=",
+          "raw_hex": "4769676162697445746865726e6574302f302f35"
+        },
+        "description": "",
+        "if_index": 10,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 6,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzY=",
+          "raw_hex": "4769676162697445746865726e6574302f302f36"
+        },
+        "description": "",
+        "if_index": 11,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 7,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzc=",
+          "raw_hex": "4769676162697445746865726e6574302f302f37"
+        },
+        "description": "",
+        "if_index": 12,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 8,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzg=",
+          "raw_hex": "4769676162697445746865726e6574302f302f38"
+        },
+        "description": "",
+        "if_index": 13,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 9,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzk=",
+          "raw_hex": "4769676162697445746865726e6574302f302f39"
+        },
+        "description": "",
+        "if_index": 14,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 10,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzEw",
+          "raw_hex": "4769676162697445746865726e6574302f302f3130"
+        },
+        "description": "",
+        "if_index": 15,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 11,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzEx",
+          "raw_hex": "4769676162697445746865726e6574302f302f3131"
+        },
+        "description": "",
+        "if_index": 16,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 12,
+        "id": {
+          "subtype": 5,
+          "raw": "R2lnYWJpdEV0aGVybmV0MC8wLzEy",
+          "raw_hex": "4769676162697445746865726e6574302f302f3132"
+        },
+        "description": "",
+        "if_index": 17,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      },
+      {
+        "number": 901,
+        "id": {
+          "subtype": 5,
+          "raw": "TUV0aDAvMC8y",
+          "raw_hex": "4d457468302f302f32"
+        },
+        "description": "",
+        "if_index": null,
+        "physical": false,
+        "mapping_rule": "unresolved"
+      }
+    ],
+    "components": {
+      "ieee_lag": {
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "if_mib": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "if_stack": {
+        "supported": false,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lag_membership": {
+        "supported": false,
+        "walk_complete": false,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_local": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_man_addr": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "lldp_rem": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "stability": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      },
+      "system": {
+        "supported": true,
+        "walk_complete": true,
+        "decode_complete": true,
+        "issues": null
+      }
+    }
+  },
+  "roots": {
+    "1.2.840.10006.300.43.1.2.3.1.1": [],
+    "1.2.840.10006.300.43.1.2.1": [],
+    "1.2.840.10006.300.43.1.1.1": [],
+    "1.3.6.1.2.1.31.1.2.1.3": [],
+    "1.3.6.1.4.1.2011.5.25.41.1.3": [
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.1.0",
+        "type": "Integer",
+        "value": 120
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.2.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.2.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.3.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.4.0",
+        "type": "Integer",
+        "value": 19
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.5.0",
+        "type": "Integer",
+        "value": 5
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.6.0",
+        "type": "Integer",
+        "value": 8
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.7.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.8.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.9.0",
+        "type": "Integer",
+        "value": 2
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.10.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.12.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.13.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.14.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.19.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.20.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.22.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.23.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.24.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.25.0",
+        "type": "OctetString",
+        "value": "As6L7lJd"
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.26.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.27.0",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.28.0",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.35.0",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.3.1.36.0",
+        "type": "Integer",
+        "value": 2
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.4.0",
+        "type": "Integer",
+        "value": 32768
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.6.0",
+        "type": "Integer",
+        "value": 32768
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.7.0",
+        "type": "OctetString",
+        "value": "At2YJnaj"
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.3.8.0",
+        "type": "Integer",
+        "value": 1
+      }
+    ],
+    "1.3.6.1.4.1.2011.5.25.41.1.4.1": [
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.2.0.16",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.2.0.17",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.3.0.16",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.3.0.17",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.4.0.16",
+        "type": "Integer",
+        "value": 2
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.4.0.17",
+        "type": "Integer",
+        "value": 2
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.6.0.16",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.6.0.17",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.8.0.16",
+        "type": "Gauge32",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.8.0.17",
+        "type": "Gauge32",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.10.0.16",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.10.0.17",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.12.0.16",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.12.0.17",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.13.0.16",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.13.0.17",
+        "type": "Integer",
+        "value": -1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.14.0.16",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.3.6.1.4.1.2011.5.25.41.1.4.1.1.14.0.17",
+        "type": "Integer",
+        "value": 1
+      }
+    ],
+    "1.0.8802.1.1.2.1.5.4623.1.2.3": [
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.1",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.2",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.3",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.4",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.5",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.6",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.7",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.8",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.9",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.10",
+        "type": "OctetString",
+        "value": "gA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.11",
+        "type": "OctetString",
+        "value": "wA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.1.12",
+        "type": "OctetString",
+        "value": "wA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.1",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.2",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.3",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.4",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.5",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.6",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.7",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.8",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.9",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.10",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.11",
+        "type": "Integer",
+        "value": 1
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.2.3.1.2.12",
+        "type": "Integer",
+        "value": 1
+      }
+    ],
+    "1.0.8802.1.1.2.1.5.4623.1.3.3": [
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.1.0.8.1",
+        "type": "OctetString",
+        "value": "AA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.1.0.9.1",
+        "type": "OctetString",
+        "value": "AA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.1.0.10.1",
+        "type": "OctetString",
+        "value": "AA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.1.0.11.1",
+        "type": "OctetString",
+        "value": "AA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.1.0.12.1",
+        "type": "OctetString",
+        "value": "AA=="
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.2.0.8.1",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.2.0.9.1",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.2.0.10.1",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.2.0.11.1",
+        "type": "Integer",
+        "value": 0
+      },
+      {
+        "oid": ".1.0.8802.1.1.2.1.5.4623.1.3.3.1.2.0.12.1",
+        "type": "Integer",
+        "value": 0
+      }
+    ]
+  }
+}

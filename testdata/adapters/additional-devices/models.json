@@ -1,0 +1,16 @@
+[
+  {
+    "id": "huawei-s5720-28tp-pwr-li-ac-v200r011c10spc600",
+    "kind": "switch",
+    "model": "S5720-28TP-PWR-LI-AC",
+    "sys_object_id": ".1.3.6.1.4.1.2011.2.23.462",
+    "description": "S5720-28TP-PWR-LI-AC \r\nHuawei Versatile Routing Platform Software \r\n VRP (R) software,Version 5.170 (S5720 V200R011C10SPC600) \r\n Copyright (C) 2007 Huawei Technologies Co., Ltd."
+  },
+  {
+    "id": "huawei-ac6507s-v200r010c00spc700",
+    "kind": "wireless_controller",
+    "model": "AC6507S",
+    "sys_object_id": ".1.3.6.1.4.1.2011.2.240.19",
+    "description": "Huawei AC6507S Huawei Versatile Routing Platform Software  VRP (R) software,Version 5.170 (AC6507S V200R010C00SPC700) Copyright (C) 2011-2019 Huawei Technologies Co., Ltd"
+  }
+]

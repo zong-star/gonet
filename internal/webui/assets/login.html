@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>登录 · GoNet</title>
+<link rel="stylesheet" href="/tokens.css"><link rel="stylesheet" href="/login.css"><script src="/login.js" defer></script>
+</head>
+<body>
+<main class="login-shell">
+ <section class="login-card" aria-labelledby="loginTitle">
+  <div class="login-logo" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M12 12h16M12 12v16m0 0h16m0 0V12M12 12l16 16" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/><circle cx="28" cy="12" r="4"/><circle cx="12" cy="28" r="4"/><circle cx="28" cy="28" r="4"/></svg></div>
+  <h1 id="loginTitle">GoNet</h1><p class="login-subtitle">Network Management Platform</p>
+  <form id="loginForm" novalidate>
+   <label for="username">用户名</label>
+   <input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required autofocus>
+   <label for="password">密码</label>
+   <div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" required><button id="togglePassword" type="button" aria-label="显示密码" aria-pressed="false">显示</button></div>
+   <div id="loginError" class="login-error" role="alert" aria-live="polite"></div>
+   <button id="loginButton" class="login-submit" type="submit"><span id="loginSpinner" class="login-spinner" hidden aria-hidden="true"></span><span id="loginLabel">登录</span></button>
+  </form>
+ </section>
+ <p class="login-footer">GoNet · 网络设备与拓扑管理</p>
+</main>
+</body></html>

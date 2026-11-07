@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GoNet API 使用说明</title>
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/docs/api.css">
+  <script defer src="/docs/api.js"></script>
+</head>
+<body>
+<header class="docs-header"><div><a href="/?page=api" class="brand">GoNet</a><span>开发者文档</span><a class="download" href="/docs/openapi.yaml" download="gonet-openapi.yaml">下载 OpenAPI</a></div></header>
+<div class="docs-layout">
+  <nav aria-label="页面目录">
+    <p>页面目录</p>
+    <a href="#intro">API 简介</a>
+    <a href="#connection">连接方式</a>
+    <a href="#routes">查询接口</a>
+    <a href="#schema-v2">新版端点与单路径</a>
+    <a href="#topology">完整拓扑</a>
+    <a href="#summary">拓扑摘要</a>
+    <a href="#search">设备搜索</a>
+    <a href="#device">设备详情</a>
+    <a href="#neighbors">设备邻居</a>
+    <a href="#interfaces">接口状态</a>
+    <a href="#uplink">到核心的路径</a>
+    <a href="#collection">采集诊断</a>
+    <a href="#data">数据与标识</a>
+    <a href="#errors">错误码与排障</a>
+    <a href="#openapi">OpenAPI</a>
+  </nav>
+  <main>
+    <section id="intro">
+      <p class="eyebrow">GONET · API V1</p>
+      <h1>GoNet API 使用说明</h1>
+      <p>查询园区网络设备、拓扑关系和 LLDP 物理链路，适用于 AI Agent、自动化巡检与第三方监控工具。</p>
+    </section>
+    <section id="connection">
+      <h2>连接方式</h2>
+      <dl>
+        <dt>基础地址</dt><dd>将示例中的 <code>https://gonet.example</code> 替换成客户端可访问的 GoNet HTTPS 域名或 IP。使用受信任的 TLS 证书。</dd>
+        <dt>凭据</dt><dd>在 API 管理页创建 Key，并把完整 Key 存入调用方的安全配置。下列命令从调用方环境变量 <code>GONET_API_KEY</code> 读取它，并在 <code>Authorization: Bearer</code> 请求头中发送。</dd>
+        <dt>查询权限</dt><dd>「精简拓扑查询」<code>topology_compact</code> 允许设备搜索、设备详情、设备邻居、接口状态、到核心的路径、拓扑摘要和采集诊断这七个 GET，与 Dify 的七个工具对应。完整拓扑另需「拓扑只读」<code>topology_read</code> 权限。</dd>
+        <dt>来源 IP</dt><dd>把 GoNet 实际看到的客户端出口地址加入该 Key 的白名单。经过 NAT 时使用 NAT 出口地址。经过反向代理时，由部署方配置可信代理。</dd>
+        <dt>请求与响应</dt><dd><code>GET</code> 查询以 UTF-8 JSON 返回 <code>data</code> 和 <code>meta</code>。表中标注的 <code>HEAD</code> 适用于普通只读 Key 和管理员会话，响应体为空。</dd>
+      </dl>
+    </section>
+    <section id="routes">
+      <h2>查询接口</h2>
+      <p>当前有八个拓扑查询接口，其中七个作为 Dify 工具提供。完整拓扑接口未加入精简工具 Schema。</p>
+      <div class="scroll"><table><thead><tr><th scope="col">方法</th><th scope="col">路径</th><th scope="col">用途</th><th scope="col">Dify 工具名</th></tr></thead><tbody>
+        <tr><td>GET / HEAD</td><td><a href="#topology"><code>/api/v1/topology</code></a></td><td>完整拓扑</td><td>未加入精简 Schema</td></tr>
+        <tr><td>GET / HEAD</td><td><a href="#summary"><code>/api/v1/topology/summary</code></a></td><td>拓扑统计</td><td><code>get_topology_summary</code></td></tr>
+        <tr><td>GET</td><td><a href="#search"><code>/api/v1/devices</code></a></td><td>按管理 IP、名称或 sysName 搜索内部设备 ID</td><td><code>find_device</code></td></tr>
+        <tr><td>GET / HEAD</td><td><a href="#device"><code>/api/v1/devices/{device_id}</code></a></td><td>单台设备</td><td><code>get_device_info</code></td></tr>
+        <tr><td>GET / HEAD</td><td><a href="#neighbors"><code>/api/v1/devices/{device_id}/neighbors</code></a></td><td>直接邻居</td><td><code>get_device_neighbors</code></td></tr>
+        <tr><td>GET / HEAD</td><td><a href="#interfaces"><code>/api/v1/devices/{device_id}/interfaces</code></a></td><td>接口运行状态</td><td><code>get_device_interfaces</code></td></tr>
+        <tr><td>GET</td><td><a href="#uplink"><code>/api/v1/devices/{device_id}/uplink-path</code></a></td><td>到已配置核心设备的确认路径</td><td><code>get_device_path_to_core</code></td></tr>
+        <tr><td>GET / HEAD</td><td><a href="#collection"><code>/api/v1/topology/collection</code></a></td><td>采集缺口和失败原因</td><td><code>get_collection_diagnostics</code></td></tr>
+      </tbody></table></div>
+      <p>完整拓扑、拓扑摘要、设备详情和设备邻居支持 <code>state=all|active</code>。普通查询默认 <code>all</code>，紧凑邻居默认 <code>active</code>。<code>active</code> 只保留状态为 <code>active</code> 的正式链路，设备列表仍包含历史设备，链路计数按筛选后的结果重算。未知、重复、空值或非法参数返回 400。</p>
+      <p>设备详情、设备邻居、上联路径和拓扑摘要的 GET 可通过 <code>schema_version=2</code> 选择新版响应，详见下节。各接口后续示例展示省略版本参数时的默认响应。</p>
+    </section>
+    <section id="schema-v2">
+      <h2>新版端点与单条上联路径</h2>
+      <p>调用上述四个 GET 时显式发送 <code>schema_version=2</code>，响应使用 <code>data.schema_version=2</code>，外层仍为 <code>data</code> 和 <code>meta</code>。设备搜索使用现有契约，先取得唯一的内部设备 ID。新版字段和数据质量从 <code>data</code> 读取。</p>
+      <pre data-copy><code>DEVICE_ID=102
+curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  "https://gonet.example/api/v1/devices/${DEVICE_ID}/uplink-path?schema_version=2&amp;target=core"</code></pre>
+      <h3>聚合适配与版本 3</h3>
+      <p>邻居和上联路径支持 <code>schema_version=3</code>。路径的 <code>aggregation.status</code> 区分 confirmed、partial、unknown、none、conflict；<code>member_data_status</code> 单独说明列表完整度。未知或单端证据不能显示为无聚合。成员使用 from/to 和原有物理 link_id，双端确认后聚合只计一跳。v2 保留旧结构，并补充 aggregation_status / aggregation_diagnostics。</p>
+      <p>邻居 v2/v3 支持 <code>neighbor_device_id</code> 筛选与 <code>cursor</code> 翻页。has_more 为 true 时用 next_cursor 继续并保持原筛选和 limit；409 CURSOR_STALE 后重新查询。v3 的 response_truncated 表示字节裁剪，正常分页另由 has_more 表示。设备详情和摘要仍使用版本 2。</p>
+      <p>华为成员需由已验证的私有表适配采集；信锐核心的本端成员来源尚未核实，当前应保持 partial/unknown。</p>
+      <h3>接口名称与端点</h3>
+      <p>邻居的 <code>local</code> / <code>remote</code>、路径边的 <code>from</code> / <code>to</code> 和聚合成员共用以下端点字段。每个端点都携带所属设备的内部 ID。</p>
+      <div class="scroll"><table><thead><tr><th scope="col">字段</th><th scope="col">含义</th></tr></thead><tbody>
+        <tr><td><code>interface_name</code></td><td>有可靠证据的真实接口名，未知为 <code>null</code>。端口主标签读取此字段。</td></tr>
+        <tr><td><code>interface_description</code></td><td>管理员配置的描述或 IF-MIB <code>ifAlias</code>。已采到且为空时为 <code>""</code>，缺证据时为 <code>null</code>。</td></tr>
+        <tr><td><code>if_index</code></td><td>同设备、同观测批次内可靠关联的正整数索引，未知为 <code>null</code>。</td></tr>
+        <tr><td><code>interface_name_source</code></td><td><code>inventory</code>、<code>if_name</code>、<code>lldp_interface_name</code> 或 <code>null</code>，标明名称来源。</td></tr>
+        <tr><td><code>if_index_status</code></td><td><code>known</code>、<code>not_collected</code>、<code>unmatched</code>、<code>ambiguous</code> 或 <code>unknown</code>。索引非空时为 <code>known</code>。</td></tr>
+      </tbody></table></div>
+      <p>接口名与索引可以独立缺失。只有描述的端点显示“接口名未知”，描述在详情中查看。历史字段缺证据时保留未知。</p>
+      <h3>单条路径与状态</h3>
+      <p>新版上联只返回至多一条确认路径。<code>path_status=found</code> 时，<code>path</code> 包含 <code>target_core_device_id</code>、<code>hop_count</code>、有序 <code>nodes</code> 和 <code>edges</code>，满足 <code>hop_count = edges.length = nodes.length - 1</code>。源设备即核心时返回一个节点、零条边。<code>not_found</code> 和 <code>no_core_configured</code> 返回 <code>path=null</code> 及原因。</p>
+      <p><code>max_paths</code> 可省略或传 <code>1</code>，<code>max_hops</code> 为 1–16，默认 16。聚合边占一跳，成员放在 <code>aggregation.member_links</code>，<code>member_data_status</code> 区分完整、部分和未知。候选仅在 <code>include_unverified=true</code> 时单独返回，<code>candidate_observer_device_ids</code> 给出查询观察者范围。空数组表示可查且无记录，带原因的 <code>null</code> 表示无法提供。</p>
+      <p><code>verification_status</code> 表示证据核验，<code>topology_status</code> 表示拓扑有效性，<code>oper_status</code> 表示运行观测。运行状态缺证据时为 <code>unknown</code>，其他运行状态须携带 <code>oper_observed_at</code>。</p>
+      <h3>数据质量与计数</h3>
+      <p><code>data_quality.snapshot_id</code> 和 <code>snapshot_at</code> 对应实际读取的已提交快照，<code>latest_scan</code> 独立记录最近扫描。<code>as_of</code>、<code>data_age_seconds</code>、<code>stale_after_seconds</code> 和 <code>stale</code> 描述计算时间与时效。默认过期阈值为 72 小时，可由服务环境变量 <code>GONET_TOPOLOGY_STALE_AFTER</code> 配置。时间不可信时年龄和过期判断为 <code>null</code>，原因见 <code>diagnostic_codes</code>。</p>
+      <p><code>coverage</code> 分别描述 <code>network</code>、<code>device_neighbors</code> 和 <code>device_to_core_query</code> 的覆盖，状态为 <code>covered</code>、<code>gap</code> 或 <code>unknown</code>。网络缺口和设备查询结果可同时展示。</p>
+      <p>新版邻居返回实际筛选条件、<code>limit</code>、<code>matching_link_count</code>、<code>returned_link_count</code>、<code>returned_unique_neighbor_count</code> 及 <code>truncated</code>。详情的 <code>adjacent_link_count</code> 和摘要的 <code>count_definitions</code> 提供计数口径。</p>
+      <p>主路径保持完整，必需响应超出 12 KiB 时返回 <code>422 RESULT_TOO_LARGE</code>，搜索预算耗尽时返回 <code>422 SEARCH_BUDGET_EXCEEDED</code>。控制台设备详情提供 SVG 和逐跳表格。Dify 的上联 OpenAPI 工具名为 <code>get_device_path_to_core</code>，客户端需核对实际发送的版本参数及端点字段。</p>
+    </section>
+    <section id="topology">
+      <h2>完整拓扑</h2>
+      <p><code>GET /api/v1/topology</code></p>
+      <p>无需路径参数。查询参数为 <code>state</code> 和 <code>include_pending=true|false</code>。后者默认为 <code>true</code>。设为 <code>false</code> 时，候选数组为空，摘要的待核验数量仍按可见候选计算。</p>
+      <p><code>data</code> 包含统计 <code>summary</code>、核心设备 <code>core_ids</code>、设备 <code>devices</code>、物理链路 <code>links</code> 和待核验邻居 <code>neighbor_candidates</code>。完整图超过 2000 台设备、10000 条链路或 8 MiB 时返回 422。</p>
+      <pre data-copy><code>curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  'https://gonet.example/api/v1/topology?state=all&amp;include_pending=true'</code></pre>
+      <h3>成功响应示例 · 空拓扑</h3>
+      <pre><code>{
+  "data": {
+    "summary": {
+      "device_count": 0, "link_count": 0, "collected_device_count": 0,
+      "historical_device_count": 0, "pending_neighbor_count": 0,
+      "device_kinds": {"switch": 0, "router": 0, "wireless_controller": 0}
+    },
+    "core_ids": [], "devices": [], "links": [], "neighbor_candidates": []
+  },
+  "meta": {
+    "schema_version": "1.0", "request_id": "example-request",
+    "generated_at": "2026-11-03T09:00:00Z", "latest_scan_id": null,
+    "latest_scan_status": "", "latest_scan_finished_at": null,
+    "data_age_seconds": null, "fresh": false, "coverage_gap": true, "state": "all"
+  }
+}</code></pre>
+    </section>
+    <section id="summary">
+      <h2>拓扑摘要</h2>
+      <p><code>GET /api/v1/topology/summary</code></p>
+      <p>无需路径参数，查询参数为 <code>state</code>。<code>data</code> 直接返回设备数、物理链路数、已采集设备数、历史设备数、待核验邻居数，以及按交换机、路由器和无线控制器分类的设备数。</p>
+      <pre data-copy><code>curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  'https://gonet.example/api/v1/topology/summary?state=active'</code></pre>
+      <h3>成功响应示例 · data 部分</h3>
+      <pre><code>{
+  "device_count": 2, "link_count": 2, "collected_device_count": 2,
+  "historical_device_count": 0, "pending_neighbor_count": 0,
+  "device_kinds": {"switch": 2, "router": 0, "wireless_controller": 0}
+}</code></pre>
+    </section>
+    <section id="search">
+      <h2>设备搜索</h2>
+      <p><code>GET /api/v1/devices</code></p>
+      <p><code>query</code> 必填。管理 IP 按已核验地址精确匹配，支持 IPv4 和 IPv6。设备显示名和 <code>sysName</code> 依次按精确、前缀、子串匹配，忽略大小写。<code>vendor</code> 和 <code>model</code> 为可选的精确筛选条件。<code>limit</code> 范围 1–5，默认 5。</p>
+      <p><code>total</code> 是截取前的去重命中数。<code>ambiguous=true</code> 表示最高匹配等级有多台设备，应先确认目标，再使用 <code>items[].device_id</code> 查询详情、邻居或到核心的路径。</p>
+      <pre data-copy><code>curl --fail-with-body --get \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  --data-urlencode "query=192.0.2.20" \
+  'https://gonet.example/api/v1/devices'</code></pre>
+      <h3>成功响应示例 · data 部分</h3>
+      <pre><code>{
+  "items": [{
+    "device_id": "102", "name": "接入交换机", "management_ip": "192.0.2.20",
+    "vendor": "H3C", "model": "S5130", "match_type": "management_ip"
+  }],
+  "total": 1, "ambiguous": false
+}</code></pre>
+    </section>
+    <section id="device">
+      <h2>设备详情</h2>
+      <p><code>GET /api/v1/devices/{device_id}</code></p>
+      <p>将 <code>device_id</code> 替换成设备搜索返回的 <code>items[].device_id</code>，或完整拓扑返回的 <code>devices[].id</code>。它是无前导零的正十进制字符串，最大值为 <code>9223372036854775807</code>。格式错误返回 400，设备不存在或不在可见范围内返回 404。查询参数为 <code>state</code>。</p>
+      <p><code>data.device</code> 包含设备身份、系统名称、区域、厂商型号、管理地址、采集状态、发现深度、筛选后的链路数及最近观察时间。</p>
+      <pre data-copy><code>DEVICE_ID=101
+curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  "https://gonet.example/api/v1/devices/${DEVICE_ID}?state=all"</code></pre>
+      <h3>成功响应示例 · data 部分</h3>
+      <pre><code>{
+  "device": {
+    "id": "101", "name": "核心交换机", "sys_name": "sw-core",
+    "area": "园区 A", "vendor": "示例厂商", "model": "示例型号",
+    "device_kind": "switch", "access_addresses": ["192.0.2.10"],
+    "chassis_mac": "020000000010", "identity_state": "verified",
+    "collection_status": "collected", "discovery_depth": 0,
+    "link_count": 2, "last_seen_at": "2026-11-03T08:45:00Z"
+  }
+}</code></pre>
+    </section>
+    <section id="neighbors">
+      <h2>设备邻居</h2>
+      <p><code>GET /api/v1/devices/{device_id}/neighbors</code></p>
+      <p>路径参数沿用 <a href="#device">设备详情</a> 的字符串 ID，支持 <code>state</code> 和 <code>limit</code>。不存在或不可见的设备返回 404。已有设备没有匹配链路时返回 200 和空数组。</p>
+      <p><code>data</code> 包含目标 <code>device_id</code>、去重后的 <code>neighbor_count</code>、物理链路数 <code>link_count</code> 和 <code>items</code>。每项为 <code>neighbor</code> 设备与 <code>link</code> 链路对象，同一邻居的并行物理链路分别列出。</p>
+      <p>精简 Key 自动使用紧凑响应，默认最多 20 条链路。普通只读 Key 或管理员会话可显式传入 <code>limit=1–20</code> 启用。紧凑响应增加从目标设备视角排列的 <code>local</code>、<code>remote</code> 端口、<code>verification_status</code> 和观测引用。<code>returned_link_count</code> 与 <code>truncated</code> 描述实际返回量，原有计数字段仍为截取前的总量。</p>
+      <pre data-copy><code>DEVICE_ID=101
+curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  "https://gonet.example/api/v1/devices/${DEVICE_ID}/neighbors?limit=20"</code></pre>
+      <h3>紧凑响应示例 · data 部分</h3>
+      <pre><code>{"device_id": "101", "neighbor_count": 0, "link_count": 0,
+ "returned_link_count": 0, "truncated": false, "items": []}</code></pre>
+    </section>
+    <section id="interfaces">
+      <h2>接口状态</h2>
+      <p><code>GET /api/v1/devices/{device_id}/interfaces</code>，对应 Dify 工具 <code>get_device_interfaces</code>。</p>
+      <p>路径参数为设备搜索取得的内部 ID，无需 schema_version。返回 <code>device_id</code>、<code>interfaces</code>、<code>status_collection_state</code> 和 <code>status_attempted_at</code>。接口项包含名称、描述、ifIndex、admin_status、oper_status 和采集时间。该接口读取独立 IF-MIB 缓存，不触发扫描。</p>
+      <p>接口采集失败时保留上次成功值，并标记采集状态。unknown、采集失败或样本过期均不能直接解释为端口 down；拓扑 active 也不等于端口当前 up。</p>
+      <pre data-copy><code>DEVICE_ID=68
+curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  "https://gonet.example/api/v1/devices/${DEVICE_ID}/interfaces"</code></pre>
+    </section>
+    <section id="uplink">
+      <h2>到核心的路径</h2>
+      <p><code>GET /api/v1/devices/{device_id}/uplink-path</code></p>
+      <p>GoNet 在最新已提交的扫描批次内，沿已确认物理链路查找到可见核心设备的路径，优先返回跳数较少、证据较强的路径。双端确认的 LAG 占一跳，<code>endpoint_a</code> 和 <code>endpoint_b</code> 按路径方向排列，<code>member_links</code> 保留实际物理端口配对及链路 ID。</p>
+      <dl>
+        <dt><code>target</code></dt><dd>仅支持 <code>core</code>，默认值也是 <code>core</code>。</dd>
+        <dt><code>max_paths</code></dt><dd>范围 1–3，默认 3。</dd>
+        <dt><code>max_hops</code></dt><dd>范围 1–16，默认 16。起点已是核心时可返回零跳路径。</dd>
+        <dt><code>include_unverified</code></dt><dd>默认 <code>false</code>。设为 <code>true</code> 时最多附带 20 条待核验观察，单列于 <code>candidate_links</code>。路径仍按已确认链路计算。</dd>
+      </dl>
+      <pre data-copy><code>DEVICE_ID=102
+curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  "https://gonet.example/api/v1/devices/${DEVICE_ID}/uplink-path?max_paths=3&amp;include_unverified=true"</code></pre>
+      <p><code>path_found=false</code> 时返回空 <code>paths</code> 和 <code>reason</code>。例如 <code>no_confirmed_path_to_core</code> 表示在当前批次和跳数范围内没有找到确认路径。<code>coverage_gap=true</code> 表示采集覆盖有缺口，<code>search_truncated=true</code> 表示搜索达到工作预算。</p>
+    </section>
+    <section id="collection">
+      <h2>采集诊断</h2>
+      <p><code>GET /api/v1/topology/collection</code>，对应 Dify 工具 <code>get_collection_diagnostics</code>。</p>
+      <p>使用 <code>schema_version=2</code>。可选参数：<code>device_id</code> 筛选正式设备；<code>snapshot_id</code> 检查当前快照一致性；<code>limit=1–50</code> 控制单页数量，默认 10；<code>cursor</code> 使用上一页 next_cursor。快照或游标对应数据变化时返回 409，需要重新查询。</p>
+      <p>响应 <code>data.items</code> 包含设备、未解析邻居和目标尝试，提供名称、地址、采集状态、覆盖状态、<code>reason_codes</code> 和 <code>incomplete_components</code>。<code>total</code> 为匹配项总数；<code>has_more=true</code> 时继续翻页。不同类型和口径的计数不可相加，not_recorded 不等于已知采集失败。snapshot_id 不提供任意历史查询。</p>
+      <pre data-copy><code>curl --fail-with-body \
+  -H "Authorization: Bearer ${GONET_API_KEY}" \
+  'https://gonet.example/api/v1/topology/collection?schema_version=2&amp;device_id=68&amp;limit=10'</code></pre>
+    </section>
+    <section id="data">
+      <h2>数据与标识</h2>
+      <ul>
+        <li>查询读取现有管理范围内最近一次已提交的扫描结果和保留的历史状态。扫描提交前，查询仍读取上一份已提交数据。查询过程无需登录交换机、启动扫描或下发配置。</li>
+        <li>待核验邻居是 LLDP 观察，记录包含 <code>key</code>、<code>system_name</code>、<code>device_kind</code>、<code>model</code>、<code>status</code>、<code>observed_by_ids</code> 和 <code>observed_at</code>。它单独列出，等待核验后才可能成为正式设备。</li>
+        <li>正式设备、端口、链路和扫描 ID 都是十进制字符串。<code>access_addresses</code> 是访问地址。候选 <code>key</code> 用于标识待核验观察，设备详情路径接受正式设备 ID。</li>
+        <li>每条链路有独立 <code>id</code>，记录两端设备和端口的 ID、名称，以及 <code>confidence</code>、<code>discovery_state</code>、<code>fresh</code>、<code>coverage_gap</code>、<code>missed_complete_scans</code>、首次和最近观察时间及扫描 ID。</li>
+        <li><code>meta</code> 包含请求 ID、接口版本、生成时间、最近提交扫描的 ID、状态、完成时间、数据年龄、<code>fresh</code>、<code>coverage_gap</code> 和查询使用的 <code>state</code>。缺失时间与扫描 ID 可为 <code>null</code>。<code>fresh</code> 描述数据与扫描的关系，实时在线状态需另行判断。</li>
+        <li>v2 及以上邻居、路径响应的 <code>data_quality.collection</code> 提供采集计数、问题码和明细地址；v2 摘要与设备详情也提供这些字段。调用 <code>GET /api/v1/topology/collection?schema_version=2</code> 分页查看设备、未解析邻居及失败目标；可加 <code>device_id</code> 筛选，并用 <code>snapshot_id</code> 检查快照一致性。按 <code>next_cursor</code> 翻页。计数口径不同，不可直接相加。</li>
+        <li><code>partial</code> 表示扫描存在缺口，可能涉及设备失败、表项不完整、身份或端口未解析、扫描限制。<code>unknown</code> 表示完整性证据不足，响应会给出具体原因。路径覆盖检查指定跳数内的可见 active 分支，核心作为终点；已找到确认路径与采集存在缺口可以同时成立。旧 Dify 工具可重新导入最新 Agent OpenAPI，增加 <code>get_collection_diagnostics</code>。</li>
+        <li>设备搜索、紧凑邻居、路径及精简 Key 的查询受 12 KiB 响应上限约束。<code>meta.response_truncated=true</code> 表示省略了部分候选观察、列表项或排名靠后的整条路径。单条必需结果仍超限时返回 422。</li>
+      </ul>
+    </section>
+    <section id="errors">
+      <h2>错误码与排障</h2>
+      <pre><code>{"error":{"code":"IP_NOT_ALLOWED","message":"请求来源 IP 不在白名单内"},"meta":{"request_id":"example-request"}}</code></pre>
+      <div class="scroll"><table><thead><tr><th scope="col">HTTP</th><th scope="col">含义与检查项</th></tr></thead><tbody>
+        <tr><td>200</td><td>查询成功。空列表可以表示当前范围内没有匹配的数据。</td></tr>
+        <tr><td>400</td><td>检查参数名、参数值以及从设备搜索或拓扑取得的内部设备 ID。</td></tr>
+        <tr><td>401</td><td>缺少凭据或 Key 无效。检查 Bearer 前缀、完整 Key 以及代理是否转发 Authorization。</td></tr>
+        <tr><td>403</td><td>检查 Key 的来源 IP 白名单和入口限制。精简 Key 请求完整拓扑时返回 <code>API_ROUTE_NOT_ALLOWED</code>。</td></tr>
+        <tr><td>404</td><td>检查接口路径、设备 ID 和设备是否在可见范围内。</td></tr>
+        <tr><td>405</td><td>请按接口表使用 GET 或 HEAD。精简 Key、设备搜索和到核心的路径均使用 GET。</td></tr>
+        <tr><td>422</td><td><code>RESULT_TOO_LARGE</code> 表示响应超出容量。新版上联的 <code>SEARCH_BUDGET_EXCEEDED</code> 表示搜索预算耗尽，无法确定选路结果。</td></tr>
+        <tr><td>500 / 503 / 504</td><td>服务内部异常、数据源不可用或读取超时。排查时可提供 <code>meta.request_id</code>。</td></tr>
+      </tbody></table></div>
+    </section>
+    <section id="openapi">
+      <h2>OpenAPI</h2>
+      <p>通用 OpenAPI 3.1.1 覆盖全部接口。精简 OpenAPI 3.0.3 提供七个只读查询工具、Bearer 鉴权和响应定义；不含完整拓扑接口。</p>
+      <a class="download" href="/docs/openapi.yaml" download="gonet-openapi.yaml">下载 OpenAPI</a>
+      <a class="download" href="/docs/agent-openapi.yaml" download="gonet-agent-openapi.yaml">下载精简查询 OpenAPI</a>
+    </section>
+  </main>
+</div>
+</body>
+</html>

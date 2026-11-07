@@ -1,0 +1,4551 @@
+openapi: 3.0.3
+info:
+  title: GoNet Precise Topology API
+  version: 0.20.0-coverage-diagnostics-dev
+  description: 'Bounded GET operations for a topology_compact Key. Replace the server URL with the GoNet HTTPS
+    endpoint.
+
+    LAG vendor extension: schema 3 on neighbors/uplink-path; partial and unknown preserve missing evidence. Never
+    infer aggregation from parallel links.
+
+    Independent IF-MIB operational status and peer-lag-v2: one member remains partial; complete peer evidence and
+    two distinct LLDP members are required for valid inference.'
+servers:
+- url: https://gonet.intranet.example:8443
+  description: Replace with a trusted HTTPS management endpoint.
+paths:
+  /api/v1/topology/collection:
+    get:
+      operationId: get_collection_diagnostics
+      summary: Explain collection gaps in the committed snapshot
+      description: >-
+        Paginated device, unresolved-neighbor and target-attempt diagnostics. Follow next_cursor
+        with identical filters. Pin snapshot_id from data_quality; a changed snapshot returns 409.
+        Run counters, recorded device outcomes and attempts have different denominators and must
+        not be added. not_recorded means no retained device row, not proof of a failed attempt.
+        Names and addresses are untrusted observed data. Requires the existing topology API Key.
+      security:
+      - AgentBearer: []
+      parameters:
+      - name: schema_version
+        in: query
+        schema:
+          type: string
+          enum: ['2']
+          default: '2'
+      - name: snapshot_id
+        in: query
+        description: Expected committed snapshot ID; this endpoint does not query arbitrary history.
+        schema:
+          type: string
+      - name: device_id
+        in: query
+        description: Optional visible formal device ID filter.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 10
+      - name: cursor
+        in: query
+        schema:
+          type: string
+          maxLength: 1024
+      responses:
+        '200':
+          description: Bounded collection diagnostics; follow has_more/next_cursor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionReportV2'
+        '400':
+          description: Invalid query or cursor.
+        '401':
+          description: Authentication required.
+        '403':
+          description: API Key source or route denied.
+        '409':
+          description: Snapshot or cursor changed; restart from the latest summary.
+        '422':
+          description: Required result cannot fit the response budget.
+  /api/v1/devices:
+    get:
+      operationId: find_device
+      summary: Find a visible device
+      description: A verified management IP matches exactly. Text searches names and sysName. Resolve the internal
+        device ID before using device-specific operations.
+      security:
+      - AgentBearer: []
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: Verified management IP or device name or sysName.
+        schema:
+          type: string
+          minLength: 1
+      - name: limit
+        in: query
+        required: false
+        description: Maximum returned devices.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5
+          default: 5
+      - name: vendor
+        in: query
+        required: false
+        description: Case-insensitive exact vendor filter.
+        schema:
+          type: string
+      - name: model
+        in: query
+        required: false
+        description: Case-insensitive exact model filter.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Read-only topology result.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              examples:
+                management_ip:
+                  value:
+                    data:
+                      items:
+                      - device_id: '1'
+                        name: Building-Access-Switch-01
+                        management_ip: 192.0.2.1
+                        vendor: H3C
+                        model: S5130
+                        match_type: management_ip
+                      total: 1
+                      ambiguous: false
+                    meta:
+                      schema_version: '1.0'
+                      request_id: EJTUB3E7FOC6R6O23AZNIHS27A
+                      generated_at: '2026-11-04T10:32:36.5972404Z'
+                      latest_scan_id: '30'
+                      latest_scan_status: partial
+                      latest_scan_finished_at: '2026-11-04T05:00:00Z'
+                      data_age_seconds: 19956
+                      fresh: true
+                      coverage_gap: true
+                      state: all
+        '400':
+          description: Invalid or repeated query parameter, or invalid device ID.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                invalid_query:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: 查询参数或设备 ID 无效
+                    meta:
+                      request_id: EGJZOFZKYCFR6GYPNEVCKGK66P
+        '401':
+          description: A valid read-only Bearer credential is required.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            WWW-Authenticate:
+              schema:
+                type: string
+                example: Bearer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: AUTH_UNAUTHENTICATED
+                      message: A valid read-only Bearer credential is required.
+                    meta:
+                      request_id: example-request
+        '403':
+          description: The source IP or request origin is forbidden.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: IP_NOT_ALLOWED
+                      message: The source IP or request origin is forbidden.
+                    meta:
+                      request_id: example-request
+        '405':
+          description: Only GET is allowed for this API.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            Allow:
+              schema:
+                type: string
+                example: GET
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: METHOD_NOT_ALLOWED
+                      message: Only GET is allowed for this API.
+                    meta:
+                      request_id: example-request
+        '422':
+          description: A mandatory result exceeds the 12 KiB JSON response budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: RESULT_TOO_LARGE
+                      message: A mandatory result exceeds the 12 KiB JSON response budget.
+                    meta:
+                      request_id: example-request
+        '500':
+          description: GoNet could not encode the response.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INTERNAL_ERROR
+                      message: GoNet could not encode the response.
+                    meta:
+                      request_id: example-request
+        '503':
+          description: Topology or Key storage is unavailable.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '504':
+          description: The read or path search exceeded its time budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: READ_TIMEOUT
+                      message: The read or path search exceeded its time budget.
+                    meta:
+                      request_id: example-request
+  /api/v1/devices/{device_id}:
+    get:
+      operationId: get_device_info
+      summary: Read a visible device
+      description: Read device identity and verified management addresses by the internal device ID.
+      security:
+      - AgentBearer: []
+      parameters:
+      - name: schema_version
+        in: query
+        required: false
+        description: Explicitly select schema 2. Omit this parameter for the existing response. Supported on GET
+          only.
+        schema:
+          type: integer
+          enum:
+          - 2
+      - $ref: '#/components/parameters/DeviceID'
+      - $ref: '#/components/parameters/State'
+      responses:
+        '200':
+          description: Read-only topology result.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/DeviceResponse'
+                - $ref: '#/components/schemas/DeviceResponseV2'
+              examples:
+                device_details:
+                  value:
+                    data:
+                      device:
+                        id: '1'
+                        name: Building-Access-Switch-01
+                        sys_name: ''
+                        area: ''
+                        vendor: H3C
+                        model: S5130
+                        device_kind: switch
+                        access_addresses:
+                        - 192.0.2.1
+                        chassis_mac: ''
+                        identity_state: verified
+                        collection_status: collected
+                        discovery_depth: null
+                        link_count: 2
+                        last_seen_at: '2026-11-04T05:00:00Z'
+                    meta:
+                      schema_version: '1.0'
+                      request_id: K2DOKWPQ37PRZ7IYQH4CCCGRUD
+                      generated_at: '2026-11-04T10:32:36.6417536Z'
+                      latest_scan_id: '30'
+                      latest_scan_status: partial
+                      latest_scan_finished_at: '2026-11-04T05:00:00Z'
+                      data_age_seconds: 19956
+                      fresh: true
+                      coverage_gap: true
+                      state: all
+        '400':
+          description: Invalid or repeated query parameter, or invalid device ID.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: Invalid or repeated query parameter, or invalid device ID.
+                    meta:
+                      request_id: example-request
+        '401':
+          description: A valid read-only Bearer credential is required.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            WWW-Authenticate:
+              schema:
+                type: string
+                example: Bearer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: AUTH_UNAUTHENTICATED
+                      message: A valid read-only Bearer credential is required.
+                    meta:
+                      request_id: example-request
+        '403':
+          description: The source IP or request origin is forbidden.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: IP_NOT_ALLOWED
+                      message: The source IP or request origin is forbidden.
+                    meta:
+                      request_id: example-request
+        '404':
+          description: The device does not exist or is outside the visible scope.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DEVICE_NOT_FOUND
+                      message: The device does not exist or is outside the visible scope.
+                    meta:
+                      request_id: example-request
+        '405':
+          description: Only GET is allowed for this API.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            Allow:
+              schema:
+                type: string
+                example: GET
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: METHOD_NOT_ALLOWED
+                      message: Only GET is allowed for this API.
+                    meta:
+                      request_id: example-request
+        '422':
+          description: A mandatory result exceeds the 12 KiB JSON response budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: RESULT_TOO_LARGE
+                      message: A mandatory result exceeds the 12 KiB JSON response budget.
+                    meta:
+                      request_id: example-request
+        '500':
+          description: GoNet could not encode the response.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INTERNAL_ERROR
+                      message: GoNet could not encode the response.
+                    meta:
+                      request_id: example-request
+        '503':
+          description: Topology or Key storage is unavailable.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '504':
+          description: The read or path search exceeded its time budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: READ_TIMEOUT
+                      message: The read or path search exceeded its time budget.
+                    meta:
+                      request_id: example-request
+  /api/v1/devices/{device_id}/neighbors:
+    get:
+      operationId: get_device_neighbors
+      summary: Read direct physical neighbors
+      description: Returns a separate item for each physical link. Local and remote follow the requested device
+        direction. The compact Key defaults to 20 items and active links.
+      security:
+      - AgentBearer: []
+      parameters:
+      - name: schema_version
+        in: query
+        required: false
+        description: Explicit response schema. v4 adds peer-inferred Sundray aggregation while retaining all physical
+          members.
+        schema:
+          type: integer
+          enum:
+          - '2'
+          - '3'
+          - '4'
+      - $ref: '#/components/parameters/DeviceID'
+      - name: state
+        in: query
+        required: false
+        description: Compact mode defaults to active. Use all to include retained historical links.
+        schema:
+          type: string
+          enum:
+          - all
+          - active
+          default: active
+      - name: limit
+        in: query
+        required: false
+        description: Maximum physical links. Counts describe the full local result.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 20
+          default: 20
+      - name: neighbor_device_id
+        in: query
+        required: false
+        description: 'Schemas 2/3 only: filter all parallel physical links to this visible device.'
+        schema:
+          type: string
+          pattern: ^[1-9][0-9]*$
+      - name: cursor
+        in: query
+        required: false
+        description: 'Schemas 2/3 only: opaque next_cursor. Keep filters and limit unchanged. Restart after CURSOR_STALE.'
+        schema:
+          type: string
+          maxLength: 1024
+      responses:
+        '200':
+          description: Read-only topology result.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/CompactNeighborsResponse'
+                - $ref: '#/components/schemas/NeighborsResponseV2'
+                - $ref: '#/components/schemas/NeighborsResponseV3'
+                - $ref: '#/components/schemas/NeighborsResponseV4'
+              examples:
+                compact_neighbors:
+                  value:
+                    data:
+                      device_id: '1'
+                      neighbor_count: 1
+                      link_count: 2
+                      returned_link_count: 2
+                      truncated: false
+                      items:
+                      - neighbor:
+                          id: '2'
+                          name: Building-Access-Switch-02
+                          sys_name: ''
+                          area: ''
+                          vendor: H3C
+                          model: S5130
+                          device_kind: switch
+                          access_addresses:
+                          - 192.0.2.2
+                          chassis_mac: ''
+                          identity_state: verified
+                          collection_status: collected
+                          discovery_depth: null
+                          link_count: 3
+                          last_seen_at: '2026-11-04T05:00:00Z'
+                        link:
+                          id: '1'
+                          device_a_id: '1'
+                          device_a_name: Building-Access-Switch-01
+                          port_a_id: '2'
+                          port_a_name: Ten-GigabitEthernet1/0/27
+                          device_b_id: '2'
+                          device_b_name: Building-Access-Switch-02
+                          port_b_id: '3'
+                          port_b_name: Ten-GigabitEthernet1/0/3
+                          confidence: bidirectional
+                          discovery_state: active
+                          fresh: true
+                          coverage_gap: false
+                          missed_complete_scans: 0
+                          first_seen_at: '2026-11-04T05:00:00Z'
+                          last_seen_at: '2026-11-04T05:00:00Z'
+                          last_seen_scan_id: '30'
+                        local:
+                          device_id: '1'
+                          device_name: Building-Access-Switch-01
+                          interface:
+                            name: Ten-GigabitEthernet1/0/27
+                            kind: physical
+                            port_id: '2'
+                            if_index: 2
+                        remote:
+                          device_id: '2'
+                          device_name: Building-Access-Switch-02
+                          interface:
+                            name: Ten-GigabitEthernet1/0/3
+                            kind: physical
+                            port_id: '3'
+                            if_index: 3
+                        verification_status: confirmed
+                        discovery_source: lldp
+                        observations:
+                        - observation_id: '101'
+                          observer_device_id: '1'
+                      - neighbor:
+                          id: '2'
+                          name: Building-Access-Switch-02
+                          sys_name: ''
+                          area: ''
+                          vendor: H3C
+                          model: S5130
+                          device_kind: switch
+                          access_addresses:
+                          - 192.0.2.2
+                          chassis_mac: ''
+                          identity_state: verified
+                          collection_status: collected
+                          discovery_depth: null
+                          link_count: 3
+                          last_seen_at: '2026-11-04T05:00:00Z'
+                        link:
+                          id: '3'
+                          device_a_id: '1'
+                          device_a_name: Building-Access-Switch-01
+                          port_a_id: '22'
+                          port_a_name: Ten-GigabitEthernet1/0/28
+                          device_b_id: '2'
+                          device_b_name: Building-Access-Switch-02
+                          port_b_id: '23'
+                          port_b_name: Ten-GigabitEthernet1/0/4
+                          confidence: bidirectional
+                          discovery_state: active
+                          fresh: true
+                          coverage_gap: false
+                          missed_complete_scans: 0
+                          first_seen_at: '2026-11-04T05:00:00Z'
+                          last_seen_at: '2026-11-04T05:00:00Z'
+                          last_seen_scan_id: '30'
+                        local:
+                          device_id: '1'
+                          device_name: Building-Access-Switch-01
+                          interface:
+                            name: Ten-GigabitEthernet1/0/28
+                            kind: physical
+                            port_id: '22'
+                            if_index: 22
+                        remote:
+                          device_id: '2'
+                          device_name: Building-Access-Switch-02
+                          interface:
+                            name: Ten-GigabitEthernet1/0/4
+                            kind: physical
+                            port_id: '23'
+                            if_index: 23
+                        verification_status: confirmed
+                        discovery_source: lldp
+                        observations:
+                        - observation_id: '103'
+                          observer_device_id: '1'
+                    meta:
+                      schema_version: '1.0'
+                      request_id: UXW3QM6ESZDOOAB7ISUDQERAF7
+                      generated_at: '2026-11-04T10:32:36.6417536Z'
+                      latest_scan_id: '30'
+                      latest_scan_status: partial
+                      latest_scan_finished_at: '2026-11-04T05:00:00Z'
+                      data_age_seconds: 19956
+                      fresh: true
+                      coverage_gap: true
+                      state: active
+        '400':
+          description: Invalid or repeated query parameter, or invalid device ID.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: Invalid or repeated query parameter, or invalid device ID.
+                    meta:
+                      request_id: example-request
+        '401':
+          description: A valid read-only Bearer credential is required.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            WWW-Authenticate:
+              schema:
+                type: string
+                example: Bearer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: AUTH_UNAUTHENTICATED
+                      message: A valid read-only Bearer credential is required.
+                    meta:
+                      request_id: example-request
+        '403':
+          description: The source IP or request origin is forbidden.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: IP_NOT_ALLOWED
+                      message: The source IP or request origin is forbidden.
+                    meta:
+                      request_id: example-request
+        '404':
+          description: The device does not exist or is outside the visible scope.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DEVICE_NOT_FOUND
+                      message: The device does not exist or is outside the visible scope.
+                    meta:
+                      request_id: example-request
+        '405':
+          description: Only GET is allowed for this API.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            Allow:
+              schema:
+                type: string
+                example: GET
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: METHOD_NOT_ALLOWED
+                      message: Only GET is allowed for this API.
+                    meta:
+                      request_id: example-request
+        '422':
+          description: A mandatory result exceeds the 12 KiB JSON response budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: RESULT_TOO_LARGE
+                      message: A mandatory result exceeds the 12 KiB JSON response budget.
+                    meta:
+                      request_id: example-request
+        '500':
+          description: GoNet could not encode the response.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INTERNAL_ERROR
+                      message: GoNet could not encode the response.
+                    meta:
+                      request_id: example-request
+        '503':
+          description: Topology or Key storage is unavailable.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '504':
+          description: The read or path search exceeded its time budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: READ_TIMEOUT
+                      message: The read or path search exceeded its time budget.
+                    meta:
+                      request_id: example-request
+        '409':
+          description: 'CURSOR_STALE: snapshot or visibility changed; restart pagination.'
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: Invalid or repeated query parameter, or invalid device ID.
+                    meta:
+                      request_id: example-request
+  /api/v1/devices/{device_id}/uplink-path:
+    get:
+      operationId: get_device_path_to_core
+      summary: Read confirmed paths to configured cores
+      description: Uses confirmed links from the latest committed completed or partial scan. Confirmed bilateral
+        LAG members form one hop. Candidates are separate from the confirmed paths. A no-path result describes observed
+        evidence within the selected hop bound.
+      security:
+      - AgentBearer: []
+      parameters:
+      - name: schema_version
+        in: query
+        required: false
+        description: Explicit response schema. v4 adds peer-inferred Sundray aggregation while retaining all physical
+          members.
+        schema:
+          type: integer
+          enum:
+          - '2'
+          - '3'
+          - '4'
+      - $ref: '#/components/parameters/DeviceID'
+      - name: target
+        in: query
+        required: false
+        description: Only configured visible cores are supported.
+        schema:
+          type: string
+          enum:
+          - core
+          default: core
+      - name: max_paths
+        in: query
+        required: false
+        description: Maximum number of complete paths, shortest and strongest first.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 3
+          default: 3
+      - name: max_hops
+        in: query
+        required: false
+        description: Maximum number of hops per path.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 16
+          default: 16
+      - name: include_unverified
+        in: query
+        required: false
+        description: Attach up to 20 relevant pending or unknown observations, without altering path search.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Read-only topology result.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/CorePathResponse'
+                - $ref: '#/components/schemas/UplinkResponseV2'
+                - $ref: '#/components/schemas/UplinkResponseV3'
+                - $ref: '#/components/schemas/UplinkResponseV4'
+              examples:
+                lag_and_physical_path:
+                  value:
+                    data:
+                      source_device:
+                        device_id: '1'
+                        name: Building-Access-Switch-01
+                        management_ip: 192.0.2.1
+                        device_kind: switch
+                      path_found: true
+                      paths:
+                      - path_id: 0d3b1fe2020959c8ef67a591
+                        hop_count: 2
+                        nodes:
+                        - device_id: '1'
+                          name: Building-Access-Switch-01
+                          management_ip: 192.0.2.1
+                          device_kind: switch
+                        - device_id: '2'
+                          name: Building-Access-Switch-02
+                          management_ip: 192.0.2.2
+                          device_kind: switch
+                        - device_id: '3'
+                          name: Building-Access-Switch-03
+                          management_ip: 192.0.2.3
+                          device_kind: switch
+                          role: core
+                        links:
+                        - connection_id: lag:1:101:2:101
+                          connection_type: lag
+                          verification_status: confirmed
+                          confidence: bidirectional
+                          discovery_source: lldp
+                          lag_status: confirmed
+                          lag_mode: lacp
+                          member_coverage: complete
+                          endpoint_a:
+                            device_id: '1'
+                            logical_interface:
+                              name: Bridge-Aggregation1
+                              kind: aggregate
+                              if_index: 101
+                          endpoint_b:
+                            device_id: '2'
+                            logical_interface:
+                              name: Bridge-Aggregation2
+                              kind: aggregate
+                              if_index: 101
+                          member_links:
+                          - link_id: '1'
+                            a_interface: Ten-GigabitEthernet1/0/27
+                            b_interface: Ten-GigabitEthernet1/0/3
+                            a_if_index: 2
+                            b_if_index: 3
+                            confidence: bidirectional
+                            verification_status: confirmed
+                            scan_id: '30'
+                            first_seen_at: '2026-11-04T05:00:00Z'
+                            last_seen_at: '2026-11-04T05:00:00Z'
+                          - link_id: '3'
+                            a_interface: Ten-GigabitEthernet1/0/28
+                            b_interface: Ten-GigabitEthernet1/0/4
+                            a_if_index: 22
+                            b_if_index: 23
+                            confidence: bidirectional
+                            verification_status: confirmed
+                            scan_id: '30'
+                            first_seen_at: '2026-11-04T05:00:00Z'
+                            last_seen_at: '2026-11-04T05:00:00Z'
+                        - connection_type: physical
+                          verification_status: confirmed
+                          confidence: bidirectional
+                          discovery_source: lldp
+                          lag_status: unknown
+                          endpoint_a:
+                            device_id: '2'
+                            interface:
+                              name: Ten-GigabitEthernet1/0/27
+                              kind: physical
+                              if_index: null
+                          endpoint_b:
+                            device_id: '3'
+                            interface:
+                              name: Ten-GigabitEthernet1/0/3
+                              kind: physical
+                              if_index: null
+                          member_links:
+                          - link_id: '2'
+                            a_interface: Ten-GigabitEthernet1/0/27
+                            b_interface: Ten-GigabitEthernet1/0/3
+                            verification_status: confirmed
+                            scan_id: '30'
+                            first_seen_at: '2026-11-04T05:00:00Z'
+                            last_seen_at: '2026-11-04T05:00:00Z'
+                      candidate_links:
+                      - observation_id: '200'
+                        scan_id: '30'
+                        observer_device_id: '2'
+                        local_lldp_port_number: 14
+                        remote_device_id: null
+                        remote_management_ip: null
+                        remote_chassis_id:
+                          subtype: 4
+                          raw: AgAAAAAE
+                        remote_port_id:
+                          subtype: 7
+                          raw: cmVtb3RlLXBvcnQ=
+                        observed_at: '2026-11-04T05:00:00Z'
+                        reason_codes:
+                        - PORT_UNRESOLVED
+                        verification_status: pending
+                        discovery_source: lldp
+                    meta:
+                      schema_version: '1.0'
+                      request_id: ZJ34WTOW3EMQFSF45QSWYBPLKK
+                      generated_at: '2026-11-04T10:32:36.6423651Z'
+                      latest_scan_id: '30'
+                      latest_scan_status: partial
+                      latest_scan_finished_at: '2026-11-04T05:00:00Z'
+                      data_age_seconds: 19956
+                      fresh: true
+                      coverage_gap: true
+                      state: active
+                      search_truncated: false
+                no_confirmed_path:
+                  value:
+                    data:
+                      source_device:
+                        device_id: '1'
+                        name: Building-Access-Switch-01
+                        management_ip: 192.0.2.1
+                        device_kind: switch
+                      path_found: false
+                      paths: []
+                      reason: no_confirmed_path_to_core
+                    meta:
+                      schema_version: '1.0'
+                      request_id: PW4YTZLT6YDCICJG5FLFKACHNQ
+                      generated_at: '2026-11-04T10:32:36.6423651Z'
+                      latest_scan_id: '30'
+                      latest_scan_status: partial
+                      latest_scan_finished_at: '2026-11-04T05:00:00Z'
+                      data_age_seconds: 19956
+                      fresh: true
+                      coverage_gap: true
+                      state: active
+                      search_truncated: false
+        '400':
+          description: Invalid or repeated query parameter, or invalid device ID.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: Invalid or repeated query parameter, or invalid device ID.
+                    meta:
+                      request_id: example-request
+        '401':
+          description: A valid read-only Bearer credential is required.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            WWW-Authenticate:
+              schema:
+                type: string
+                example: Bearer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                unauthenticated:
+                  value:
+                    error:
+                      code: AUTH_UNAUTHENTICATED
+                      message: 请提供登录会话或只读凭据
+                    meta:
+                      request_id: ZAVIR7V5GQOHNO4YPJ3ULELV65
+        '403':
+          description: The source IP or request origin is forbidden.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: IP_NOT_ALLOWED
+                      message: The source IP or request origin is forbidden.
+                    meta:
+                      request_id: example-request
+        '404':
+          description: The device does not exist or is outside the visible scope.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                device_not_found:
+                  value:
+                    error:
+                      code: DEVICE_NOT_FOUND
+                      message: 设备不存在或不在可见范围内
+                    meta:
+                      request_id: L3MJPA4IL2OEJ2WVTMH7WTGLAE
+        '405':
+          description: Only GET is allowed for this API.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            Allow:
+              schema:
+                type: string
+                example: GET
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: METHOD_NOT_ALLOWED
+                      message: Only GET is allowed for this API.
+                    meta:
+                      request_id: example-request
+        '422':
+          description: A mandatory result exceeds the 12 KiB JSON response budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                result_too_large:
+                  value:
+                    error:
+                      code: RESULT_TOO_LARGE
+                      message: 响应超出容量限制
+                    meta:
+                      request_id: DRDZQKTY6WH6SYIGD3DJF7IFDQ
+        '500':
+          description: 'INTERNAL_ERROR: the assembled graph failed validation.'
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '503':
+          description: Topology or Key storage is unavailable.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '504':
+          description: The read or path search exceeded its time budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: READ_TIMEOUT
+                      message: The read or path search exceeded its time budget.
+                    meta:
+                      request_id: example-request
+  /api/v1/topology/summary:
+    get:
+      operationId: get_topology_summary
+      summary: Read topology counts
+      description: Read counts for the visible committed topology and retained coverage.
+      security:
+      - AgentBearer: []
+      parameters:
+      - name: schema_version
+        in: query
+        required: false
+        description: Explicitly select schema 2. Omit this parameter for the existing response. Supported on GET
+          only.
+        schema:
+          type: integer
+          enum:
+          - 2
+      - $ref: '#/components/parameters/State'
+      responses:
+        '200':
+          description: Read-only topology result.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/SummaryResponse'
+                - $ref: '#/components/schemas/SummaryResponseV2'
+              examples:
+                topology_summary:
+                  value:
+                    data:
+                      device_count: 3
+                      link_count: 3
+                      collected_device_count: 3
+                      historical_device_count: 0
+                      pending_neighbor_count: 0
+                      device_kinds:
+                        router: 0
+                        switch: 3
+                        wireless_controller: 0
+                    meta:
+                      schema_version: '1.0'
+                      request_id: QED2DVK6JEPAKFQTEVHWBLJB4P
+                      generated_at: '2026-11-04T10:32:36.6428729Z'
+                      latest_scan_id: '30'
+                      latest_scan_status: partial
+                      latest_scan_finished_at: '2026-11-04T05:00:00Z'
+                      data_age_seconds: 19956
+                      fresh: true
+                      coverage_gap: true
+                      state: all
+        '400':
+          description: Invalid or repeated query parameter, or invalid device ID.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: Invalid or repeated query parameter, or invalid device ID.
+                    meta:
+                      request_id: example-request
+        '401':
+          description: A valid read-only Bearer credential is required.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            WWW-Authenticate:
+              schema:
+                type: string
+                example: Bearer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: AUTH_UNAUTHENTICATED
+                      message: A valid read-only Bearer credential is required.
+                    meta:
+                      request_id: example-request
+        '403':
+          description: The source IP or request origin is forbidden.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                ip_not_allowed:
+                  value:
+                    error:
+                      code: IP_NOT_ALLOWED
+                      message: 请求来源 IP 不在白名单内
+                    meta:
+                      request_id: CPOHG5YZGU4IFIXIWZ5F4FJVAS
+        '405':
+          description: Only GET is allowed for this API.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            Allow:
+              schema:
+                type: string
+                example: GET
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: METHOD_NOT_ALLOWED
+                      message: Only GET is allowed for this API.
+                    meta:
+                      request_id: example-request
+        '422':
+          description: A mandatory result exceeds the 12 KiB JSON response budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: RESULT_TOO_LARGE
+                      message: A mandatory result exceeds the 12 KiB JSON response budget.
+                    meta:
+                      request_id: example-request
+        '500':
+          description: GoNet could not encode the response.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INTERNAL_ERROR
+                      message: GoNet could not encode the response.
+                    meta:
+                      request_id: example-request
+        '503':
+          description: Topology or Key storage is unavailable.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '504':
+          description: The read or path search exceeded its time budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: READ_TIMEOUT
+                      message: The read or path search exceeded its time budget.
+                    meta:
+                      request_id: example-request
+  /api/v1/devices/{device_id}/interfaces:
+    get:
+      operationId: get_device_interfaces
+      summary: Read physical Ethernet and identified logical aggregation interface status
+      description: Independent IF-MIB cache. ifName is the primary matching key; ifIndex is current and may change
+        after reboot. TimeTicks last_change is relative to sysUpTime; last_change_at is an estimate in the current
+        uptime cycle or null. Failure preserves last successful values, indicated by status_collection_state. No
+        LLDP scan is triggered. Limit 8 MiB; an oversized response returns 422.
+      security:
+      - AgentBearer: []
+      parameters:
+      - $ref: '#/components/parameters/DeviceID'
+      responses:
+        '200':
+          description: Read-only topology result.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - meta
+                properties:
+                  data:
+                    type: object
+                    required:
+                    - device_id
+                    - interfaces
+                    - status_collection_state
+                    - status_attempted_at
+                    properties:
+                      device_id:
+                        $ref: '#/components/schemas/ID'
+                      interfaces:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/InterfaceStatus'
+                      status_collection_state: &id001
+                        type: string
+                      status_attempted_at: &id002
+                        type: string
+                        format: date-time
+                        nullable: true
+                      status_error: *id001
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+        '400':
+          description: Invalid or repeated query parameter, or invalid device ID.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INVALID_ARGUMENT
+                      message: Invalid or repeated query parameter, or invalid device ID.
+                    meta:
+                      request_id: example-request
+        '401':
+          description: A valid read-only Bearer credential is required.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            WWW-Authenticate:
+              schema:
+                type: string
+                example: Bearer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: AUTH_UNAUTHENTICATED
+                      message: A valid read-only Bearer credential is required.
+                    meta:
+                      request_id: example-request
+        '403':
+          description: The source IP or request origin is forbidden.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: IP_NOT_ALLOWED
+                      message: The source IP or request origin is forbidden.
+                    meta:
+                      request_id: example-request
+        '404':
+          description: The device does not exist or is outside the visible scope.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DEVICE_NOT_FOUND
+                      message: The device does not exist or is outside the visible scope.
+                    meta:
+                      request_id: example-request
+        '405':
+          description: Only GET is allowed for this API.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+            Allow:
+              schema:
+                type: string
+                example: GET
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: METHOD_NOT_ALLOWED
+                      message: Only GET is allowed for this API.
+                    meta:
+                      request_id: example-request
+        '422':
+          description: A mandatory result exceeds the 12 KiB JSON response budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: RESULT_TOO_LARGE
+                      message: A mandatory result exceeds the 12 KiB JSON response budget.
+                    meta:
+                      request_id: example-request
+        '500':
+          description: GoNet could not encode the response.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: INTERNAL_ERROR
+                      message: GoNet could not encode the response.
+                    meta:
+                      request_id: example-request
+        '503':
+          description: Topology or Key storage is unavailable.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: DATABASE_UNAVAILABLE
+                      message: Topology or Key storage is unavailable.
+                    meta:
+                      request_id: example-request
+        '504':
+          description: The read or path search exceeded its time budget.
+          headers:
+            X-Request-ID:
+              description: GoNet request correlation ID.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIError'
+              examples:
+                error:
+                  value:
+                    error:
+                      code: READ_TIMEOUT
+                      message: The read or path search exceeded its time budget.
+                    meta:
+                      request_id: example-request
+components:
+  securitySchemes:
+    AgentBearer:
+      type: http
+      scheme: bearer
+      description: A GoNet API Key with profile topology_compact and a matching source IP allowlist.
+  parameters:
+    DeviceID:
+      name: device_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ID'
+      description: Canonical positive decimal int64, no leading zero; overflow is 400. No name or IP lookup.
+    State:
+      name: state
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - all
+        - active
+        default: all
+      description: active filters only links by discovery_state=active; devices remain visible regardless of collection
+        status. Repeated, empty and unknown parameters are rejected.
+  schemas:
+    ID:
+      type: string
+      pattern: ^[1-9][0-9]*$
+      description: Positive database int64 ID represented as a decimal string; maximum 9223372036854775807.
+    Device:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - name
+      - sys_name
+      - area
+      - vendor
+      - model
+      - device_kind
+      - access_addresses
+      - chassis_mac
+      - identity_state
+      - collection_status
+      - discovery_depth
+      - link_count
+      - last_seen_at
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        name:
+          type: string
+        sys_name:
+          type: string
+        area:
+          type: string
+        vendor:
+          type: string
+        model:
+          type: string
+        device_kind:
+          type: string
+          enum:
+          - switch
+          - router
+          - wireless_controller
+        access_addresses:
+          type: array
+          items:
+            type: string
+        chassis_mac:
+          type: string
+        identity_state:
+          type: string
+        collection_status:
+          type: string
+          enum:
+          - collected
+          - historical
+        discovery_depth:
+          type: integer
+          minimum: 0
+          nullable: true
+        link_count:
+          type: integer
+          minimum: 0
+        last_seen_at:
+          type: string
+          format: date-time
+          description: UTC RFC3339 timestamp; null when unavailable or zero.
+          nullable: true
+    Link:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - device_a_id
+      - device_a_name
+      - port_a_id
+      - port_a_name
+      - device_b_id
+      - device_b_name
+      - port_b_id
+      - port_b_name
+      - confidence
+      - discovery_state
+      - fresh
+      - coverage_gap
+      - missed_complete_scans
+      - first_seen_at
+      - last_seen_at
+      - last_seen_scan_id
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        device_a_id:
+          $ref: '#/components/schemas/ID'
+        device_a_name:
+          type: string
+        port_a_id:
+          $ref: '#/components/schemas/ID'
+        port_a_name:
+          type: string
+        device_b_id:
+          $ref: '#/components/schemas/ID'
+        device_b_name:
+          type: string
+        port_b_id:
+          $ref: '#/components/schemas/ID'
+        port_b_name:
+          type: string
+        confidence:
+          type: string
+          enum:
+          - bidirectional
+          - single_sided
+        discovery_state:
+          type: string
+          enum:
+          - active
+          - suspect_stale
+          - stale
+        fresh:
+          type: boolean
+        coverage_gap:
+          type: boolean
+        missed_complete_scans:
+          type: integer
+          minimum: 0
+        first_seen_at:
+          type: string
+          format: date-time
+          description: UTC RFC3339 timestamp; null when unavailable or zero.
+          nullable: true
+        last_seen_at:
+          type: string
+          format: date-time
+          description: UTC RFC3339 timestamp; null when unavailable or zero.
+          nullable: true
+        last_seen_scan_id:
+          $ref: '#/components/schemas/NullableID'
+        source_admin_status: &id004
+          type: string
+        source_oper_status: &id005
+          type: string
+        target_admin_status: &id006
+          type: string
+        target_oper_status: &id007
+          type: string
+        source_collection_state: &id008
+          type: string
+        target_collection_state: &id009
+          type: string
+        link_oper_status: &id010
+          type: string
+          enum:
+          - up
+          - degraded
+          - down
+          - admin_down
+          - unknown
+          - stale
+          - ''
+        status_collected_at: *id002
+        source_status_collected_at: *id002
+        target_status_collected_at: *id002
+        aggregation: &id011
+          $ref: '#/components/schemas/NeighborAggregationV4'
+    Summary:
+      type: object
+      additionalProperties: false
+      required:
+      - device_count
+      - link_count
+      - collected_device_count
+      - historical_device_count
+      - pending_neighbor_count
+      - device_kinds
+      properties:
+        device_count:
+          type: integer
+          minimum: 0
+        link_count:
+          type: integer
+          minimum: 0
+        collected_device_count:
+          type: integer
+          minimum: 0
+        historical_device_count:
+          type: integer
+          minimum: 0
+        pending_neighbor_count:
+          type: integer
+          minimum: 0
+        device_kinds:
+          type: object
+          additionalProperties: false
+          required:
+          - switch
+          - router
+          - wireless_controller
+          properties:
+            switch:
+              type: integer
+              minimum: 0
+            router:
+              type: integer
+              minimum: 0
+            wireless_controller:
+              type: integer
+              minimum: 0
+    DeviceData:
+      type: object
+      additionalProperties: false
+      required:
+      - device
+      properties:
+        device:
+          $ref: '#/components/schemas/Device'
+    SummaryResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          $ref: '#/components/schemas/Summary'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    DeviceResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          $ref: '#/components/schemas/DeviceData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ErrorDetail:
+      type: object
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    APIError:
+      type: object
+      additionalProperties: false
+      required:
+      - error
+      - meta
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        meta:
+          type: object
+          additionalProperties: false
+          required:
+          - request_id
+          properties:
+            request_id:
+              type: string
+    NullableID:
+      type: string
+      pattern: ^[1-9][0-9]*$
+      description: Positive database int64 ID represented as a decimal string; maximum 9223372036854775807.
+      nullable: true
+    Meta:
+      type: object
+      additionalProperties: false
+      required:
+      - schema_version
+      - request_id
+      - generated_at
+      - latest_scan_id
+      - latest_scan_status
+      - latest_scan_finished_at
+      - data_age_seconds
+      - fresh
+      - coverage_gap
+      - state
+      properties:
+        schema_version:
+          type: string
+          enum:
+          - '1.0'
+        request_id:
+          type: string
+        generated_at:
+          type: string
+          format: date-time
+        latest_scan_id:
+          $ref: '#/components/schemas/NullableID'
+        latest_scan_status:
+          type: string
+          enum:
+          - ''
+          - completed
+          - partial
+        latest_scan_finished_at:
+          type: string
+          format: date-time
+          description: UTC RFC3339 timestamp; null when unavailable or zero.
+          nullable: true
+        data_age_seconds:
+          type: integer
+          minimum: 0
+          nullable: true
+        fresh:
+          type: boolean
+        coverage_gap:
+          type: boolean
+        state:
+          type: string
+          enum:
+          - all
+          - active
+        response_truncated:
+          type: boolean
+          description: Items or complete lower-ranked paths were omitted to meet the response budget.
+        search_truncated:
+          type: boolean
+          description: Path search reached its work or queue budget.
+        candidates_truncated:
+          type: boolean
+          description: The optional candidate list was cut to its count or byte limit.
+    SearchResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - items
+          - total
+          - ambiguous
+          properties:
+            items:
+              type: array
+              items:
+                type: object
+                additionalProperties: false
+                required:
+                - device_id
+                - name
+                - management_ip
+                - vendor
+                - model
+                - match_type
+                properties:
+                  device_id:
+                    $ref: '#/components/schemas/ID'
+                  name:
+                    type: string
+                  management_ip:
+                    type: string
+                    nullable: true
+                    description: Verified IPv4 or IPv6 address when available.
+                  vendor:
+                    type: string
+                  model:
+                    type: string
+                  match_type:
+                    type: string
+                    enum:
+                    - management_ip
+                    - name
+                    - sys_name
+              maxItems: 5
+            total:
+              type: integer
+              minimum: 0
+              description: Number of distinct matches before the result limit.
+            ambiguous:
+              type: boolean
+              description: True when multiple devices share the highest matching rank.
+        meta:
+          $ref: '#/components/schemas/Meta'
+    Interface:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - kind
+      - if_index
+      properties:
+        name:
+          type: string
+        kind:
+          type: string
+          enum:
+          - physical
+          - aggregate
+        port_id:
+          $ref: '#/components/schemas/ID'
+        if_index:
+          type: integer
+          format: int32
+          minimum: 1
+          nullable: true
+    NeighborEndpoint:
+      type: object
+      additionalProperties: false
+      required:
+      - device_id
+      - device_name
+      - interface
+      properties:
+        device_id:
+          $ref: '#/components/schemas/ID'
+        device_name:
+          type: string
+        interface:
+          $ref: '#/components/schemas/Interface'
+    ObservationRef:
+      type: object
+      additionalProperties: false
+      required:
+      - observation_id
+      - observer_device_id
+      properties:
+        observation_id:
+          $ref: '#/components/schemas/ID'
+        observer_device_id:
+          $ref: '#/components/schemas/ID'
+    CompactNeighborItem:
+      type: object
+      additionalProperties: false
+      required:
+      - neighbor
+      - link
+      - local
+      - remote
+      - verification_status
+      - discovery_source
+      - observations
+      properties:
+        neighbor:
+          $ref: '#/components/schemas/Device'
+        link:
+          $ref: '#/components/schemas/Link'
+        local:
+          $ref: '#/components/schemas/NeighborEndpoint'
+        remote:
+          $ref: '#/components/schemas/NeighborEndpoint'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - historical
+        discovery_source:
+          type: string
+          enum:
+          - lldp
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservationRef'
+          maxItems: 2
+    CompactNeighborsResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - device_id
+          - neighbor_count
+          - link_count
+          - returned_link_count
+          - truncated
+          - items
+          properties:
+            device_id:
+              $ref: '#/components/schemas/ID'
+            neighbor_count:
+              type: integer
+              minimum: 0
+            link_count:
+              type: integer
+              minimum: 0
+            returned_link_count:
+              type: integer
+              minimum: 0
+              maximum: 20
+            truncated:
+              type: boolean
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/CompactNeighborItem'
+              maxItems: 20
+        meta:
+          $ref: '#/components/schemas/Meta'
+    PathNode:
+      type: object
+      additionalProperties: false
+      required:
+      - device_id
+      - name
+      - management_ip
+      - device_kind
+      properties:
+        device_id:
+          $ref: '#/components/schemas/ID'
+        name:
+          type: string
+        management_ip:
+          type: string
+          nullable: true
+          description: Verified IPv4 or IPv6 address when available.
+        device_kind:
+          type: string
+        role:
+          type: string
+          enum:
+          - core
+    PathEndpoint:
+      type: object
+      additionalProperties: false
+      required:
+      - device_id
+      properties:
+        device_id:
+          $ref: '#/components/schemas/ID'
+        interface:
+          $ref: '#/components/schemas/Interface'
+        logical_interface:
+          $ref: '#/components/schemas/Interface'
+    PathMember:
+      type: object
+      additionalProperties: false
+      required:
+      - link_id
+      - a_interface
+      - b_interface
+      - verification_status
+      - scan_id
+      - first_seen_at
+      - last_seen_at
+      properties:
+        link_id:
+          $ref: '#/components/schemas/ID'
+        a_interface:
+          type: string
+        b_interface:
+          type: string
+        a_if_index:
+          type: integer
+          format: int32
+          minimum: 1
+          nullable: true
+        b_if_index:
+          type: integer
+          format: int32
+          minimum: 1
+          nullable: true
+        confidence:
+          type: string
+          enum:
+          - bidirectional
+          - single_sided
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+        scan_id:
+          $ref: '#/components/schemas/ID'
+        first_seen_at:
+          type: string
+          format: date-time
+          nullable: true
+        last_seen_at:
+          type: string
+          format: date-time
+          nullable: true
+    PathHop:
+      type: object
+      additionalProperties: false
+      required:
+      - connection_type
+      - verification_status
+      - confidence
+      - discovery_source
+      - lag_status
+      - endpoint_a
+      - endpoint_b
+      - member_links
+      properties:
+        connection_id:
+          type: string
+        connection_type:
+          type: string
+          enum:
+          - physical
+          - lag
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+        confidence:
+          type: string
+          enum:
+          - bidirectional
+          - single_sided
+        discovery_source:
+          type: string
+          enum:
+          - lldp
+        lag_status:
+          type: string
+          enum:
+          - confirmed
+          - partial_lag
+          - not_member
+          - unknown
+        lag_mode:
+          type: string
+          enum:
+          - lacp
+          - static
+          - unknown
+        member_coverage:
+          type: string
+          enum:
+          - complete
+          - partial
+          - unknown
+        endpoint_a:
+          $ref: '#/components/schemas/PathEndpoint'
+        endpoint_b:
+          $ref: '#/components/schemas/PathEndpoint'
+        member_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/PathMember'
+          minItems: 1
+    CorePath:
+      type: object
+      additionalProperties: false
+      required:
+      - path_id
+      - hop_count
+      - nodes
+      - links
+      properties:
+        path_id:
+          type: string
+          pattern: ^[a-f0-9]{24}$
+        hop_count:
+          type: integer
+          minimum: 0
+          maximum: 16
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PathNode'
+          maxItems: 17
+          minItems: 1
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/PathHop'
+          maxItems: 16
+    RawLLDPIdentifier:
+      type: object
+      additionalProperties: false
+      required:
+      - subtype
+      - raw
+      properties:
+        subtype:
+          type: integer
+          minimum: 1
+          maximum: 255
+        raw:
+          type: string
+          format: byte
+          description: Original identifier octets in Base64.
+      nullable: true
+    CandidateLink:
+      type: object
+      additionalProperties: false
+      required:
+      - observation_id
+      - scan_id
+      - observer_device_id
+      - local_lldp_port_number
+      - remote_device_id
+      - remote_management_ip
+      - remote_chassis_id
+      - remote_port_id
+      - observed_at
+      - reason_codes
+      - verification_status
+      - discovery_source
+      properties:
+        observation_id:
+          $ref: '#/components/schemas/NullableID'
+        scan_id:
+          $ref: '#/components/schemas/ID'
+        observer_device_id:
+          $ref: '#/components/schemas/ID'
+        local_lldp_port_number:
+          type: integer
+          minimum: 0
+        remote_device_id:
+          $ref: '#/components/schemas/NullableID'
+        remote_management_ip:
+          type: string
+          nullable: true
+          description: Verified IPv4 or IPv6 address when available.
+        remote_chassis_id:
+          $ref: '#/components/schemas/RawLLDPIdentifier'
+        remote_port_id:
+          $ref: '#/components/schemas/RawLLDPIdentifier'
+        observed_at:
+          type: string
+          format: date-time
+          nullable: true
+        reason_codes:
+          type: array
+          items:
+            type: string
+        verification_status:
+          type: string
+          enum:
+          - pending
+          - unknown
+        discovery_source:
+          type: string
+          enum:
+          - lldp
+    CorePathResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - source_device
+          - path_found
+          - paths
+          properties:
+            source_device:
+              $ref: '#/components/schemas/PathNode'
+            path_found:
+              type: boolean
+            paths:
+              type: array
+              items:
+                $ref: '#/components/schemas/CorePath'
+              maxItems: 3
+            reason:
+              type: string
+              enum:
+              - no_scan_data
+              - no_visible_core
+              - no_confirmed_path_to_core
+              - search_budget_exceeded
+            candidate_links:
+              type: array
+              items:
+                $ref: '#/components/schemas/CandidateLink'
+              maxItems: 20
+        meta:
+          $ref: '#/components/schemas/Meta'
+    LinkEndpointV2:
+      type: object
+      additionalProperties: false
+      required:
+      - device_id
+      - interface_name
+      - interface_description
+      - if_index
+      - interface_name_source
+      - if_index_status
+      properties:
+        device_id:
+          $ref: '#/components/schemas/ID'
+        interface_name:
+          type: string
+          nullable: true
+        interface_description:
+          type: string
+          nullable: true
+        if_index:
+          type: integer
+          minimum: 1
+          nullable: true
+        interface_name_source:
+          type: string
+          enum:
+          - inventory
+          - if_name
+          - lldp_interface_name
+          - null
+          nullable: true
+        if_index_status:
+          type: string
+          enum:
+          - known
+          - not_collected
+          - unmatched
+          - ambiguous
+          - unknown
+    CollectionSummaryV2:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum: [configured_discovery_run]
+        device_counts:
+          type: object
+          description: Original scan counters; overlapping scopes, never add them as a total.
+          additionalProperties:
+            type: integer
+        recorded_outcomes:
+          type: object
+          description: Visible formal devices grouped by retained per-device outcome; not_recorded includes historical devices.
+          additionalProperties:
+            type: integer
+        reason_counts:
+          type: object
+          description: Run issue occurrences grouped by reason code, not a device count.
+          additionalProperties:
+            type: integer
+        termination_reasons:
+          type: array
+          items:
+            type: string
+        details_url:
+          type: string
+    CollectionItemV2:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: [device, neighbor_candidate, target_attempt]
+        key:
+          type: string
+        device_id:
+          type: string
+          nullable: true
+        name:
+          type: string
+        addresses:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          description: Device success/partial/failed/unscanned/not_recorded, or candidate verification / target attempt state.
+        coverage_status:
+          type: string
+          enum: [covered, gap, unknown]
+        reason_codes:
+          type: array
+          items:
+            type: string
+        incomplete_components:
+          type: array
+          description: Known incomplete components, including optional components. Does not alone determine neighbor coverage.
+          items:
+            type: string
+        collected_at:
+          type: string
+          format: date-time
+          nullable: true
+    CollectionReportV2:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            schema_version:
+              type: integer
+              enum: [2]
+            data_quality:
+              $ref: '#/components/schemas/DataQualityV2'
+            total:
+              type: integer
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/CollectionItemV2'
+            has_more:
+              type: boolean
+            next_cursor:
+              type: string
+              nullable: true
+        meta:
+          type: object
+    CoverageV2:
+      type: object
+      additionalProperties: false
+      required:
+      - scope
+      - status
+      - reason_codes
+      properties:
+        scope:
+          type: string
+          enum:
+          - network
+          - device_neighbors
+          - device_to_core_query
+        status:
+          type: string
+          enum:
+          - covered
+          - gap
+          - unknown
+        reason_codes:
+          type: array
+          items: &id003
+            type: string
+        device_id:
+          $ref: '#/components/schemas/ID'
+        state:
+          type: string
+          enum:
+          - active
+          - all
+        evaluated_device_count:
+          type: integer
+        affected_device_ids:
+          type: array
+          description: At most 10 affected device IDs; use collection diagnostics for detail.
+          items:
+            type: string
+        affected_devices_truncated:
+          type: boolean
+        max_hops:
+          type: integer
+        definition:
+          type: string
+          description: Path coverage checks visible active branches within max_hops; cores terminate expansion.
+    DataQualityV2:
+      type: object
+      additionalProperties: false
+      required:
+      - snapshot_id
+      - snapshot_at
+      - as_of
+      - data_age_seconds
+      - latest_scan
+      - stale_after_seconds
+      - stale
+      - coverage
+      properties:
+        snapshot_status:
+          type: string
+          description: Status of the committed snapshot, independent of latest_scan.
+        collection:
+          $ref: '#/components/schemas/CollectionSummaryV2'
+        snapshot_id:
+          type: string
+          nullable: true
+        snapshot_at:
+          type: string
+          format: date-time
+          nullable: true
+        as_of:
+          type: string
+          format: date-time
+        data_age_seconds:
+          type: integer
+          minimum: 0
+          nullable: true
+        latest_scan:
+          type: object
+          additionalProperties: false
+          required:
+          - scan_id
+          - status
+          properties:
+            scan_id:
+              $ref: '#/components/schemas/ID'
+            status:
+              type: string
+          nullable: true
+        stale_after_seconds:
+          type: integer
+          minimum: 1
+        stale:
+          type: boolean
+          nullable: true
+        coverage:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageV2'
+        diagnostic_codes:
+          type: array
+          items:
+            type: string
+    CountDefinitionV2:
+      type: object
+      additionalProperties: false
+      required:
+      - scope
+      - unit
+      - dedup_key
+      - state_filter
+      properties:
+        scope: *id003
+        unit: *id003
+        dedup_key: *id003
+        state_filter: *id003
+    NeighborV2:
+      type: object
+      additionalProperties: false
+      required:
+      - link_id
+      - local
+      - remote
+      - verification_status
+      - topology_status
+      - oper_status
+      - observations
+      properties:
+        link_id:
+          $ref: '#/components/schemas/ID'
+        local:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        remote:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status:
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at:
+          type: string
+          format: date-time
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservationRef'
+        source_admin_status: *id004
+        source_oper_status: *id005
+        target_admin_status: *id006
+        target_oper_status: *id007
+        source_collection_state: *id008
+        target_collection_state: *id009
+        link_oper_status: *id010
+        status_collected_at: *id002
+        source_status_collected_at: *id002
+        target_status_collected_at: *id002
+        aggregation: *id011
+    NeighborsResponseV2:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - device_id
+          - state
+          - limit
+          - matching_link_count
+          - returned_link_count
+          - returned_unique_neighbor_count
+          - truncated
+          - items
+          properties:
+            schema_version: &id013
+              type: integer
+              enum:
+              - 2
+            data_quality: &id014
+              $ref: '#/components/schemas/DataQualityV2'
+            device_id:
+              $ref: '#/components/schemas/ID'
+            state:
+              type: string
+              enum:
+              - active
+              - all
+            limit:
+              type: integer
+              minimum: 1
+              maximum: 20
+            matching_link_count: &id012
+              type: integer
+              minimum: 0
+            returned_link_count: *id012
+            returned_unique_neighbor_count: *id012
+            truncated:
+              type: boolean
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/NeighborV2'
+              maxItems: 20
+            next_cursor:
+              type: string
+              nullable: true
+            has_more:
+              type: boolean
+            response_truncated:
+              type: boolean
+        meta:
+          $ref: '#/components/schemas/Meta'
+    DeviceResponseV2:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - device
+          - adjacent_link_count
+          - count_definition
+          properties:
+            schema_version: *id013
+            data_quality: *id014
+            device:
+              $ref: '#/components/schemas/Device'
+            adjacent_link_count: *id012
+            count_definition:
+              $ref: '#/components/schemas/CountDefinitionV2'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    SummaryResponseV2:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - device_count
+          - link_count
+          - collected_device_count
+          - historical_device_count
+          - pending_neighbor_count
+          - device_kinds
+          - count_definitions
+          properties:
+            schema_version: *id013
+            data_quality: *id014
+            device_count:
+              type: integer
+              minimum: 0
+            link_count:
+              type: integer
+              minimum: 0
+            collected_device_count:
+              type: integer
+              minimum: 0
+            historical_device_count:
+              type: integer
+              minimum: 0
+            pending_neighbor_count:
+              type: integer
+              minimum: 0
+            device_kinds:
+              type: object
+              additionalProperties: false
+              required:
+              - switch
+              - router
+              - wireless_controller
+              properties:
+                switch:
+                  type: integer
+                  minimum: 0
+                router:
+                  type: integer
+                  minimum: 0
+                wireless_controller:
+                  type: integer
+                  minimum: 0
+            count_definitions:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/CountDefinitionV2'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    UplinkNodeV2:
+      type: object
+      additionalProperties: false
+      required:
+      - device_id
+      - display_name
+      - role
+      properties:
+        device_id:
+          $ref: '#/components/schemas/ID'
+        display_name:
+          type: string
+          nullable: true
+        role:
+          type: string
+          enum:
+          - source
+          - transit
+          - core
+          - source_core
+    UplinkMemberV2:
+      type: object
+      additionalProperties: false
+      required:
+      - link_id
+      - from
+      - to
+      - verification_status
+      - topology_status
+      - oper_status
+      properties:
+        link_id:
+          $ref: '#/components/schemas/ID'
+        from:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        to:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        verification_status: &id015
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status: &id016
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status: &id017
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at: &id018
+          type: string
+          format: date-time
+        membership_status:
+          type: string
+          enum:
+          - confirmed
+          - local_only
+          - remote_only
+          - conflict
+    UplinkEdgeV2:
+      type: object
+      additionalProperties: false
+      required:
+      - edge_id
+      - link_id
+      - hop
+      - kind
+      - from
+      - to
+      - verification_status
+      - topology_status
+      - oper_status
+      - aggregation
+      properties:
+        edge_id: &id019
+          type: string
+        link_id:
+          type: string
+          nullable: true
+        hop:
+          type: integer
+          minimum: 1
+        kind:
+          type: string
+          enum:
+          - physical
+          - aggregate
+        from:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        to:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        verification_status: *id015
+        topology_status: *id016
+        oper_status: *id017
+        oper_observed_at: *id018
+        aggregation:
+          type: object
+          additionalProperties: false
+          required:
+          - aggregate_id
+          - member_data_status
+          - member_links
+          properties:
+            aggregate_id: *id019
+            member_data_status:
+              type: string
+              enum:
+              - complete
+              - partial
+              - unknown
+            member_links:
+              type: array
+              items:
+                $ref: '#/components/schemas/UplinkMemberV2'
+              nullable: true
+          nullable: true
+        aggregation_status:
+          type: string
+          enum: &id021
+          - confirmed
+          - partial
+          - unknown
+          - none
+          - conflict
+        aggregation_diagnostics:
+          $ref: '#/components/schemas/AggregationDiagnostics'
+    UplinkResponseV2:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - source_device_id
+          - target
+          - max_hops
+          - path_status
+          - path
+          properties:
+            schema_version:
+              type: integer
+              enum:
+              - 2
+            data_quality:
+              $ref: '#/components/schemas/DataQualityV2'
+            source_device_id:
+              $ref: '#/components/schemas/ID'
+            target:
+              type: string
+              enum:
+              - core
+            max_hops:
+              type: integer
+              minimum: 1
+              maximum: 16
+            path_status:
+              type: string
+              enum:
+              - found
+              - not_found
+              - no_core_configured
+            path:
+              type: object
+              additionalProperties: false
+              required:
+              - target_core_device_id
+              - hop_count
+              - nodes
+              - edges
+              properties:
+                target_core_device_id:
+                  $ref: '#/components/schemas/ID'
+                hop_count:
+                  type: integer
+                  minimum: 0
+                  maximum: 16
+                nodes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UplinkNodeV2'
+                edges:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UplinkEdgeV2'
+              nullable: true
+            reason:
+              type: string
+              enum:
+              - no_visible_core
+              - no_core_configured
+              - no_scan_data
+              - no_confirmed_path_within_bound
+            candidate_links:
+              type: array
+              items:
+                $ref: '#/components/schemas/CandidateLink'
+              nullable: true
+            candidate_observer_device_ids:
+              type: array
+              items:
+                $ref: '#/components/schemas/ID'
+            candidate_data_reason:
+              type: string
+              enum:
+              - candidate_data_unavailable
+              - response_budget_exceeded
+        meta:
+          $ref: '#/components/schemas/Meta'
+    UplinkMemberV3:
+      type: object
+      additionalProperties: false
+      required:
+      - link_id
+      - from
+      - to
+      - verification_status
+      - topology_status
+      - oper_status
+      - membership_status
+      properties:
+        link_id:
+          $ref: '#/components/schemas/ID'
+        from:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        to:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status:
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at:
+          type: string
+          format: date-time
+        membership_status:
+          type: string
+          enum:
+          - confirmed
+          - local_only
+          - remote_only
+          - conflict
+    AggregationDiagnostics:
+      type: object
+      additionalProperties: false
+      properties:
+        local_group: &id020
+          type: object
+          additionalProperties: false
+          required:
+          - device_id
+          - interface_name
+          - interface_description
+          - if_index
+          - interface_name_source
+          - if_index_status
+          properties:
+            device_id:
+              $ref: '#/components/schemas/ID'
+            interface_name:
+              type: string
+              nullable: true
+            interface_description:
+              type: string
+              nullable: true
+            if_index:
+              type: integer
+              minimum: 1
+              nullable: true
+            interface_name_source:
+              type: string
+              enum:
+              - inventory
+              - if_name
+              - lldp_interface_name
+              - null
+              nullable: true
+            if_index_status:
+              type: string
+              enum:
+              - known
+              - not_collected
+              - unmatched
+              - ambiguous
+              - unknown
+          nullable: true
+        remote_group: *id020
+        member_data_status:
+          type: string
+          enum:
+          - complete
+          - partial
+          - unknown
+        member_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/UplinkMemberV2'
+          nullable: true
+        unpaired_members:
+          type: array
+          items: &id023
+            type: object
+            additionalProperties: false
+            properties:
+              device_id:
+                $ref: '#/components/schemas/ID'
+              if_index:
+                type: integer
+                minimum: 1
+              reason:
+                type: string
+            required:
+            - device_id
+            - if_index
+            - reason
+        advertisements:
+          type: array
+          items: &id024
+            type: object
+            additionalProperties: true
+            description: Observed LLDP aggregation advertisement. aggregate_id is opaque, not an ifIndex; observer_device_id
+              identifies its source.
+        reason_codes:
+          type: array
+          items:
+            type: string
+      required:
+      - local_group
+      - remote_group
+      - member_data_status
+      - member_links
+      - unpaired_members
+      - reason_codes
+    AggregationV3:
+      type: object
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+          enum: *id021
+        aggregate_id:
+          type: string
+          nullable: true
+        mode:
+          type: string
+          enum:
+          - lacp
+          - static
+          - unknown
+        local_group: *id020
+        remote_group: *id020
+        member_data_status:
+          type: string
+          enum:
+          - complete
+          - partial
+          - unknown
+        known_member_link_count: &id022
+          type: integer
+          minimum: 0
+        returned_member_link_count: *id022
+        member_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/UplinkMemberV3'
+          nullable: true
+        unpaired_members:
+          type: array
+          items: *id023
+        advertisements:
+          type: array
+          items: *id024
+        reason_codes:
+          type: array
+          items:
+            type: string
+      required:
+      - status
+      - aggregate_id
+      - mode
+      - local_group
+      - remote_group
+      - member_data_status
+      - known_member_link_count
+      - returned_member_link_count
+      - member_links
+      - unpaired_members
+    UplinkEdgeV3:
+      type: object
+      additionalProperties: false
+      required:
+      - edge_id
+      - link_id
+      - hop
+      - kind
+      - from
+      - to
+      - verification_status
+      - topology_status
+      - oper_status
+      - aggregation
+      - aggregation_status
+      properties:
+        edge_id:
+          type: string
+        link_id:
+          type: string
+          nullable: true
+        hop:
+          type: integer
+          minimum: 1
+        kind:
+          type: string
+          enum:
+          - physical
+          - aggregate
+        from:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        to:
+          $ref: '#/components/schemas/LinkEndpointV2'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status:
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at:
+          type: string
+          format: date-time
+        aggregation:
+          $ref: '#/components/schemas/AggregationV3'
+        aggregation_status:
+          type: string
+          enum:
+          - confirmed
+          - partial
+          - unknown
+          - none
+          - conflict
+    UplinkResponseV3:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - source_device_id
+          - target
+          - max_hops
+          - path_status
+          - path
+          properties:
+            schema_version:
+              type: integer
+              enum:
+              - 3
+            data_quality:
+              $ref: '#/components/schemas/DataQualityV2'
+            source_device_id:
+              $ref: '#/components/schemas/ID'
+            target:
+              type: string
+              enum:
+              - core
+            max_hops:
+              type: integer
+              minimum: 1
+              maximum: 16
+            path_status:
+              type: string
+              enum:
+              - found
+              - not_found
+              - no_core_configured
+            path:
+              type: object
+              additionalProperties: false
+              required:
+              - target_core_device_id
+              - hop_count
+              - nodes
+              - edges
+              properties:
+                target_core_device_id:
+                  $ref: '#/components/schemas/ID'
+                hop_count:
+                  type: integer
+                  minimum: 0
+                  maximum: 16
+                nodes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UplinkNodeV2'
+                edges:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UplinkEdgeV3'
+              nullable: true
+            reason:
+              type: string
+              enum:
+              - no_visible_core
+              - no_core_configured
+              - no_scan_data
+              - no_confirmed_path_within_bound
+            candidate_links:
+              type: array
+              items:
+                $ref: '#/components/schemas/CandidateLink'
+              nullable: true
+            candidate_observer_device_ids:
+              type: array
+              items:
+                $ref: '#/components/schemas/ID'
+            candidate_data_reason:
+              type: string
+              enum:
+              - candidate_data_unavailable
+              - response_budget_exceeded
+        meta:
+          $ref: '#/components/schemas/Meta'
+    NeighborsResponseV3:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - device_id
+          - state
+          - limit
+          - matching_link_count
+          - returned_link_count
+          - returned_unique_neighbor_count
+          - truncated
+          - items
+          properties:
+            schema_version:
+              type: integer
+              enum:
+              - 3
+            data_quality:
+              $ref: '#/components/schemas/DataQualityV2'
+            device_id:
+              $ref: '#/components/schemas/ID'
+            state:
+              type: string
+              enum:
+              - active
+              - all
+            limit:
+              type: integer
+              minimum: 1
+              maximum: 20
+            matching_link_count: &id025
+              type: integer
+              minimum: 0
+            returned_link_count: *id025
+            returned_unique_neighbor_count: *id025
+            truncated:
+              type: boolean
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/NeighborV2'
+              maxItems: 20
+            next_cursor:
+              type: string
+              nullable: true
+            has_more:
+              type: boolean
+            response_truncated:
+              type: boolean
+        meta:
+          $ref: '#/components/schemas/Meta'
+    LinkEndpointV4:
+      type: object
+      additionalProperties: false
+      required:
+      - device_id
+      - interface_name
+      - interface_description
+      - if_index
+      - interface_name_source
+      - if_index_status
+      properties:
+        device_id:
+          $ref: '#/components/schemas/ID'
+        interface_name:
+          type: string
+          nullable: true
+        interface_description:
+          type: string
+          nullable: true
+        if_index:
+          type: integer
+          minimum: 1
+          nullable: true
+        interface_name_source:
+          type: string
+          enum:
+          - inventory
+          - if_name
+          - lldp_interface_name
+          - null
+          nullable: true
+        if_index_status:
+          type: string
+          enum:
+          - known
+          - not_collected
+          - unmatched
+          - ambiguous
+          - unknown
+        display_name: &id026
+          type: string
+    AggregationGroupV4:
+      type: object
+      additionalProperties: false
+      properties:
+        group_id: *id026
+        device_id:
+          $ref: '#/components/schemas/ID'
+        aggregate_if_index:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+          nullable: true
+        interface_name:
+          type: string
+          nullable: true
+        display_name: *id026
+        evidence_type:
+          type: string
+          enum:
+          - direct
+          - peer_inferred
+        mode:
+          type: string
+          enum:
+          - static
+          - lacp
+          - unknown
+        sources:
+          type: array
+          items: *id026
+        inferred_from:
+          type: object
+          additionalProperties: false
+          properties:
+            device_id:
+              $ref: '#/components/schemas/ID'
+            group_id: *id026
+            scan_id:
+              $ref: '#/components/schemas/ID'
+          required:
+          - device_id
+          - group_id
+          - scan_id
+        aggregation_source:
+          type: string
+          enum:
+          - native
+          - peer_inferred
+        local_device_id:
+          $ref: '#/components/schemas/ID'
+        remote_device_id:
+          $ref: '#/components/schemas/ID'
+        remote_aggregation_id: *id001
+        member_interfaces:
+          type: array
+          items:
+            type: integer
+        evidence_link_ids:
+          type: array
+          items:
+            type: integer
+        inference_status: *id001
+        inferred_at: *id002
+      required:
+      - group_id
+      - device_id
+      - aggregate_if_index
+      - interface_name
+      - display_name
+      - evidence_type
+      - mode
+      - sources
+    UplinkMemberV4:
+      type: object
+      additionalProperties: false
+      required:
+      - link_id
+      - from
+      - to
+      - verification_status
+      - topology_status
+      - oper_status
+      - membership_status
+      properties:
+        link_id:
+          $ref: '#/components/schemas/ID'
+        from:
+          $ref: '#/components/schemas/LinkEndpointV4'
+        to:
+          $ref: '#/components/schemas/LinkEndpointV4'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status:
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at:
+          type: string
+          format: date-time
+        membership_status:
+          type: string
+          enum:
+          - confirmed
+          - local_only
+          - remote_only
+          - conflict
+          - inferred
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservationRef'
+    AggregationV4:
+      type: object
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+          enum: &id030
+          - confirmed
+          - inferred
+          - partial
+          - unknown
+          - none
+          - conflict
+        aggregate_id:
+          type: string
+          nullable: true
+        mode:
+          type: string
+          enum:
+          - lacp
+          - static
+          - unknown
+        local_group:
+          type: object
+          additionalProperties: false
+          properties:
+            group_id: &id027
+              type: string
+            device_id:
+              $ref: '#/components/schemas/ID'
+            aggregate_if_index:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              nullable: true
+            interface_name:
+              type: string
+              nullable: true
+            display_name: *id027
+            evidence_type:
+              type: string
+              enum:
+              - direct
+              - peer_inferred
+            mode:
+              type: string
+              enum:
+              - static
+              - lacp
+              - unknown
+            sources:
+              type: array
+              items: *id027
+            inferred_from:
+              type: object
+              additionalProperties: false
+              properties:
+                device_id:
+                  $ref: '#/components/schemas/ID'
+                group_id: *id027
+                scan_id:
+                  $ref: '#/components/schemas/ID'
+              required:
+              - device_id
+              - group_id
+              - scan_id
+            aggregation_source:
+              type: string
+              enum:
+              - native
+              - peer_inferred
+            local_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_aggregation_id: *id001
+            member_interfaces:
+              type: array
+              items:
+                type: integer
+            evidence_link_ids:
+              type: array
+              items:
+                type: integer
+            inference_status: *id001
+            inferred_at: *id002
+          required:
+          - group_id
+          - device_id
+          - aggregate_if_index
+          - interface_name
+          - display_name
+          - evidence_type
+          - mode
+          - sources
+          nullable: true
+        remote_group:
+          type: object
+          additionalProperties: false
+          properties:
+            group_id: &id028
+              type: string
+            device_id:
+              $ref: '#/components/schemas/ID'
+            aggregate_if_index:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              nullable: true
+            interface_name:
+              type: string
+              nullable: true
+            display_name: *id028
+            evidence_type:
+              type: string
+              enum:
+              - direct
+              - peer_inferred
+            mode:
+              type: string
+              enum:
+              - static
+              - lacp
+              - unknown
+            sources:
+              type: array
+              items: *id028
+            inferred_from:
+              type: object
+              additionalProperties: false
+              properties:
+                device_id:
+                  $ref: '#/components/schemas/ID'
+                group_id: *id028
+                scan_id:
+                  $ref: '#/components/schemas/ID'
+              required:
+              - device_id
+              - group_id
+              - scan_id
+            aggregation_source:
+              type: string
+              enum:
+              - native
+              - peer_inferred
+            local_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_aggregation_id: *id001
+            member_interfaces:
+              type: array
+              items:
+                type: integer
+            evidence_link_ids:
+              type: array
+              items:
+                type: integer
+            inference_status: *id001
+            inferred_at: *id002
+          required:
+          - group_id
+          - device_id
+          - aggregate_if_index
+          - interface_name
+          - display_name
+          - evidence_type
+          - mode
+          - sources
+          nullable: true
+        member_data_status:
+          type: string
+          enum:
+          - complete
+          - partial
+          - unknown
+        known_member_link_count: &id029
+          type: integer
+          minimum: 0
+        returned_member_link_count: *id029
+        member_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/UplinkMemberV4'
+          nullable: true
+        unpaired_members:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              device_id:
+                $ref: '#/components/schemas/ID'
+              if_index:
+                type: integer
+                minimum: 1
+              reason:
+                type: string
+            required:
+            - device_id
+            - if_index
+            - reason
+        advertisements:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            description: Observed LLDP aggregation advertisement. aggregate_id is opaque, not an ifIndex; observer_device_id
+              identifies its source.
+        reason_codes:
+          type: array
+          items:
+            type: string
+      required:
+      - status
+      - aggregate_id
+      - mode
+      - local_group
+      - remote_group
+      - member_data_status
+      - known_member_link_count
+      - returned_member_link_count
+      - member_links
+      - unpaired_members
+    UplinkEdgeV4:
+      type: object
+      additionalProperties: false
+      required:
+      - edge_id
+      - link_id
+      - hop
+      - kind
+      - from
+      - to
+      - verification_status
+      - topology_status
+      - oper_status
+      - aggregation
+      - aggregation_status
+      properties:
+        edge_id:
+          type: string
+        link_id:
+          type: string
+          nullable: true
+        hop:
+          type: integer
+          minimum: 1
+        kind:
+          type: string
+          enum:
+          - physical
+          - aggregate
+        from:
+          $ref: '#/components/schemas/LinkEndpointV4'
+        to:
+          $ref: '#/components/schemas/LinkEndpointV4'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status:
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at:
+          type: string
+          format: date-time
+        aggregation:
+          $ref: '#/components/schemas/AggregationV4'
+        aggregation_status:
+          type: string
+          enum: *id030
+    UplinkResponseV4:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - source_device_id
+          - target
+          - max_hops
+          - path_status
+          - path
+          - inference_policy_version
+          properties:
+            schema_version:
+              type: integer
+              enum:
+              - 4
+            data_quality:
+              $ref: '#/components/schemas/DataQualityV2'
+            source_device_id:
+              $ref: '#/components/schemas/ID'
+            target:
+              type: string
+              enum:
+              - core
+            max_hops:
+              type: integer
+              minimum: 1
+              maximum: 16
+            path_status:
+              type: string
+              enum:
+              - found
+              - not_found
+              - no_core_configured
+            path:
+              type: object
+              additionalProperties: false
+              required:
+              - target_core_device_id
+              - hop_count
+              - nodes
+              - edges
+              properties:
+                target_core_device_id:
+                  $ref: '#/components/schemas/ID'
+                hop_count:
+                  type: integer
+                  minimum: 0
+                  maximum: 16
+                nodes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UplinkNodeV2'
+                edges:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UplinkEdgeV4'
+              nullable: true
+            reason:
+              type: string
+              enum:
+              - no_visible_core
+              - no_core_configured
+              - no_scan_data
+              - no_confirmed_path_within_bound
+            candidate_links:
+              type: array
+              items:
+                $ref: '#/components/schemas/CandidateLink'
+              nullable: true
+            candidate_observer_device_ids:
+              type: array
+              items:
+                $ref: '#/components/schemas/ID'
+            candidate_data_reason:
+              type: string
+              enum:
+              - candidate_data_unavailable
+              - response_budget_exceeded
+            inference_policy_version:
+              type: string
+              enum:
+              - peer-lag-v1
+              - peer-lag-v2
+        meta:
+          $ref: '#/components/schemas/Meta'
+    NeighborAggregationV4:
+      type: object
+      additionalProperties: false
+      properties:
+        aggregate_id:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: *id030
+        local_group:
+          type: object
+          additionalProperties: false
+          properties:
+            group_id: &id031
+              type: string
+            device_id:
+              $ref: '#/components/schemas/ID'
+            aggregate_if_index:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              nullable: true
+            interface_name:
+              type: string
+              nullable: true
+            display_name: *id031
+            evidence_type:
+              type: string
+              enum:
+              - direct
+              - peer_inferred
+            mode:
+              type: string
+              enum:
+              - static
+              - lacp
+              - unknown
+            sources:
+              type: array
+              items: *id031
+            inferred_from:
+              type: object
+              additionalProperties: false
+              properties:
+                device_id:
+                  $ref: '#/components/schemas/ID'
+                group_id: *id031
+                scan_id:
+                  $ref: '#/components/schemas/ID'
+              required:
+              - device_id
+              - group_id
+              - scan_id
+            aggregation_source:
+              type: string
+              enum:
+              - native
+              - peer_inferred
+            local_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_aggregation_id: *id001
+            member_interfaces:
+              type: array
+              items:
+                type: integer
+            evidence_link_ids:
+              type: array
+              items:
+                type: integer
+            inference_status: *id001
+            inferred_at: *id002
+          required:
+          - group_id
+          - device_id
+          - aggregate_if_index
+          - interface_name
+          - display_name
+          - evidence_type
+          - mode
+          - sources
+          nullable: true
+        remote_group:
+          type: object
+          additionalProperties: false
+          properties:
+            group_id: &id032
+              type: string
+            device_id:
+              $ref: '#/components/schemas/ID'
+            aggregate_if_index:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              nullable: true
+            interface_name:
+              type: string
+              nullable: true
+            display_name: *id032
+            evidence_type:
+              type: string
+              enum:
+              - direct
+              - peer_inferred
+            mode:
+              type: string
+              enum:
+              - static
+              - lacp
+              - unknown
+            sources:
+              type: array
+              items: *id032
+            inferred_from:
+              type: object
+              additionalProperties: false
+              properties:
+                device_id:
+                  $ref: '#/components/schemas/ID'
+                group_id: *id032
+                scan_id:
+                  $ref: '#/components/schemas/ID'
+              required:
+              - device_id
+              - group_id
+              - scan_id
+            aggregation_source:
+              type: string
+              enum:
+              - native
+              - peer_inferred
+            local_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_device_id:
+              $ref: '#/components/schemas/ID'
+            remote_aggregation_id: *id001
+            member_interfaces:
+              type: array
+              items:
+                type: integer
+            evidence_link_ids:
+              type: array
+              items:
+                type: integer
+            inference_status: *id001
+            inferred_at: *id002
+          required:
+          - group_id
+          - device_id
+          - aggregate_if_index
+          - interface_name
+          - display_name
+          - evidence_type
+          - mode
+          - sources
+          nullable: true
+        known_member_link_count:
+          type: integer
+          minimum: 0
+      required:
+      - aggregate_id
+      - status
+      - local_group
+      - remote_group
+      - known_member_link_count
+    NeighborV4:
+      type: object
+      additionalProperties: false
+      required:
+      - link_id
+      - local
+      - remote
+      - verification_status
+      - topology_status
+      - oper_status
+      - observations
+      properties:
+        link_id:
+          $ref: '#/components/schemas/ID'
+        local:
+          $ref: '#/components/schemas/LinkEndpointV4'
+        remote:
+          $ref: '#/components/schemas/LinkEndpointV4'
+        verification_status:
+          type: string
+          enum:
+          - confirmed
+          - unverified
+          - conflict
+          - unknown
+        topology_status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        oper_status:
+          type: string
+          enum:
+          - up
+          - down
+          - degraded
+          - unknown
+        oper_observed_at:
+          type: string
+          format: date-time
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservationRef'
+        aggregation: *id011
+        source_admin_status: *id004
+        source_oper_status: *id005
+        target_admin_status: *id006
+        target_oper_status: *id007
+        source_collection_state: *id008
+        target_collection_state: *id009
+        link_oper_status: *id010
+        status_collected_at: *id002
+        source_status_collected_at: *id002
+        target_status_collected_at: *id002
+    NeighborsResponseV4:
+      type: object
+      additionalProperties: false
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required:
+          - schema_version
+          - data_quality
+          - device_id
+          - state
+          - limit
+          - matching_link_count
+          - returned_link_count
+          - returned_unique_neighbor_count
+          - truncated
+          - items
+          - inference_policy_version
+          properties:
+            schema_version:
+              type: integer
+              enum:
+              - 4
+            data_quality:
+              $ref: '#/components/schemas/DataQualityV2'
+            device_id:
+              $ref: '#/components/schemas/ID'
+            state:
+              type: string
+              enum:
+              - active
+              - all
+            limit:
+              type: integer
+              minimum: 1
+              maximum: 20
+            matching_link_count: &id033
+              type: integer
+              minimum: 0
+            returned_link_count: *id033
+            returned_unique_neighbor_count: *id033
+            truncated:
+              type: boolean
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/NeighborV4'
+              maxItems: 20
+            next_cursor:
+              type: string
+              nullable: true
+            has_more:
+              type: boolean
+            response_truncated:
+              type: boolean
+            inference_policy_version:
+              type: string
+              enum:
+              - peer-lag-v1
+              - peer-lag-v2
+        meta:
+          $ref: '#/components/schemas/Meta'
+    InterfaceStatus:
+      type: object
+      properties:
+        if_index:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        name: *id001
+        description: *id001
+        alias: *id001
+        alias_collected:
+          type: boolean
+        type:
+          type: integer
+        phys_address:
+          type: string
+          nullable: true
+        phys_address_hex: *id001
+        admin_status: *id001
+        oper_status: *id001
+        last_change:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+          nullable: true
+        last_change_at: *id002
+        last_change_state: *id001
+        sys_up_time:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+        status_collected_at: *id002
+        status_attempted_at: *id002
+        status_collection_state: *id001
+        status_error: *id001
+      required:
+      - if_index
+      - name
+      - type
+      - admin_status
+      - oper_status
+      - status_collection_state

@@ -1,0 +1,16 @@
+[Unit]
+Description=GoNet explicit database migrations
+After=network-online.target postgresql.service
+
+[Service]
+Type=oneshot
+User=gonet
+Group=gonet
+WorkingDirectory=/var/lib/gonet
+EnvironmentFile=/etc/gonet/gonet.env
+ExecStart=/opt/gonet/gonet migrate up --config /var/lib/gonet/config.yaml
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict

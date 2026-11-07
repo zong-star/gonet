@@ -1,0 +1,27 @@
+[Unit]
+Description=GoNet LLDP topology console
+Wants=network-online.target
+After=network-online.target postgresql.service
+
+[Service]
+Type=simple
+User=gonet
+Group=gonet
+WorkingDirectory=/var/lib/gonet
+StateDirectory=gonet
+StateDirectoryMode=0750
+EnvironmentFile=/etc/gonet/gonet.env
+ExecStartPre=/opt/gonet/gonet config validate --config /var/lib/gonet/config.yaml
+ExecStart=/opt/gonet/gonet serve --config /var/lib/gonet/config.yaml --scope /var/lib/gonet/config/scan-scope.json --output-dir /var/lib/gonet/outputs --listen 127.0.0.1:8787
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=45s
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/gonet
+
+[Install]
+WantedBy=multi-user.target

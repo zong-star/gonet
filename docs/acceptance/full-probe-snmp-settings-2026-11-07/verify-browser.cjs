@@ -1,0 +1,53 @@
+const {chromium}=require('../../../.tools/node_modules/playwright');
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+(async()=>{
+ const dir=process.env.GONET_SNMP_SETTINGS_BROWSER_OUTPUT,base=process.env.GONET_SNMP_TEST_URL;
+ fs.mkdirSync(dir,{recursive:true});
+ const [name,value]=process.env.GONET_SNMP_TEST_COOKIE.split('=');
+ const browser=await chromium.launch({channel:'chrome',headless:true});
+ const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:1440,height:950},reducedMotion:'reduce'});
+ const checks=[],errors=[];
+ try{
+  await context.addCookies([{name,value,url:base,httpOnly:true,secure:true}]);
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(base+'/?page=settings');
+  const community=page.locator('#snmpCommunity'),version=page.locator('#snmpVersion');
+  await page.getByText('当前团体名：已配置（不回显）',{exact:true}).waitFor();
+  assert.equal(await version.inputValue(),'2c');
+  assert.deepEqual(await version.locator('option').allTextContents(),['SNMP v2c']);
+  assert.equal(await community.getAttribute('type'),'password');
+  assert.equal(await community.inputValue(),'');
+  checks.push('SNMP v2c and masked community field appear in scan settings; existing credential is not returned');
+  const save=async()=>{const response=page.waitForResponse(r=>r.url().endsWith('/api/settings')&&r.request().method()==='PUT');await page.locator('#saveSettings').click();const r=await response;assert.equal(r.status(),200);return await r.json()};
+  let body=await save();assert.equal(body.settings.snmp.community_configured,true);assert.equal(body.settings.snmp.community,undefined);
+  checks.push('Blank save keeps the existing environment-based community');
+  await community.fill('fixture-snmp-after-2026');
+  body=await save();assert.ok(!JSON.stringify(body).includes('fixture-snmp-after-2026'));
+  await page.getByText('已是最新',{exact:true}).waitFor();assert.equal(await community.inputValue(),'');
+  await page.reload();await page.getByText('当前团体名：已配置（不回显）',{exact:true}).waitFor();assert.equal(await community.inputValue(),'');
+  const state=await page.evaluate(async()=>await(await fetch('/api/state')).json());
+  assert.ok(!JSON.stringify(state).includes('fixture-snmp-after-2026'));
+  checks.push('New community saves through the authenticated endpoint, survives reload, and never appears in state or save response');
+  let writes=0;page.on('request',r=>{if(r.url().endsWith('/api/settings')&&r.method()==='PUT')writes++});
+  await community.fill('x'.repeat(256));await page.locator('#saveSettings').click();
+  await page.locator('#settingsFormError:not(.hidden)').waitFor();assert.equal(writes,0);
+  await community.fill('');await save();checks.push('Oversized community is rejected before a write; empty field preserves the saved secret');
+  const launched=page.waitForResponse(r=>r.url().endsWith('/api/scan')&&r.request().method()==='POST');
+  await page.locator('#saveAndScan').click();assert.equal((await launched).status(),202);
+  await page.waitForFunction(async()=>{const s=await(await fetch('/api/state')).json();return s.job?.state==='completed'});
+  checks.push('Save and update uses the existing topology job entry point');
+  await page.getByRole('button',{name:/扫描设置/}).click();
+  await page.screenshot({path:path.join(dir,'settings-wide.png'),fullPage:true});
+  await page.setViewportSize({width:390,height:844});await page.locator('#panel-snmp').scrollIntoViewIfNeeded();
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+  await page.screenshot({path:path.join(dir,'settings-narrow.png'),fullPage:true});
+  await page.getByRole('button',{name:/SNMP 探测池/}).click();
+  await page.locator('summary').filter({hasText:'覆盖与探测统计'}).click();
+  await page.getByText(/本轮全范围探测完成/).waitFor();
+  checks.push('Full-range completion is visible; desktop and narrow settings layouts have no horizontal overflow');
+  assert.deepEqual(errors,[]);
+  fs.writeFileSync(path.join(dir,'browser.json'),JSON.stringify({checks,errors},null,2));
+  console.log('PASS '+checks.length+' SNMP settings browser checks');
+ }catch(e){fs.writeFileSync(path.join(dir,'browser-failure.json'),JSON.stringify({checks,errors,error:String(e.stack)},null,2));throw e}
+ finally{await browser.close()}
+})().catch(e=>{console.error(e);process.exitCode=1});

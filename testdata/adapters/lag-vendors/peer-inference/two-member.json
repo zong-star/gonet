@@ -1,0 +1,16 @@
+{
+  "provenance": "Synthetic graph using captured device-local H3C 639 -> 27/28 and link 240/253 pairing. No network traffic or claimed fresh scan.",
+  "scan_id": 1001,
+  "devices": [
+    {"ID":1,"SysObjectID":"1.3.6.1.4.1.45577","ClassificationRule":"sundray_ts7914_chassis38_20251010","Verified":true},
+    {"ID":74,"SysObjectID":"1.3.6.1.4.1.25506.1.1460","Verified":true}
+  ],
+  "members": [
+    {"DeviceID":74,"aggregate_if_index":639,"member_if_index":27,"source":"ieee_lag","status":"confirmed","mode":"static","Name":"Bridge-Aggregation1","Complete":true},
+    {"DeviceID":74,"aggregate_if_index":639,"member_if_index":28,"source":"ieee_lag","status":"confirmed","mode":"static","Name":"Bridge-Aggregation1","Complete":true}
+  ],
+  "links": [
+    {"ID":240,"DeviceA":1,"DeviceB":74,"IfA":78,"IfB":27,"PortA":178,"PortB":274},
+    {"ID":253,"DeviceA":1,"DeviceB":74,"IfA":113,"IfB":28,"PortA":1131,"PortB":284}
+  ]
+}

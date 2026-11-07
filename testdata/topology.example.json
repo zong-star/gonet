@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "devices": [
+    {
+      "ref": 1,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000001",
+      "identity_keys": [
+        "lldp:4:000000000001"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAB",
+        "raw_hex": "000000000001"
+      },
+      "sys_name": "A",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "fixture-switch",
+        "reason": "rule:fixture-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.1",
+          "state": "verified",
+          "source": "seed"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 2,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000002",
+      "identity_keys": [
+        "lldp:4:000000000002"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAC",
+        "raw_hex": "000000000002"
+      },
+      "sys_name": "B",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "fixture-switch",
+        "reason": "rule:fixture-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.2",
+          "state": "verified",
+          "source": "seed"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 3,
+      "state": "verified",
+      "strong_key": "lldp:4:000000000003",
+      "identity_keys": [
+        "lldp:4:000000000003"
+      ],
+      "chassis": {
+        "subtype": 4,
+        "raw": "AAAAAAAD",
+        "raw_hex": "000000000003"
+      },
+      "sys_name": "C",
+      "sys_object_id": "1.3.6.1.4.1.99999.1.1",
+      "classification": {
+        "result": "switch",
+        "rule_id": "fixture-switch",
+        "reason": "rule:fixture-switch"
+      },
+      "addresses": [
+        {
+          "addr": "192.0.2.3",
+          "state": "verified",
+          "source": "seed"
+        }
+      ],
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "ports": [
+    {
+      "ref": 1,
+      "device": 1,
+      "key": "lldp:5:476931",
+      "subtype": 5,
+      "raw_id": "R2kx",
+      "aliases": [
+        "lldp:5:476931"
+      ],
+      "display_name": "",
+      "if_index": 101,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 2,
+      "device": 1,
+      "key": "lldp:5:476933",
+      "subtype": 5,
+      "raw_id": "R2kz",
+      "aliases": [
+        "lldp:5:476933"
+      ],
+      "display_name": "",
+      "if_index": 102,
+      "lldp_port_num": 2,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 3,
+      "device": 2,
+      "key": "lldp:5:476932",
+      "subtype": 5,
+      "raw_id": "R2ky",
+      "aliases": [
+        "lldp:5:476932"
+      ],
+      "display_name": "",
+      "if_index": 201,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    },
+    {
+      "ref": 4,
+      "device": 3,
+      "key": "lldp:5:476934",
+      "subtype": 5,
+      "raw_id": "R2k0",
+      "aliases": [
+        "lldp:5:476934"
+      ],
+      "display_name": "",
+      "if_index": 301,
+      "lldp_port_num": 1,
+      "if_type": 6,
+      "resolution": "verified",
+      "physical": true,
+      "mapping_rule": "ifname-exact",
+      "first_seen": "2023-11-14T22:13:20Z",
+      "last_seen": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "links": [
+    {
+      "key": {
+        "device_a": 1,
+        "port_a": 1,
+        "device_b": 2,
+        "port_b": 3
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    },
+    {
+      "key": {
+        "device_a": 1,
+        "port_a": 2,
+        "device_b": 3,
+        "port_b": 4
+      },
+      "seen_from_a": true,
+      "seen_from_b": true,
+      "first_at": "2023-11-14T22:13:20Z",
+      "last_at": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "observations": [
+    {
+      "observer": 1,
+      "remote": 2,
+      "local_port": 1,
+      "remote_port": 3,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAC",
+          "raw_hex": "000000000002"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2ky",
+          "raw_hex": "476932"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 1,
+      "remote": 3,
+      "local_port": 2,
+      "remote_port": 4,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 2,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 2,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAD",
+          "raw_hex": "000000000003"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2k0",
+          "raw_hex": "476934"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 2,
+      "remote": 1,
+      "local_port": 3,
+      "remote_port": 1,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2kx",
+          "raw_hex": "476931"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    },
+    {
+      "observer": 3,
+      "remote": 1,
+      "local_port": 4,
+      "remote_port": 2,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 1
+      },
+      "at": "2023-11-14T22:13:20Z",
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AAAAAAAB",
+          "raw_hex": "000000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2kz",
+          "raw_hex": "476933"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      }
+    }
+  ],
+  "unresolved": [
+    {
+      "observer": 3,
+      "local_port": 4,
+      "row": {
+        "time_mark": 7,
+        "local_port_num": 1,
+        "remote_index": 2
+      },
+      "raw": {
+        "index": {
+          "time_mark": 7,
+          "local_port_num": 1,
+          "remote_index": 2
+        },
+        "chassis": {
+          "subtype": 7,
+          "raw": "ZC1sb2NhbA==",
+          "raw_hex": "642d6c6f63616c"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2k1",
+          "raw_hex": "476935"
+        },
+        "port_description": "",
+        "sys_name": "",
+        "sys_description": "",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": null
+      },
+      "reason": "remote identity unresolved",
+      "at": "2023-11-14T22:13:20Z"
+    }
+  ],
+  "conflicts": null,
+  "self_connections": null,
+  "issues": null
+}

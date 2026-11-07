@@ -1,0 +1,108 @@
+/* GoNet 控制台设计变量。
+ * 只定义变量，不定义组件样式；组件样式在 style.css，并按“框架/组件/页面/响应式”分区。
+ * 起始值来自 `docs/agent-plan-ui-ux-2026-11-01.md` §5.1；视觉验收后只调这里的值，不散落到各组件。
+ * 新增或改名必须同步 `docs/ui-contract-2026-11-01.md` §9.1。 */
+:root {
+  /* 背景与表面 */
+  --color-bg: #f8fafb;
+  --color-surface: #ffffff;
+  --color-surface-muted: #fbfcfd;
+  --color-surface-hover: #f3f7f8;
+
+  /* 文字 */
+  --color-text: #18202b;
+  --color-text-secondary: #536174;
+  --color-text-tertiary: #64748b;
+  --color-on-brand: #ffffff;
+
+  /* 分隔与边框 */
+  --color-border: #e5e7eb;
+  --color-border-strong: #d7dee3;
+  --color-border-subtle: #f0f3f6;
+
+  /* 品牌 */
+  --color-brand: #087f72;
+  --color-brand-strong: #066356;
+  --color-brand-soft: #e9f6f2;
+
+  /* 状态：每个状态各有文本、浅背景、边框三个值。
+   * “未响应”属于中性状态，使用 --color-neutral-*，不得使用 danger。 */
+  --color-success-text: #0f6f57;
+  --color-success-bg: #eaf7f2;
+  --color-success-border: #bfe3d8;
+  --color-warning-text: #8a5a10;
+  --color-warning-bg: #fdf6e7;
+  --color-warning-border: #eeddb4;
+  --color-danger-text: #a92c22;
+  --color-danger-bg: #fdefed;
+  --color-danger-border: #f2cbc5;
+  --color-info-text: #1a5fb4;
+  --color-info-bg: #eef4fd;
+  --color-info-border: #c8dcf7;
+  --color-neutral-text: #536174;
+  --color-neutral-bg: #f2f5f7;
+  --color-neutral-border: #dde3e8;
+
+  /* 浮层与拓扑非文字线条；图中文字仍使用正文 token */
+  --color-backdrop: #20374526;
+  --color-graph-edge: #90bbae;
+  --color-graph-single: #c9ae75;
+  --color-graph-history: #bdc7cf;
+  --color-graph-wireless: #a39ac7;
+  --color-graph-wireless-bg: #f6f3fc;
+
+  /* 字体：只用系统字体，不下载外部字体 */
+  --font-sans: "Segoe UI", "Microsoft YaHei", sans-serif;
+  --font-mono: Consolas, "Cascadia Mono", "Microsoft YaHei", monospace;
+
+  /* 字号：正文与表格主体 13–14px，最小 12px */
+  --font-size-12: 12px;
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
+
+  /* 字重 */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* 间距 */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* 圆角 */
+  --radius-control: 6px;
+  --radius-panel: 8px;
+  --radius-dialog: 12px;
+
+  /* 尺寸 */
+  --control-height: 32px;
+  --control-height-lg: 36px;
+  --row-height: 27px;
+  --pager-height: 40px;
+  --layout-sidebar: 218px;
+  --topbar-height: 52px;
+
+  /* 阴影：面板极轻；只有抽屉和浮层使用明确层级 */
+  --shadow-panel: 0 2px 4px #21394e02;
+  --shadow-overlay: 0 10px 30px #183e3826;
+
+  /* 焦点：统一可见焦点环，不能只有 hover */
+  --focus-ring: 0 0 0 2px #087f7233;
+  --focus-ring-strong: 0 0 0 2px var(--color-brand);
+
+  /* 动效：只用于 hover、状态、抽屉和入场，禁止 transition:all */
+  --motion-hover: 150ms;
+  --motion-state: 200ms;
+  --motion-drawer: 240ms;
+  --motion-enter: 220ms;
+  --ease-standard: cubic-bezier(.2, .8, .2, 1);
+}

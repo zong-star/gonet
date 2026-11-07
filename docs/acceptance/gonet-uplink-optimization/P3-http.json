@@ -1,0 +1,576 @@
+[
+  {
+    "name": "device_v2",
+    "path": "/api/v1/devices/1?schema_version=2",
+    "status": 200,
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "30",
+          "snapshot_at": "2026-11-04T05:00:00Z",
+          "as_of": "2026-11-05T05:07:51.110243Z",
+          "data_age_seconds": 86871,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": []
+        },
+        "device": {
+          "id": "1",
+          "name": "Building-Access-Switch-01",
+          "sys_name": "",
+          "area": "",
+          "vendor": "H3C",
+          "model": "S5130",
+          "device_kind": "switch",
+          "access_addresses": [
+            "192.0.2.1"
+          ],
+          "chassis_mac": "",
+          "identity_state": "verified",
+          "collection_status": "collected",
+          "discovery_depth": null,
+          "link_count": 2,
+          "last_seen_at": "2026-11-04T05:00:00Z"
+        },
+        "adjacent_link_count": 2,
+        "count_definition": {
+          "scope": "device_adjacency",
+          "unit": "physical_link",
+          "dedup_key": "link_id",
+          "state_filter": "all"
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "PVVV3VZMSDECFTGZS6RRV24KPJ",
+        "generated_at": "2026-11-05T05:07:51.110243Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-04T05:00:00Z",
+        "data_age_seconds": 86871,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    }
+  },
+  {
+    "name": "neighbors_v2",
+    "path": "/api/v1/devices/1/neighbors?schema_version=2",
+    "status": 200,
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "30",
+          "snapshot_at": "2026-11-04T05:00:00Z",
+          "as_of": "2026-11-05T05:07:51.110243Z",
+          "data_age_seconds": 86871,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_neighbors",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "1",
+              "state": "active"
+            }
+          ]
+        },
+        "device_id": "1",
+        "state": "active",
+        "limit": 20,
+        "matching_link_count": 2,
+        "returned_link_count": 2,
+        "returned_unique_neighbor_count": 1,
+        "truncated": false,
+        "items": [
+          {
+            "link_id": "1",
+            "local": {
+              "device_id": "1",
+              "interface_name": "Ten-GigabitEthernet1/0/27",
+              "interface_description": null,
+              "if_index": 2,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "2",
+              "interface_name": "Ten-GigabitEthernet1/0/3",
+              "interface_description": null,
+              "if_index": 3,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": [
+              {
+                "observation_id": "101",
+                "observer_device_id": "1"
+              }
+            ]
+          },
+          {
+            "link_id": "3",
+            "local": {
+              "device_id": "1",
+              "interface_name": "Ten-GigabitEthernet1/0/28",
+              "interface_description": null,
+              "if_index": 22,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "remote": {
+              "device_id": "2",
+              "interface_name": "Ten-GigabitEthernet1/0/4",
+              "interface_description": null,
+              "if_index": 23,
+              "interface_name_source": "if_name",
+              "if_index_status": "known"
+            },
+            "verification_status": "confirmed",
+            "topology_status": "active",
+            "oper_status": "unknown",
+            "observations": [
+              {
+                "observation_id": "103",
+                "observer_device_id": "1"
+              }
+            ]
+          }
+        ]
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "P4NBQVYLGITGKIKWTIXHHGKIOR",
+        "generated_at": "2026-11-05T05:07:51.110243Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-04T05:00:00Z",
+        "data_age_seconds": 86871,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    }
+  },
+  {
+    "name": "summary_v2",
+    "path": "/api/v1/topology/summary?schema_version=2",
+    "status": 200,
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "30",
+          "snapshot_at": "2026-11-04T05:00:00Z",
+          "as_of": "2026-11-05T05:07:51.110243Z",
+          "data_age_seconds": 86871,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            }
+          ]
+        },
+        "device_count": 3,
+        "link_count": 3,
+        "collected_device_count": 3,
+        "historical_device_count": 0,
+        "pending_neighbor_count": 0,
+        "device_kinds": {
+          "router": 0,
+          "switch": 3,
+          "wireless_controller": 0
+        },
+        "count_definitions": {
+          "collected_device_count": {
+            "scope": "network",
+            "unit": "device",
+            "dedup_key": "device_id",
+            "state_filter": "collected"
+          },
+          "device_count": {
+            "scope": "network",
+            "unit": "device",
+            "dedup_key": "device_id",
+            "state_filter": "all"
+          },
+          "device_kinds": {
+            "scope": "network",
+            "unit": "device",
+            "dedup_key": "device_id",
+            "state_filter": "all"
+          },
+          "historical_device_count": {
+            "scope": "network",
+            "unit": "device",
+            "dedup_key": "device_id",
+            "state_filter": "historical"
+          },
+          "link_count": {
+            "scope": "network",
+            "unit": "physical_link",
+            "dedup_key": "link_id",
+            "state_filter": "all"
+          },
+          "pending_neighbor_count": {
+            "scope": "network",
+            "unit": "pending_neighbor_entry",
+            "dedup_key": "candidate_key",
+            "state_filter": "pending"
+          }
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "TVC46NVXUVO7LAVO6DCQRVZ37W",
+        "generated_at": "2026-11-05T05:07:51.110243Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-04T05:00:00Z",
+        "data_age_seconds": 86871,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "all"
+      }
+    }
+  },
+  {
+    "name": "uplink_v2",
+    "path": "/api/v1/devices/1/uplink-path?schema_version=2\u0026include_unverified=true",
+    "status": 200,
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "30",
+          "snapshot_at": "2026-11-04T05:00:00Z",
+          "as_of": "2026-11-05T05:07:51.1107513Z",
+          "data_age_seconds": 86871,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_to_core_query",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "1"
+            }
+          ]
+        },
+        "source_device_id": "1",
+        "target": "core",
+        "max_hops": 16,
+        "path_status": "found",
+        "path": {
+          "target_core_device_id": "3",
+          "hop_count": 2,
+          "nodes": [
+            {
+              "device_id": "1",
+              "display_name": "Building-Access-Switch-01",
+              "role": "source"
+            },
+            {
+              "device_id": "2",
+              "display_name": "Building-Access-Switch-02",
+              "role": "transit"
+            },
+            {
+              "device_id": "3",
+              "display_name": "Building-Access-Switch-03",
+              "role": "core"
+            }
+          ],
+          "edges": [
+            {
+              "edge_id": "aggregate:1:101:2:101",
+              "link_id": null,
+              "hop": 1,
+              "kind": "aggregate",
+              "from": {
+                "device_id": "1",
+                "interface_name": "Bridge-Aggregation1",
+                "interface_description": null,
+                "if_index": 101,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "to": {
+                "device_id": "2",
+                "interface_name": "Bridge-Aggregation2",
+                "interface_description": null,
+                "if_index": 101,
+                "interface_name_source": "if_name",
+                "if_index_status": "known"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": {
+                "aggregate_id": "aggregate:1:101:2:101",
+                "member_data_status": "complete",
+                "member_links": [
+                  {
+                    "link_id": "1",
+                    "from": {
+                      "device_id": "1",
+                      "interface_name": "Ten-GigabitEthernet1/0/27",
+                      "interface_description": null,
+                      "if_index": 2,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "2",
+                      "interface_name": "Ten-GigabitEthernet1/0/3",
+                      "interface_description": null,
+                      "if_index": 3,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  },
+                  {
+                    "link_id": "3",
+                    "from": {
+                      "device_id": "1",
+                      "interface_name": "Ten-GigabitEthernet1/0/28",
+                      "interface_description": null,
+                      "if_index": 22,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "to": {
+                      "device_id": "2",
+                      "interface_name": "Ten-GigabitEthernet1/0/4",
+                      "interface_description": null,
+                      "if_index": 23,
+                      "interface_name_source": "if_name",
+                      "if_index_status": "known"
+                    },
+                    "verification_status": "confirmed",
+                    "topology_status": "active",
+                    "oper_status": "unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "edge_id": "physical:2",
+              "link_id": "2",
+              "hop": 2,
+              "kind": "physical",
+              "from": {
+                "device_id": "2",
+                "interface_name": null,
+                "interface_description": null,
+                "if_index": null,
+                "interface_name_source": null,
+                "if_index_status": "unknown"
+              },
+              "to": {
+                "device_id": "3",
+                "interface_name": null,
+                "interface_description": null,
+                "if_index": null,
+                "interface_name_source": null,
+                "if_index_status": "unknown"
+              },
+              "verification_status": "confirmed",
+              "topology_status": "active",
+              "oper_status": "unknown",
+              "aggregation": null
+            }
+          ]
+        },
+        "candidate_links": [
+          {
+            "observation_id": "200",
+            "scan_id": "30",
+            "observer_device_id": "2",
+            "local_lldp_port_number": 14,
+            "remote_device_id": null,
+            "remote_management_ip": null,
+            "remote_chassis_id": {
+              "subtype": 4,
+              "raw": "AgAAAAAE"
+            },
+            "remote_port_id": {
+              "subtype": 7,
+              "raw": "cmVtb3RlLXBvcnQ="
+            },
+            "observed_at": "2026-11-04T05:00:00Z",
+            "reason_codes": [
+              "PORT_UNRESOLVED"
+            ],
+            "verification_status": "pending",
+            "discovery_source": "lldp"
+          }
+        ],
+        "candidate_observer_device_ids": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "O7OSVQHNGT2HKPRZTEUZE6RMOQ",
+        "generated_at": "2026-11-05T05:07:51.1107513Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-04T05:00:00Z",
+        "data_age_seconds": 86871,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    }
+  },
+  {
+    "name": "uplink_zero_v2",
+    "path": "/api/v1/devices/3/uplink-path?schema_version=2",
+    "status": 200,
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "30",
+          "snapshot_at": "2026-11-04T05:00:00Z",
+          "as_of": "2026-11-05T05:07:51.1107513Z",
+          "data_age_seconds": 86871,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_to_core_query",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "3"
+            }
+          ]
+        },
+        "source_device_id": "3",
+        "target": "core",
+        "max_hops": 16,
+        "path_status": "found",
+        "path": {
+          "target_core_device_id": "3",
+          "hop_count": 0,
+          "nodes": [
+            {
+              "device_id": "3",
+              "display_name": "Building-Access-Switch-03",
+              "role": "source_core"
+            }
+          ],
+          "edges": []
+        }
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "5C4227HQHUAXRYWQN7HJDAG4QK",
+        "generated_at": "2026-11-05T05:07:51.1107513Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-04T05:00:00Z",
+        "data_age_seconds": 86871,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    }
+  },
+  {
+    "name": "uplink_empty_v2",
+    "path": "/api/v1/devices/1/uplink-path?schema_version=2\u0026max_hops=1",
+    "status": 200,
+    "body": {
+      "data": {
+        "schema_version": 2,
+        "data_quality": {
+          "snapshot_id": "30",
+          "snapshot_at": "2026-11-04T05:00:00Z",
+          "as_of": "2026-11-05T05:07:51.1107513Z",
+          "data_age_seconds": 86871,
+          "latest_scan": null,
+          "stale_after_seconds": 259200,
+          "stale": false,
+          "coverage": [
+            {
+              "scope": "network",
+              "status": "gap",
+              "reason_codes": [
+                "collection_incomplete"
+              ]
+            },
+            {
+              "scope": "device_to_core_query",
+              "status": "unknown",
+              "reason_codes": [],
+              "device_id": "1"
+            }
+          ]
+        },
+        "source_device_id": "1",
+        "target": "core",
+        "max_hops": 1,
+        "path_status": "not_found",
+        "path": null,
+        "reason": "no_confirmed_path_within_bound"
+      },
+      "meta": {
+        "schema_version": "1.0",
+        "request_id": "O5VBDKTBGSFTPV3IM27TVYX4YF",
+        "generated_at": "2026-11-05T05:07:51.1107513Z",
+        "latest_scan_id": "30",
+        "latest_scan_status": "partial",
+        "latest_scan_finished_at": "2026-11-04T05:00:00Z",
+        "data_age_seconds": 86871,
+        "fresh": true,
+        "coverage_gap": true,
+        "state": "active"
+      }
+    }
+  }
+]

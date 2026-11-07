@@ -1,0 +1,10 @@
+version: 1
+rules:
+  - id: h3c-live-462-1515-ports
+    device_rule_id: h3c-live-462-1515
+    legacy_gigabit_ethernet: true
+    fixture: testdata/adapters/inventory-models/catalog.json
+  - id: h3c-live-462-1517p02-ports
+    device_rule_id: h3c-live-462-1517p02
+    legacy_gigabit_ethernet: true
+    fixture: testdata/adapters/inventory-models/catalog.json

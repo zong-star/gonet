@@ -1,0 +1,192 @@
+{
+  "provenance": {
+    "kind": "sanitized_real_snapshot_subset",
+    "date": "2026-10-31",
+    "scope": "One physical uplink only; other rows and IPv6 address omitted. Names/IPs/MACs substituted consistently. Subsets never grant collection/absence completeness.",
+    "core_model": "TS7914 two-member stack, operator-confirmed",
+    "core_lldp_software": "SW-CHASSIS3.8 BUILD20251010-015800, observed from H3C LLDP",
+    "peer_model": "H3C S5130S-28P-EI / Comware 7.1.070 Release 6368",
+    "peer_original_collection_complete": true,
+    "cli_comparison": "NOT RUN"
+  },
+  "core": {
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.1",
+      "chassis": {
+        "subtype": 7,
+        "raw": "MDI6MDA6MDA6MDA6MDA6MDE=",
+        "raw_hex": "30323a30303a30303a30303a30303a3031"
+      },
+      "sys_name": "lab-core",
+      "sys_description": "Linux Sundray 4.14.76-10.3.4.0-4-Marvell #2 SMP Fri Oct 10 03:09:01 UTC 2025 aarch64",
+      "sys_object_id": ".1.3.6.1.4.1.45577",
+      "uptime_before": 566909910,
+      "uptime_after": 566909933,
+      "lldp_last_change_before": 0,
+      "lldp_last_change_after": 0,
+      "cap_supported": null,
+      "cap_enabled": null,
+      "cap_supported_names": null,
+      "cap_enabled_names": null
+    },
+    "interfaces": [
+      {
+        "if_index": 90,
+        "name": "ge1_1_8",
+        "description": "ge1_1_8",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAx",
+        "phys_address_hex": "020000000031"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 65800,
+        "id": {
+          "subtype": 5,
+          "raw": "Z2UxXzFfOA==",
+          "raw_hex": "6765315f315f38"
+        },
+        "description": "uplink",
+        "if_index": 90,
+        "physical": true,
+        "mapping_rule": "ifname-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 0,
+          "local_port_num": 65800,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 7,
+          "raw": "MDI6MDA6MDA6MDA6MDA6MjA=",
+          "raw_hex": "30323a30303a30303a30303a30303a3230"
+        },
+        "port": {
+          "subtype": 0,
+          "raw": "MDI6MDA6MDA6MDA6MDA6MjE=",
+          "raw_hex": "30323a30303a30303a30303a30303a3231"
+        },
+        "port_description": "uplink-core",
+        "sys_name": "lab-peer",
+        "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 6368\r\nH3C S5130S-28P-EI\r\nCopyright (c) 2004-2024 New H3C Technologies Co., Ltd. All rights reserved.",
+        "mgmt_addresses": null,
+        "cap_supported": null,
+        "cap_enabled": null,
+        "cap_enabled_names": null,
+        "issues": [
+          {
+            "code": "DECODE_ERROR",
+            "component": "lldp_rem",
+            "message": "remote row {0 65800 1} has missing or invalid identity/port fields",
+            "retryable": false
+          }
+        ]
+      }
+    ],
+    "components": {},
+    "collection_complete": false,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-10-31T06:27:20.3365486Z",
+    "collected_at": "2026-10-31T06:27:20.5816856Z",
+    "issues": []
+  },
+  "peer": {
+    "schema_version": 1,
+    "device": {
+      "target": "192.0.2.20",
+      "chassis": {
+        "subtype": 4,
+        "raw": "AgAAAAAg",
+        "raw_hex": "020000000020"
+      },
+      "sys_name": "lab-peer",
+      "sys_description": "H3C Comware Platform Software, Software Version 7.1.070, Release 6368\r\nH3C S5130S-28P-EI\r\nCopyright (c) 2004-2024 New H3C Technologies Co., Ltd. All rights reserved.",
+      "sys_object_id": ".1.3.6.1.4.1.25506.1.1587",
+      "uptime_before": 735603000,
+      "uptime_after": 735603236,
+      "lldp_last_change_before": 734651487,
+      "lldp_last_change_after": 734651487,
+      "cap_supported": "KA==",
+      "cap_enabled": "KA==",
+      "cap_supported_names": [
+        "bridge",
+        "router"
+      ],
+      "cap_enabled_names": [
+        "bridge",
+        "router"
+      ]
+    },
+    "interfaces": [
+      {
+        "if_index": 28,
+        "name": "GigabitEthernet1/0/28",
+        "description": "GigabitEthernet1/0/28",
+        "alias": "",
+        "type": 6,
+        "phys_address": "AgAAAAAh",
+        "phys_address_hex": "020000000021"
+      }
+    ],
+    "local_ports": [
+      {
+        "number": 28,
+        "id": {
+          "subtype": 3,
+          "raw": "AgAAAAAh",
+          "raw_hex": "020000000021"
+        },
+        "description": "uplink",
+        "if_index": 28,
+        "physical": true,
+        "mapping_rule": "mac-exact"
+      }
+    ],
+    "neighbors": [
+      {
+        "index": {
+          "time_mark": 485377448,
+          "local_port_num": 28,
+          "remote_index": 1
+        },
+        "chassis": {
+          "subtype": 4,
+          "raw": "AgAAAAAB",
+          "raw_hex": "020000000001"
+        },
+        "port": {
+          "subtype": 5,
+          "raw": "R2kxLzEvOA==",
+          "raw_hex": "4769312f312f38"
+        },
+        "port_description": "uplink-peer",
+        "sys_name": "lab-core",
+        "sys_description": "Sundray TS79-LC-16T16S8X-EB Platform Software, Software Version SW-CHASSIS3.8 BUILD20251010-015800",
+        "mgmt_addresses": [
+          "192.0.2.1"
+        ],
+        "cap_supported": "KA==",
+        "cap_enabled": "KA==",
+        "cap_enabled_names": [
+          "bridge",
+          "router"
+        ],
+        "issues": null
+      }
+    ],
+    "components": {},
+    "collection_complete": false,
+    "snapshot_stable": true,
+    "absence_eligible": false,
+    "started_at": "2026-10-31T06:47:27.5906826Z",
+    "collected_at": "2026-10-31T06:47:29.9638655Z",
+    "issues": []
+  }
+}
